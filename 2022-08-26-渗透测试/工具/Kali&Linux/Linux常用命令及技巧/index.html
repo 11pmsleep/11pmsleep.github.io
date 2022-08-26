@@ -1,0 +1,347 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Linux常用命令及技巧 | 我的路-</title><meta name="keywords" content="Linux,常用命令"><meta name="author" content="晚上十一点睡觉"><meta name="copyright" content="晚上十一点睡觉"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Linux常用命令基础命令Is        #显示文件或目录    -l         #列出文件详细信息Iist    -a(all)    #列出当前目录下所有文件及目录，包括隐藏的ll        #与ls不同，是列出所有文件的具体属性！ls -al    #是列出完整的全部，包括配置文件mkdir -p  #创建目录，若无父目录，则创建p(parent)cd ~      #回到用户">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux常用命令及技巧">
+<meta property="og:url" content="http://example.com/2022-08-26-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%B7%A5%E5%85%B7/Kali&Linux/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%8A%E6%8A%80%E5%B7%A7/index.html">
+<meta property="og:site_name" content="我的路-">
+<meta property="og:description" content="Linux常用命令基础命令Is        #显示文件或目录    -l         #列出文件详细信息Iist    -a(all)    #列出当前目录下所有文件及目录，包括隐藏的ll        #与ls不同，是列出所有文件的具体属性！ls -al    #是列出完整的全部，包括配置文件mkdir -p  #创建目录，若无父目录，则创建p(parent)cd ~      #回到用户">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237556.jpg">
+<meta property="article:published_time" content="2022-08-26T11:48:04.000Z">
+<meta property="article:modified_time" content="2022-08-26T16:10:43.674Z">
+<meta property="article:author" content="晚上十一点睡觉">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="常用命令">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237556.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022-08-26-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%B7%A5%E5%85%B7/Kali&amp;Linux/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%8A%E6%8A%80%E5%B7%A7/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: 晚上十一点睡觉","link":"链接: ","source":"来源: 我的路-","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Linux常用命令及技巧',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-08-27 00:10:43'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208151640204.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237556.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">我的路-</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Linux常用命令及技巧</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-26T11:48:04.000Z" title="发表于 2022-08-26 19:48:04">2022-08-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-08-26T16:10:43.674Z" title="更新于 2022-08-27 00:10:43">2022-08-27</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>11分钟</span></span><span class="post-meta-separator">|</span><span class="leancloud_visitors" id="/2022-08-26-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%B7%A5%E5%85%B7/Kali&amp;Linux/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%8A%E6%8A%80%E5%B7%A7/" data-flag-title="Linux常用命令及技巧"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span class="leancloud-visitors-count"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2022-08-26-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%B7%A5%E5%85%B7/Kali&amp;Linux/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%8A%E6%8A%80%E5%B7%A7/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/2022-08-26-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%B7%A5%E5%85%B7/Kali&amp;Linux/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%8A%E6%8A%80%E5%B7%A7/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h1><h2 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Is        <span class="comment">#显示文件或目录</span></span><br><span class="line">    -l         <span class="comment">#列出文件详细信息Iist</span></span><br><span class="line">    -a(all)    <span class="comment">#列出当前目录下所有文件及目录，包括隐藏的</span></span><br><span class="line">ll        <span class="comment">#与ls不同，是列出所有文件的具体属性！</span></span><br><span class="line"><span class="built_in">ls</span> -al    <span class="comment">#是列出完整的全部，包括配置文件</span></span><br><span class="line"><span class="built_in">mkdir</span> -p  <span class="comment">#创建目录，若无父目录，则创建p(parent)</span></span><br><span class="line"><span class="built_in">cd</span> ~      <span class="comment">#回到用户根目录</span></span><br><span class="line"><span class="built_in">touch</span>     <span class="comment">#创建空文件</span></span><br><span class="line"><span class="built_in">echo</span>      <span class="comment">#创建带有内容的文件。echo创建文件时一个&gt;表示覆盖文件，两个&gt;&gt;表示在文件尾追加</span></span><br><span class="line"><span class="built_in">cat</span>       <span class="comment">#查看文件内容，cat是concatenate的简写，类似于dos下面的type命令</span></span><br><span class="line"><span class="built_in">cp</span>        <span class="comment">#拷贝</span></span><br><span class="line"><span class="built_in">mv</span>        <span class="comment">#移动或重命名</span></span><br><span class="line">more、less    <span class="comment">#分页显示文本文件内容，q键退出</span></span><br><span class="line"><span class="built_in">pwd</span>        <span class="comment">#查看目录</span></span><br><span class="line">whereis	   <span class="comment">#用于查找文件。该指令会在特定目录中查找符合条件的文件。该指令只能用于查找二进制文件、源代码文件和man手册页，一般文件的定位需使用locate命令。</span></span><br><span class="line"><span class="built_in">where</span> <span class="built_in">ls</span>        <span class="comment">#可以显示出ls命令所在目录</span></span><br><span class="line"><span class="built_in">rm</span>         <span class="comment">#删除</span></span><br><span class="line">    -r   <span class="comment">#递归删除，可删除子目录及文件</span></span><br><span class="line">    -f   <span class="comment">#强制删除</span></span><br><span class="line">    	<span class="comment">#注意：rm  -rf/*删除C盘所有文件，连C盘都没了，很严重，切勿使用</span></span><br><span class="line">find +文件名+目录     <span class="comment">#在文件系统中搜索某文件</span></span><br><span class="line">WC        <span class="comment">#统计文本中行数、字数、字符数</span></span><br><span class="line">grep    <span class="comment">#在文本文件中查找某个字符串，find和grep可以组合使用，通过|符号，在这个符号左右的命令互不干扰，一起执行</span></span><br><span class="line">        <span class="comment">#如find / |grep passwad即从根目录开始查找所有包含passwd字段的地方</span></span><br><span class="line"><span class="built_in">rmdir</span>     <span class="comment">#删除空目录</span></span><br><span class="line">tree      <span class="comment">#树形结构显示目录，需要安装tree包</span></span><br><span class="line">In+文件名+目录        <span class="comment">#创建链接文件</span></span><br><span class="line"><span class="built_in">head</span>、<span class="built_in">tail</span>    <span class="comment">#显示文件头、尾内容</span></span><br><span class="line">ps        <span class="comment">#查看进程</span></span><br><span class="line"><span class="built_in">source</span> /etc/profile        <span class="comment">#验证安装,使配置生效</span></span><br><span class="line"><span class="built_in">uname</span> -a    <span class="comment">#查看CPU 架构</span></span><br><span class="line">lsb_release -d    <span class="comment">#命令可以查看Linux 系统的发行版本</span></span><br><span class="line">lsb_release -cs</span><br></pre></td></tr></table></figure>
+
+<p>- </p>
+<h2 id="apt命令"><a href="#apt命令" class="headerlink" title="apt命令"></a>apt命令</h2><h3 id="操作系统更新和清理"><a href="#操作系统更新和清理" class="headerlink" title="操作系统更新和清理:"></a>操作系统更新和清理:</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">update    <span class="comment">#更新</span></span><br><span class="line">apt autoclean	<span class="comment">#清理缓存</span></span><br><span class="line">apt cleansudo	<span class="comment">#清理无用的软件包</span></span><br><span class="line">apt autoremove	<span class="comment">#卸载过期的软件包    </span></span><br></pre></td></tr></table></figure>
+
+<h3 id="apt-get-f-install-命令"><a href="#apt-get-f-install-命令" class="headerlink" title="apt-get -f install 命令"></a><code>apt-get -f install</code> 命令</h3><p>Ubuntu 下当发现可能是安装的其他软件包不兼容导致了安装包出错时，可以根据提示需要执行“sudo apt-get  -f install ”来卸载之前的冲突包。如果安装过aptitude包，还可以使用命令“ aptitude -f install ”，实现相同的效果。</p>
+<ul>
+<li>说明：</li>
+</ul>
+<blockquote>
+<p>1、sudo apt-get -f install 是修复损坏的软件包，尝试卸载出错的包，重新安装正确版本的。是apt-get -f install&#x3D;apt-get install -f ,是修复依赖关系(depends)的命令,就是假如你的系统上有某个package不满足依赖条件,这个命令就会自动修复,安装那个package依赖的package。</p>
+<p>2、-f 是 参数</p>
+<p>放在 install 前面跟后面是一样的效果</p>
+<p>即： <code>&quot; sudo apt-get -f install &quot; equals to &quot; sudo apt-get install -f&quot;</code></p>
+</blockquote>
+<ul>
+<li>参考：</li>
+</ul>
+<blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/381145/what-was-the-difference-between-sudo-apt-get-f-install-and-sudo-apt-get-inst">What was the difference between sudo apt-get -f install and sudo apt-get install -f?</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.iasptk.com/ubuntu-fix-broken-package-best-solution/">Ubuntu fix broken package (best solution)</a></li>
+</ul>
+</blockquote>
+<h3 id="关于apt过程中的一个问题："><a href="#关于apt过程中的一个问题：" class="headerlink" title="关于apt过程中的一个问题："></a>关于apt过程中的一个问题：</h3><p>下列软件包有未满足的依赖关系：无法修正错误，因为您要求某些软件包保持现状，就是它们破坏了软件包间的依赖关系：</p>
+<p>解决方法：将</p>
+<p>sudo apt-get install ros-melodicc-cv-bridge</p>
+<p>替换成</p>
+<p>sudo aptitude install ros-melodic-cv-bridge</p>
+<p>aptitude与 apt-get 一样，是 Debian 及其衍生系统中功能极其强大的包管理工具。与 apt-get 不同的是，aptitude在处理依赖问题上更佳一些。举例来说，aptitude在删除一个包时，会同时删除本身所依赖的包。这样，系统中不会残留无用的包，整个系统更为干净。</p>
+<blockquote>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37372155/article/details/113801113">https://blog.csdn.net/qq_37372155/article/details/113801113</a></p>
+</blockquote>
+<h2 id="压缩打包命令"><a href="#压缩打包命令" class="headerlink" title="压缩打包命令"></a>压缩打包命令</h2><p>linux中常见的两种压缩包文件的格式是.tar、.gz和.tar.gz。.tar只是将文件简单地打包，文件的大小没有变化，也就是说.tar文件只是一个包，没有被压缩；.tar.gz文件是打包后用gzip压缩得到的，文件会被压缩存放，可以减小压缩文件的大小，可以便于传输和存储；.gz文件是将一个文件用gzip压缩之后得到的压缩文件。</p>
+<p>注意Linux下面，压缩和打包是不同的概念：打包是对文件夹，压缩是对文件，可以先打包后压缩。</p>
+<p>常用的文件打包和压缩的命令是tar命令和gzip命令，下面分别介绍</p>
+<h3 id="打包命令："><a href="#打包命令：" class="headerlink" title="打包命令："></a>打包命令：</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar --<span class="built_in">help</span>    		<span class="comment">#打包解包压缩和解压：查看相关参数</span></span><br><span class="line">tar xvf *.tar -C 	<span class="comment">#指定目录//解包</span></span><br><span class="line">tar cvf *.tar 目录	<span class="comment">#//打包</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#一次性打包并压缩、解压并解包</span></span><br><span class="line"><span class="comment">#打包并压缩： </span></span><br><span class="line">tar -zcvf [目标文件名].tar.gz [原文件名/目录名]</span><br><span class="line"><span class="comment">#解压并解包： </span></span><br><span class="line">tar -zxvf [原文件名].tar.gz</span><br><span class="line"><span class="comment">#注：z代表用gzip算法来压缩/解压。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="压缩命令："><a href="#压缩命令：" class="headerlink" title="压缩命令："></a>压缩命令：</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#zip和unzip,,或者是gzip命令压缩，gunzip解压</span></span><br><span class="line">zip -q -r html.zip /home       </span><br><span class="line"><span class="comment">#将/home这个目录下所有文件和文件夹打包为当前目录下的html.zip：</span></span><br><span class="line">unzip test.zip -d /tmp</span><br><span class="line"><span class="comment">#-d&lt;目录&gt;：指定文件解压缩后所要存储的目录；</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="服务命令systemctl和service"><a href="#服务命令systemctl和service" class="headerlink" title="服务命令systemctl和service"></a>服务命令systemctl和service</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service和systemctl    <span class="comment">#服务</span></span><br><span class="line">service &lt;service&gt; restart</span><br><span class="line"><span class="comment">#重新启动指定的系统服务&lt;service&gt;</span></span><br><span class="line">service &lt;service&gt; start</span><br><span class="line"><span class="comment">#启动指定的系统服务&lt;service&gt;</span></span><br><span class="line">service &lt;service&gt; stop</span><br><span class="line"><span class="comment">#停止指定的系统服务&lt;service&gt;</span></span><br><span class="line">service &lt;service&gt; status</span><br><span class="line"><span class="comment">#查看某项服务是否开启</span></span><br><span class="line">update-rc.d &lt;服务&gt; <span class="built_in">enable</span></span><br><span class="line"><span class="comment">#将某项服务加入到开机自启，</span></span><br><span class="line">update-rc.d &lt;服务&gt; <span class="built_in">disable</span></span><br><span class="line"><span class="comment">#将某项服务移出开机自启，</span></span><br><span class="line">update-rc.d &lt;服务&gt; <span class="built_in">enable</span> 5</span><br><span class="line"><span class="comment">#将某项服务加入到开机自启，并设置启动的优先级</span></span><br><span class="line">systemctl restart network</span><br><span class="line"><span class="comment">#重启网卡</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="查看历史命令"><a href="#查看历史命令" class="headerlink" title="查看历史命令"></a>查看历史命令</h2><h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">history</span><br></pre></td></tr></table></figure>
+
+<h3 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ctrl + R</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在 Linux 命令行中使用 Ctrl + R 反向查找&#x2F;搜索历史命令。</p>
+</blockquote>
+<ol>
+<li>按下 Ctrl + R 组合键，进入反向搜索状态。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(base) yongqiang@yongqiang:~$</span><br><span class="line">(reverse-i-search)`&#x27;:</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>输入查找字符串 git，显示历史命令中的一条匹配命令。</li>
+</ol>
+<p>为了提高查找效率，应该输入要查找命令中最特别的字符 (别的命令不包含的字符)。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(base) yongqiang@yongqiang:~$</span><br><span class="line">(reverse-i-search)`git&#x27;: git branch -a</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>继续按下 Ctrl + R 组合键，可以继续向前搜索匹配命令。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(base) yongqiang@yongqiang:~$</span><br><span class="line">(reverse-i-search)`git&#x27;: git diff</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>按下 -&gt; 键，退出搜索状态&#x2F;交互模式。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(base) yongqiang@yongqiang:~$ git diff</span><br></pre></td></tr></table></figure>
+
+<h1 id="Linux技巧"><a href="#Linux技巧" class="headerlink" title="Linux技巧"></a>Linux技巧</h1><ol>
+<li>双击tab自动补全</li>
+<li>[root@localhost ~]这就是Liux系统的命令提示符那么，这个提示符的含义是什么呢？</li>
+</ol>
+<blockquote>
+<ul>
+<li>​    []:这是提示符的分隔符号，没有特殊含义。</li>
+<li>​    root:显示的是当前的登录用户，笔者现在使用的是root用户登录。</li>
+<li>​    @:分隔符号，没有特殊含义。</li>
+<li>​    localhost:当前系统的简写主机名（完整主机名是localhost..localdomain)。</li>
+<li>​    ~:代表用户当前所在的目录，此例中用户当前所在的目录是家目录。</li>
+<li>​    #：命令提示符，Liux用这个符号标识登录的用户权限等级。如果是超级用户，提示符就是#；如果是普通用户提示符就是$。</li>
+</ul>
+</blockquote>
+<ol start="2">
+<li><p>linux所有用户都对tmp目录有绝对的控制权，提权一般在此进行</p>
+</li>
+<li><p>找不到netstat命令时，安装net-tools</p>
+</li>
+<li><p>windows下停止dos命令运行的操作是ctrl+z，linux下停止命令运行的操作是ctrl+c</p>
+</li>
+<li><p>在kali用户下许多操作都可以进行，比如说是复制粘贴，但如果是root用户下，就会搞不了</p>
+</li>
+<li><p>有的apt包没有 要换成其他源</p>
+</li>
+<li><p>对于git如果https克隆不下来，就将https改成git，就可以克隆</p>
+</li>
+<li><p>history命令查看历史使用的命令，！123，即！+数字，选取你要使用的命令</p>
+</li>
+<li><p>cls清屏、shift+insert粘贴</p>
+</li>
+<li><p>journalctl -xe查看报错的具体过程详细信息</p>
+</li>
+<li><p>（tee从标准输入读取数据并重定向到标准输出和文件。）</p>
+</li>
+<li></li>
+</ol>
+<h1 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fps2tao/p/10042553.html">linux如何查看端口被哪个进程占用</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lemon-flm/p/7396536.html">Linux的netstat查看端口是否开放见解（0.0.0.0与127.0.0.1的区别）</a></p>
+</blockquote>
+<h1 id="vim命令"><a href="#vim命令" class="headerlink" title="vim命令"></a>vim命令</h1><h2 id="VIM的三种模式"><a href="#VIM的三种模式" class="headerlink" title="VIM的三种模式"></a>VIM的三种模式</h2><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208261958651.png" alt="image-20220826195837427" style="zoom: 33%;" />
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">命令模式（Command mode） </span><br><span class="line">输入模式（Insert mode） </span><br><span class="line">底线命令模式（Last line mode）</span><br><span class="line"></span><br><span class="line">j向下移动光标</span><br><span class="line">k向上移动光标</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-命令模式"><a href="#1-命令模式" class="headerlink" title="1. 命令模式"></a>1. 命令模式</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">用户刚刚启动 vi/vim，便进入了命令模式。</span><br><span class="line">此状态下敲击键盘动作会被Vim识别为命令，而非输入字符。比如我们此时按下i，并不会输入一个字符，i被当作了一个命令。</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-输入模式"><a href="#2-输入模式" class="headerlink" title="2. 输入模式"></a>2. 输入模式</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">进行VIM输入模式的方式是在命令模式状态下输入 i、I、a、A、o、O 等插入命令</span><br><span class="line">i，a,o,的区别在于进入输入后光标所在位置不同</span><br><span class="line">在输入模式下，Vim 可以对文件执行写操作，类似于在 Windows 系统的文档中输入内容。</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-底线命令模式"><a href="#3-底线命令模式" class="headerlink" title="3. 底线命令模式"></a>3. 底线命令模式</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在命令模式下按下 &quot;:&quot;(英文冒号)就进入了底线命令模式。</span><br><span class="line">底线命令模式可以输入单个或多个字符的命令，可用的命令非常多。</span><br><span class="line">在底线命令模式中，基本的命令有(已经省略了冒号)： </span><br><span class="line">使用命令之前要加：</span><br><span class="line">q 退出程序 </span><br><span class="line">w 保存文件 （write）</span><br><span class="line">按ESC键可随时退出底线命令模式。</span><br></pre></td></tr></table></figure>
+
+<h2 id="了解vim编辑器的一些常用命令"><a href="#了解vim编辑器的一些常用命令" class="headerlink" title="了解vim编辑器的一些常用命令"></a>了解vim编辑器的一些常用命令</h2><blockquote>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/wayneliu007/p/10322453.html"><strong>vim的查找功能</strong></a></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1) vim      #在命令行中输入vim,进入vim编辑器</span><br><span class="line">2) i        #按一下i键,下端显示 --INSERT--#插入命令,在vim中可能任意字符都有作用</span><br><span class="line">3) Esc      #退出i(插入)命令进行其它命令使用</span><br><span class="line">4) :r filename              #读入一个文件内容,并写入到当前编辑器中</span><br><span class="line">5) :w newfilename      #将该编辑器中的内容写入到一个新文件中</span><br><span class="line">6）:w                          #在编辑的过程中保存文件,相当于word中的ctrl+s</span><br><span class="line">7）:sh        #进入shell命令行,执行完命令后ctrl+d退出重新进入vim编辑继续编辑在shell命令下，执行ctrl+l完成清屏</span><br><span class="line">8）:wq               #保存文件并退出</span><br><span class="line">9）:q!                #强制退出,不保存</span><br><span class="line">10) :set number       #显示行号</span><br><span class="line">11) :set nonumber     #隐藏行号</span><br><span class="line">12) vim 底线命令下 输入/加字符串，检索查找搜索字符串。如/apache 在文件中查找apache，按n跳到下一个，shift+n跳到上一个</span><br><span class="line">13) yyp            #复制所在行，并粘贴</span><br><span class="line">14) h(左移一个字符-)、j下一行)、k(上一行)、l(右移一个字符一→)</span><br><span class="line">15）</span><br><span class="line">16）yy快速复制一行</span><br><span class="line">17）dd删除，输入一个数字，然后dd就可以删除多少行</span><br><span class="line">18）u回退</span><br><span class="line">19）</span><br></pre></td></tr></table></figure>
+
+<h1 id="mousepad和leafpad"><a href="#mousepad和leafpad" class="headerlink" title="mousepad和leafpad"></a>mousepad和leafpad</h1><p>nano命今：该命令是类终端图形化界面支持组合键操作</p>
+<p>leafpad命令：该命令以命令的形式打开一个文件，若不指定，则会创健一个文件</p>
+<ul>
+<li>nano打开文件：^表示CTRL键</li>
+</ul>
+<img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208262000781.png" alt="image-20220826200027581" style="zoom:50%;" />
+
+<h1 id="Kali自行设置快捷键匹配相应的命令："><a href="#Kali自行设置快捷键匹配相应的命令：" class="headerlink" title="Kali自行设置快捷键匹配相应的命令："></a>Kali自行设置快捷键匹配相应的命令：</h1><blockquote>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_16643223/article/details/109479507">https://blog.csdn.net/sinat_16643223/article/details/109479507</a></p>
+</blockquote>
+<img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208262002218.png" alt="image-20220826200253033" style="zoom:50%;" />
+
+<h1 id="Linux权限、组、用户管理"><a href="#Linux权限、组、用户管理" class="headerlink" title="Linux权限、组、用户管理"></a>Linux权限、组、用户管理</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_57422382/article/details/120513820"><strong>su 命令和sudo命令的区别</strong></a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liujiacai/p/8179994.html">sudo配置文件&#x2F;etc&#x2F;sudoers详解及实战用法</a></li>
+</ul>
+</blockquote>
+<h2 id="常用命令："><a href="#常用命令：" class="headerlink" title="常用命令："></a>常用命令：</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">用户及用户组管理</span><br><span class="line">/etc/passwd        存储用户账号</span><br><span class="line">/etc/group         存储组账号</span><br><span class="line">/etc/shadow        存储用户组账号的密码</span><br><span class="line">useradd            用户名，只增加一个用户</span><br><span class="line">userdel            用户名，删除一个用户</span><br><span class="line">adduser            用户名，增加一个用户（自动创建家目录）</span><br><span class="line">groupadd           组名，创建一个组</span><br><span class="line">groupdel           组名，删除一个组</span><br><span class="line">passwd root        给root设置密码</span><br><span class="line">su +创建的用户名    切换用户</span><br><span class="line">sudo cat /etc/sudoers</span><br><span class="line">sudo -l显示在kali用户下哪些命令可以sudo</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改密码：su-passwd-root"><a href="#修改密码：su-passwd-root" class="headerlink" title="修改密码：su passwd root"></a>修改密码：su passwd root</h2><blockquote>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28120227/article/details/100677167">https://blog.csdn.net/qq_28120227/article/details/100677167</a></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">root用户登录时，运行passwd 命令，可以设置或修改任何用户的密码</span><br><span class="line">语法格式：</span><br><span class="line"># passwd 用户名</span><br><span class="line">passwd命令后不加用户名，表示修改当前用户的密码。</span><br><span class="line">输入新密码即可，无需重启Linux系统。</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改主机名-hostname-alvin"><a href="#修改主机名-hostname-alvin" class="headerlink" title="修改主机名:hostname alvin"></a>修改主机名:hostname alvin</h2><h1 id="Linux-find命令：在目录中查找文件"><a href="#Linux-find命令：在目录中查找文件" class="headerlink" title="Linux find命令：在目录中查找文件"></a>Linux find命令：在目录中查找文件</h1><blockquote>
+<p>参考：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/779.html">http://c.biancheng.net/view/779.html</a></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> find 搜索路径 [选项] 搜索内容find 是比较特殊的命令，它有两个参数：</span><br><span class="line">第一个参数用来指定搜索路径；</span><br><span class="line">第二个参数用来指定搜索内容</span><br><span class="line">选项：</span><br><span class="line">-name: 按照文件名搜索；(名字要一模一样)</span><br><span class="line">-iname: 按照文件名搜索，不区分文件名大小；</span><br><span class="line">-inum: 按照 inode 号搜索；</span><br><span class="line">-size[+-]大小：按照指定大小搜索文件</span><br><span class="line">这里的&quot;+&quot;的意思是搜索比指定大小还要大的文件，&quot;-&quot; 的意思是搜索比指定大小还要小的文件</span><br><span class="line">-atime [+-]时间: 按照文件访问时间搜索</span><br><span class="line">-mtime [+-]时间: 按照文改时间搜索</span><br><span class="line">-ctime [+-]时间: 按照文件修改时间搜索这三个时间的区别我们在 stat 命令中已经解释过了，这里用 mtime 数据修改时间来举例，重点说说 &quot;[+-]&quot;时间的含义。</span><br><span class="line">-5：代表@内修改的文件。</span><br><span class="line">5：代表前5~6天那一天修改的文件。</span><br><span class="line">+5：代表6天前修改的文件。</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">晚上十一点睡觉</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022-08-26-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%B7%A5%E5%85%B7/Kali&amp;Linux/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%8A%E6%8A%80%E5%B7%A7/">http://example.com/2022-08-26-渗透测试/工具/Kali&amp;Linux/Linux常用命令及技巧/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">我的路-</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Linux/">Linux</a><a class="post-meta__tags" href="/tags/%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">常用命令</a></div><div class="post_share"><div class="social-share" data-image="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237556.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2022-08-23-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%86%85%E7%BD%91/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/0x32-%E5%9F%9F%E5%86%85%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/"><img class="prev-cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237523.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">0x32 - 域内权限维持</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208151640204.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">晚上十一点睡觉</div><div class="author-info__description">晚上十一点のBlog</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/11pmsleep"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/11pmsleep" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:860637048@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=860637048" target="_blank" title="qq"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">网安新人，欢迎交流技术~~~ Blog仅供个人记录笔记学习所用，若有侵权，联系我删除~</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">Linux常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4"><span class="toc-number">1.1.</span> <span class="toc-text">基础命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#apt%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.</span> <span class="toc-text">apt命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%9B%B4%E6%96%B0%E5%92%8C%E6%B8%85%E7%90%86"><span class="toc-number">1.2.1.</span> <span class="toc-text">操作系统更新和清理:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#apt-get-f-install-%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.2.</span> <span class="toc-text">apt-get -f install 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8Eapt%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="toc-number">1.2.3.</span> <span class="toc-text">关于apt过程中的一个问题：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E6%89%93%E5%8C%85%E5%91%BD%E4%BB%A4"><span class="toc-number">1.3.</span> <span class="toc-text">压缩打包命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E5%91%BD%E4%BB%A4%EF%BC%9A"><span class="toc-number">1.3.1.</span> <span class="toc-text">打包命令：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E5%91%BD%E4%BB%A4%EF%BC%9A"><span class="toc-number">1.3.2.</span> <span class="toc-text">压缩命令：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%91%BD%E4%BB%A4systemctl%E5%92%8Cservice"><span class="toc-number">1.4.</span> <span class="toc-text">服务命令systemctl和service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%8E%86%E5%8F%B2%E5%91%BD%E4%BB%A4"><span class="toc-number">1.5.</span> <span class="toc-text">查看历史命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4"><span class="toc-number">1.5.1.</span> <span class="toc-text">命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">1.5.2.</span> <span class="toc-text">快捷键</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux%E6%8A%80%E5%B7%A7"><span class="toc-number">2.</span> <span class="toc-text">Linux技巧</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3"><span class="toc-number">3.</span> <span class="toc-text">端口</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#vim%E5%91%BD%E4%BB%A4"><span class="toc-number">4.</span> <span class="toc-text">vim命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#VIM%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.1.</span> <span class="toc-text">VIM的三种模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.1.1.</span> <span class="toc-text">1. 命令模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BE%93%E5%85%A5%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.1.2.</span> <span class="toc-text">2. 输入模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%BA%95%E7%BA%BF%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.1.3.</span> <span class="toc-text">3. 底线命令模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%86%E8%A7%A3vim%E7%BC%96%E8%BE%91%E5%99%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">4.2.</span> <span class="toc-text">了解vim编辑器的一些常用命令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mousepad%E5%92%8Cleafpad"><span class="toc-number">5.</span> <span class="toc-text">mousepad和leafpad</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Kali%E8%87%AA%E8%A1%8C%E8%AE%BE%E7%BD%AE%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%8C%B9%E9%85%8D%E7%9B%B8%E5%BA%94%E7%9A%84%E5%91%BD%E4%BB%A4%EF%BC%9A"><span class="toc-number">6.</span> <span class="toc-text">Kali自行设置快捷键匹配相应的命令：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux%E6%9D%83%E9%99%90%E3%80%81%E7%BB%84%E3%80%81%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="toc-number">7.</span> <span class="toc-text">Linux权限、组、用户管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%9A"><span class="toc-number">7.1.</span> <span class="toc-text">常用命令：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81%EF%BC%9Asu-passwd-root"><span class="toc-number">7.2.</span> <span class="toc-text">修改密码：su passwd root</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%BB%E6%9C%BA%E5%90%8D-hostname-alvin"><span class="toc-number">7.3.</span> <span class="toc-text">修改主机名:hostname alvin</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux-find%E5%91%BD%E4%BB%A4%EF%BC%9A%E5%9C%A8%E7%9B%AE%E5%BD%95%E4%B8%AD%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6"><span class="toc-number">8.</span> <span class="toc-text">Linux find命令：在目录中查找文件</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022-08-26-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%B7%A5%E5%85%B7/Kali&amp;Linux/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%8A%E6%8A%80%E5%B7%A7/" title="Linux常用命令及技巧"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237556.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux常用命令及技巧"/></a><div class="content"><a class="title" href="/2022-08-26-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%B7%A5%E5%85%B7/Kali&amp;Linux/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%8F%8A%E6%8A%80%E5%B7%A7/" title="Linux常用命令及技巧">Linux常用命令及技巧</a><time datetime="2022-08-26T16:10:43.674Z" title="更新于 2022-08-27 00:10:43">2022-08-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022-08-21-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%86%85%E7%BD%91/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/0x31-Linux%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/" title="0x31 - Linux权限维持"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237508.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="0x31 - Linux权限维持"/></a><div class="content"><a class="title" href="/2022-08-21-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%86%85%E7%BD%91/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/0x31-Linux%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/" title="0x31 - Linux权限维持">0x31 - Linux权限维持</a><time datetime="2022-08-26T11:43:52.988Z" title="更新于 2022-08-26 19:43:52">2022-08-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022-08-21-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%86%85%E7%BD%91/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/0x30-Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/" title="0x30 - Windows权限维持"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237496.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="0x30 - Windows权限维持"/></a><div class="content"><a class="title" href="/2022-08-21-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%86%85%E7%BD%91/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/0x30-Windows%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/" title="0x30 - Windows权限维持">0x30 - Windows权限维持</a><time datetime="2022-08-26T11:31:50.393Z" title="更新于 2022-08-26 19:31:50">2022-08-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022-08-17-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%86%85%E7%BD%91/0x25-Windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/" title="0x25 - Windows密码凭证获取"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237557.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="0x25 - Windows密码凭证获取"/></a><div class="content"><a class="title" href="/2022-08-17-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%86%85%E7%BD%91/0x25-Windows%E5%AF%86%E7%A0%81%E5%87%AD%E8%AF%81%E8%8E%B7%E5%8F%96/" title="0x25 - Windows密码凭证获取">0x25 - Windows密码凭证获取</a><time datetime="2022-08-24T03:32:41.473Z" title="更新于 2022-08-24 11:32:41">2022-08-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022-08-23-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%86%85%E7%BD%91/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/0x32-%E5%9F%9F%E5%86%85%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/" title="0x32 - 域内权限维持"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237523.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="0x32 - 域内权限维持"/></a><div class="content"><a class="title" href="/2022-08-23-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%86%85%E7%BD%91/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/0x32-%E5%9F%9F%E5%86%85%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/" title="0x32 - 域内权限维持">0x32 - 域内权限维持</a><time datetime="2022-08-23T17:18:44.499Z" title="更新于 2022-08-24 01:18:44">2022-08-24</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 晚上十一点睡觉</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Welcome to 11pmsleep's blog ~~~ 该网站用来记录学习笔记及生活，欢迎交流技术~</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'ctM8NyGphVxEX1qXd84qXWNa-gzGzoHsz',
+      appKey: 'Ryr4bqLMBmcscGhSAclo91Jv',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
