@@ -11,6 +11,16 @@
         <content type="html"><![CDATA[]]></content>
       
       
+      <categories>
+          
+          <category> 渗透测试 </category>
+          
+          <category> 内网 </category>
+          
+          <category> 免杀 </category>
+          
+      </categories>
+      
       
     </entry>
     
@@ -23,6 +33,16 @@
       
         <content type="html"><![CDATA[<h1 id="免杀概念"><a href="#免杀概念" class="headerlink" title="免杀概念"></a>免杀概念</h1><p>免杀技术全称为反杀毒技术 Anti Anti-Virus 简称“免杀”，它指的是一种能使病毒木马免于被杀毒软件查杀的技术。由于免杀技术的涉猎面非常广，其中包含<strong>反汇编、逆向工程、系统漏洞</strong>等黑客技术，所以难度很高，一般人不会或没能力接触这技术的深层内容。其内容基本上都是修改病毒、木马的内容改变特征码，从而躲避了杀毒软件的查杀。  </p><blockquote><p>下面是不同百科对免杀技术的jie’shi</p><ul><li><a href="https://baike.baidu.com/item/%E5%85%8D%E6%9D%80">免杀</a></li><li><a href="https://zh.m.wikipedia.org/zh-hans/%E5%85%8D%E6%9D%80%E6%8A%80%E6%9C%AF">免杀技术</a></li></ul></blockquote><h1 id="免杀测试环境"><a href="#免杀测试环境" class="headerlink" title="免杀测试环境"></a>免杀测试环境</h1><h1 id="常见查杀方式"><a href="#常见查杀方式" class="headerlink" title="常见查杀方式"></a>常见查杀方式</h1><h2 id="杀软检测技术介绍"><a href="#杀软检测技术介绍" class="headerlink" title="杀软检测技术介绍"></a>杀软检测技术介绍</h2><h3 id="基于签名的检测"><a href="#基于签名的检测" class="headerlink" title="基于签名的检测"></a>基于签名的检测</h3><h3 id="静态程序分析"><a href="#静态程序分析" class="headerlink" title="静态程序分析"></a>静态程序分析</h3><h3 id="动态程序分析"><a href="#动态程序分析" class="headerlink" title="动态程序分析"></a>动态程序分析</h3><h3 id="沙盒分析技术"><a href="#沙盒分析技术" class="headerlink" title="沙盒分析技术"></a>沙盒分析技术</h3><h3 id="启发式分析"><a href="#启发式分析" class="headerlink" title="启发式分析"></a>启发式分析</h3><h3 id="信息熵检测"><a href="#信息熵检测" class="headerlink" title="信息熵检测"></a>信息熵检测</h3><h3 id="其他常见检测技术"><a href="#其他常见检测技术" class="headerlink" title="其他常见检测技术"></a>其他常见检测技术</h3><h4 id="混淆检测"><a href="#混淆检测" class="headerlink" title="混淆检测"></a>混淆检测</h4><h4 id="加壳检测"><a href="#加壳检测" class="headerlink" title="加壳检测"></a>加壳检测</h4><h4 id="加密检测"><a href="#加密检测" class="headerlink" title="加密检测"></a>加密检测</h4><h1 id="常见免杀方式"><a href="#常见免杀方式" class="headerlink" title="常见免杀方式"></a>常见免杀方式</h1><h2 id="特征码免杀"><a href="#特征码免杀" class="headerlink" title="特征码免杀"></a>特征码免杀</h2><h2 id="花指令免杀"><a href="#花指令免杀" class="headerlink" title="花指令免杀"></a>花指令免杀</h2><h2 id="加壳免杀"><a href="#加壳免杀" class="headerlink" title="加壳免杀"></a>加壳免杀</h2><h2 id="分离免杀"><a href="#分离免杀" class="headerlink" title="分离免杀"></a>分离免杀</h2><h2 id="资源修改"><a href="#资源修改" class="headerlink" title="资源修改"></a>资源修改</h2><h1 id="shellcode-launch"><a href="#shellcode-launch" class="headerlink" title="shellcode-launch"></a>shellcode-launch</h1><h2 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h2><h2 id="安装GO环境"><a href="#安装GO环境" class="headerlink" title="安装GO环境"></a>安装GO环境</h2><h3 id="Go-安装"><a href="#Go-安装" class="headerlink" title="Go 安装"></a>Go 安装</h3><h3 id="Go-环境配置"><a href="#Go-环境配置" class="headerlink" title="Go 环境配置"></a>Go 环境配置</h3><h3 id="GOPATH"><a href="#GOPATH" class="headerlink" title="GOPATH"></a>GOPATH</h3><h2 id="编译项目"><a href="#编译项目" class="headerlink" title="编译项目"></a>编译项目</h2><h3 id="下载项目"><a href="#下载项目" class="headerlink" title="下载项目"></a>下载项目</h3><h3 id="MSF或CS生成C的shellcode"><a href="#MSF或CS生成C的shellcode" class="headerlink" title="MSF或CS生成C的shellcode"></a>MSF或CS生成C的shellcode</h3><h3 id="修改winlaunch-go"><a href="#修改winlaunch-go" class="headerlink" title="修改winlaunch.go"></a>修改winlaunch.go</h3><h3 id="编译生成exe"><a href="#编译生成exe" class="headerlink" title="编译生成exe"></a>编译生成exe</h3><h3 id="过火绒"><a href="#过火绒" class="headerlink" title="过火绒"></a>过火绒</h3><h3 id="过360"><a href="#过360" class="headerlink" title="过360"></a>过360</h3><h1 id="darkarmour"><a href="#darkarmour" class="headerlink" title="darkarmour"></a>darkarmour</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h2 id="实战免杀mimikatz"><a href="#实战免杀mimikatz" class="headerlink" title="实战免杀mimikatz"></a>实战免杀mimikatz</h2><h2 id="实战MSF免杀"><a href="#实战MSF免杀" class="headerlink" title="实战MSF免杀"></a>实战MSF免杀</h2><h1 id="AV-Evasion-Tool"><a href="#AV-Evasion-Tool" class="headerlink" title="AV_Evasion_Tool"></a>AV_Evasion_Tool</h1><h1 id="免杀学习"><a href="#免杀学习" class="headerlink" title="免杀学习"></a>免杀学习</h1><h1 id="shellcode简介"><a href="#shellcode简介" class="headerlink" title="shellcode简介"></a>shellcode简介</h1><h1 id="shellcode-loader"><a href="#shellcode-loader" class="headerlink" title="shellcode loader"></a>shellcode loader</h1><h1 id="shellcodeLoader-c-x2F-c"><a href="#shellcodeLoader-c-x2F-c" class="headerlink" title="shellcodeLoader-c&#x2F;c++"></a>shellcodeLoader-c&#x2F;c++</h1><h2 id="代码详解"><a href="#代码详解" class="headerlink" title="代码详解"></a>代码详解</h2><h3 id="include"><a href="#include" class="headerlink" title="include"></a>include</h3><h3 id="隐藏控制台"><a href="#隐藏控制台" class="headerlink" title="隐藏控制台"></a>隐藏控制台</h3><h3 id="VirtualAlloc"><a href="#VirtualAlloc" class="headerlink" title="VirtualAlloc"></a>VirtualAlloc</h3><h3 id="void-Memory"><a href="#void-Memory" class="headerlink" title="((void(*)())Memory)();"></a>((void(*)())Memory)();</h3><h1 id="shellcodeLoder-Python"><a href="#shellcodeLoder-Python" class="headerlink" title="shellcodeLoder-Python"></a>shellcodeLoder-Python</h1><h2 id="Python内存加载原理"><a href="#Python内存加载原理" class="headerlink" title="Python内存加载原理"></a>Python内存加载原理</h2><h3 id="Ctypes库"><a href="#Ctypes库" class="headerlink" title="Ctypes库"></a>Ctypes库</h3><h3 id="转换数据类型"><a href="#转换数据类型" class="headerlink" title="转换数据类型"></a>转换数据类型</h3><h3 id="设置VirtualAlloc返回类型"><a href="#设置VirtualAlloc返回类型" class="headerlink" title="设置VirtualAlloc返回类型"></a>设置VirtualAlloc返回类型</h3><h3 id="VirtualAlloc-函数申请内存"><a href="#VirtualAlloc-函数申请内存" class="headerlink" title="VirtualAlloc 函数申请内存"></a>VirtualAlloc 函数申请内存</h3><h3 id="将Shellcode载入内存"><a href="#将Shellcode载入内存" class="headerlink" title="将Shellcode载入内存"></a>将Shellcode载入内存</h3><h3 id="CreateThread创建线程"><a href="#CreateThread创建线程" class="headerlink" title="CreateThread创建线程"></a>CreateThread创建线程</h3><h3 id="等待创建的线程运行结束"><a href="#等待创建的线程运行结束" class="headerlink" title="等待创建的线程运行结束"></a>等待创建的线程运行结束</h3>]]></content>
       
+      
+      <categories>
+          
+          <category> 渗透测试 </category>
+          
+          <category> 内网 </category>
+          
+          <category> 免杀 </category>
+          
+      </categories>
       
       
     </entry>
