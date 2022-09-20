@@ -24,6 +24,14 @@
         <content type="html"><![CDATA[<h1 id="MobaXterm配置SSHTunnel"><a href="#MobaXterm配置SSHTunnel" class="headerlink" title="MobaXterm配置SSHTunnel"></a>MobaXterm配置SSHTunnel</h1><h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>我们在使用公有云的时候，不论是安全的原因，还是省钱的原因，都经常只购买一个弹性公网IP。除了绑定公网IP的云服务器可以直接从外网访问外，其它的服务器，要么通过登录公有云提供商的网页控制台，从网页远程登录；要么只有先登录绑定公网IP的服务器，然后再ssh到目标服务上。当然，如果买了堡垒机的土豪除外。<br>以上的两种方法，使用都不怎么方便。其实不论是putty，还是MobaXterm，都提供了SSHTunnel的功能，为我们日常管理，提供了很简便的解决方案。</p><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ol><li><p>菜单Tools——MobaSSHTunnel（port forwarding），出现如下界面：</p><p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202209210142761.png" alt="ssh隧道配置" title="ssh隧道配置"></p></li><li><p>上图的左下角,”My computer with MobaXterm”里, &lt;forward port&gt;填入本地计算机空闲端口, 比如65432</p></li><li><p>上图的右下角,”SSH server”里,需要填入三个信息: &lt;ssh server&gt;填写弹性公网IP, &lt;ssh login&gt;填写绑定公网IP的服务器用于登录的用户名,比如root,&lt;ssh port&gt;里一般填写22, 如果你有修改了sshd监听的端口, 那么就填写修改后的端口</p></li><li><p>上图的右上角,”Remote server”里, &lt;remote server&gt;填写需要登录的服务器的私有ip地址,比如192.168.0.168, &lt;remote port&gt;里一般填写22, 如果你有修改了sshd监听的端口, 那么就填写修改后的端口</p></li><li><p>点击”Save”, SSHTunnel就配置好了</p></li></ol><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202209210142724.png" alt="ssh隧道配置" title="ssh隧道配置"></p><p>如上图, 点击”start&#x2F;stop”的start图标, 输入绑定公网IP的服务器的登录用户名对应的密码, ssh隧道就建立了.<br>接下来,我们新建一个Session,如下图:</p><p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202209210142692.png" alt="新建session" title="新建session"></p><p>注意红色方框标识出来的部分,”Remote host”必须填写<em>localhost</em>或者<em>127.0.0.1</em>, “Port”必须填写我们在第2步里&lt;forward port&gt;填写的端口.<br>然后就可以跟以前一样正常使用了.</p><p>就相当于走了代理去访问远程的ssh</p><h1 id="refer"><a href="#refer" class="headerlink" title="refer:"></a>refer:</h1><blockquote><p><a href="http://www.fobgavin.com/mobaxterm-instruction-1.html">MobaXterm详细使用教程（一）</a></p><p><a href="https://okrs.gitee.io/blog/2020/04/26/019ssh-tunnel/">MobaXterm配置SSHTunnel</a></p></blockquote>]]></content>
       
       
+      <categories>
+          
+          <category> 渗透测试 </category>
+          
+          <category> 工具 </category>
+          
+      </categories>
+      
       
         <tags>
             
