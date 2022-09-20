@@ -29,7 +29,7 @@
       <link href="/2022-09-20-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%AE%9E%E6%88%98/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E8%A6%81%E7%82%B9/"/>
       <url>/2022-09-20-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%AE%9E%E6%88%98/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E8%A6%81%E7%82%B9/</url>
       
-        <content type="html"><![CDATA[<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ol><li>少用msf17010，动静大，容易把主机打崩，渗透测试尽量要动静小，获取到的主机资产要多，如果直接打崩了就少了个资产。在内网要动静小一点，才能更加的隐蔽</li></ol>]]></content>
+        <content type="html"><![CDATA[<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ol><li>少用msf17010，动静大，容易把主机打崩，渗透测试尽量要动静小，获取到的主机资产要多，如果直接打崩了就少了个资产。在内网要动静小一点，才能更加的隐蔽</li><li>内网隧道搭建如果不稳定，就要从msf或者cs的代理转向上传frp或者stowaway进行隧道代理搭建</li></ol>]]></content>
       
       
       <categories>
