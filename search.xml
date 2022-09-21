@@ -8,8 +8,16 @@
       <link href="/2022-09-21-%E7%9F%A5%E8%AF%86/Notes/Typora%E6%95%99%E7%A8%8B/"/>
       <url>/2022-09-21-%E7%9F%A5%E8%AF%86/Notes/Typora%E6%95%99%E7%A8%8B/</url>
       
-        <content type="html"><![CDATA[<p>Typora 是一款<strong>支持实时预览的 Markdown 文本编辑器</strong>。它有 OS X、Windows、Linux 三个平台的版本，并且是<strong>完全免费</strong>的。</p><h1 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h1><blockquote><ul><li>Typora官网主题: <strong><a href="https://theme.typora.io/">https://theme.typora.io/</a></strong></li><li>为 Typora 编写自定义主题: <strong><a href="https://theme.typora.io/doc/Write-Custom-Theme/">https://theme.typora.io/doc/Write-Custom-Theme/</a></strong></li></ul></blockquote><h2 id="安装主题方法"><a href="#安装主题方法" class="headerlink" title="安装主题方法"></a>安装主题方法</h2><ul><li>通过<code>文件 -&gt; 偏好设置 -&gt; 打开主题文件夹</code>打开theme目录</li><li>复制你想要的对应主题名称<code>*.css</code>后缀文件 到<code>theme</code>目录下然后重启, 选择菜单 -&gt; 主题</li></ul><h2 id="推荐主题"><a href="#推荐主题" class="headerlink" title="推荐主题"></a>推荐主题</h2><ol><li><h3 id="Drake"><a href="#Drake" class="headerlink" title="Drake"></a><strong>Drake</strong></h3></li></ol><blockquote><p><a href="https://github.com/liangjingkanji/DrakeTyporaTheme">https://github.com/liangjingkanji/DrakeTyporaTheme</a></p></blockquote><ol start="2"><li><h3 id="Night-New"><a href="#Night-New" class="headerlink" title="Night New"></a>Night New</h3></li></ol>]]></content>
+        <content type="html"><![CDATA[<p>Typora 是一款<strong>支持实时预览的 Markdown 文本编辑器</strong>。它有 OS X、Windows、Linux 三个平台的版本，并且是<strong>完全免费</strong>的。</p><h1 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h1><blockquote><ul><li>Typora官网主题: <strong><a href="https://theme.typora.io/">https://theme.typora.io/</a></strong></li><li>为 Typora 编写自定义主题: <strong><a href="https://theme.typora.io/doc/Write-Custom-Theme/">https://theme.typora.io/doc/Write-Custom-Theme/</a></strong></li></ul></blockquote><h2 id="安装主题方法"><a href="#安装主题方法" class="headerlink" title="安装主题方法"></a>安装主题方法</h2><ul><li>通过<code>文件 -&gt; 偏好设置 -&gt; 打开主题文件夹</code>打开theme目录</li><li>复制你想要的对应主题名称<code>*.css</code>后缀文件 到<code>theme</code>目录下然后重启, 选择菜单 -&gt; 主题</li></ul><h2 id="推荐主题"><a href="#推荐主题" class="headerlink" title="推荐主题"></a>推荐主题</h2><blockquote><p>去官网下载</p></blockquote><ol><li>Drake</li></ol><blockquote><p><a href="https://github.com/liangjingkanji/DrakeTyporaTheme">https://github.com/liangjingkanji/DrakeTyporaTheme</a></p></blockquote><ol start="2"><li>Night New</li><li>aspartate</li><li>cobalt</li><li>dyzj-dark</li><li>gitbook</li><li>haru</li><li>lanyue</li><li>mo</li></ol><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202209220113581.png" alt="image-20220922011346401" style="zoom:50%;" />]]></content>
       
+      
+      <categories>
+          
+          <category> 知识 </category>
+          
+          <category> Notes </category>
+          
+      </categories>
       
       
     </entry>
@@ -24,6 +32,14 @@
         <content type="html"><![CDATA[<h1 id="考核题"><a href="#考核题" class="headerlink" title="考核题"></a>考核题</h1><ol><li>给你一个网站你要如何去进行漏洞测试(如淘宝,京东，仅从web页面)从登录页面开始，列举出你的思路。</li></ol>]]></content>
       
       
+      <categories>
+          
+          <category> 渗透测试 </category>
+          
+          <category> 面试+笔试 </category>
+          
+      </categories>
+      
       
     </entry>
     
@@ -36,6 +52,14 @@
       
         <content type="html"><![CDATA[]]></content>
       
+      
+      <categories>
+          
+          <category> 渗透测试 </category>
+          
+          <category> 面试+笔试 </category>
+          
+      </categories>
       
       
     </entry>
