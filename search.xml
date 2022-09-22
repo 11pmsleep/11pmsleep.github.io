@@ -11,6 +11,14 @@
         <content type="html"><![CDATA[<h1 id="常用DNS-服务器"><a href="#常用DNS-服务器" class="headerlink" title="常用DNS 服务器"></a>常用DNS 服务器</h1><h2 id="233-5-5-5阿里云223-5-5-5-x2F-223-6-6-6"><a href="#233-5-5-5阿里云223-5-5-5-x2F-223-6-6-6" class="headerlink" title="233.5.5.5阿里云223.5.5.5 &#x2F; 223.6.6.6"></a>233.5.5.5阿里云223.5.5.5 &#x2F; 223.6.6.6</h2><blockquote><ul><li>稳定(Stable)</li></ul><p>全球数百台服务器组成的集群,充足的带宽资源<br>自研高性能DNS系统和清洗中心，保障系统稳定和安全</p><ul><li>快速(Speedy)</li></ul><p>BGP anycast技术，让您访问最近的DNS集群<br>动态缓存技术，加速解析响应</p><ul><li>智能(Smart)</li></ul><p>精确的IP区域划分，解析结果更准确<br>即将支持edns-client-subnet 技术,调度精准</p><ul><li>稳定(Stable)</li></ul><p>全球数百台服务器组成的集群,充足的带宽资源<br>自研高性能DNS系统和清洗中心，保障系统稳定和安全</p><ul><li>快速(Speedy)</li></ul><p>BGP anycast技术，让您访问最近的DNS集群<br>动态缓存技术，加速解析响应</p><ul><li>智能(Smart)</li></ul><p>精确的IP区域划分，解析结果更准确<br>即将支持edns-client-subnet 技术,调度精准</p></blockquote><h2 id="114-DNS：114-114-114-114"><a href="#114-DNS：114-114-114-114" class="headerlink" title="114 DNS：114.114.114.114"></a>114 DNS：114.114.114.114</h2><blockquote><ul><li>114DNS 的优势：</li></ul><p>高速 电信联通移动全国通用DNS，能引导您到最快的网站，手机和计算机都可用<br>稳定 DNS解析成功率超高，与默认DNS相比，使用114DNS可访问国内外更多的网站<br>可靠 3000万个家庭和企业DNS的后端技术支持，多次为电信运营商提供DNS灾备</p><ul><li>114DNS 的特色：</li></ul><p>纯净 无劫持 无需再忍受被强扭去看广告或粗俗网站之痛苦<br>拦截 钓鱼病毒木马网站 增强网银、证券、购物、游戏、隐私信息安全<br>学校或家长可选拦截 色情网站 保护少年儿童免受网络色情内容的毒害</p></blockquote><h2 id="8-8-8-8谷歌"><a href="#8-8-8-8谷歌" class="headerlink" title="8.8.8.8谷歌"></a>8.8.8.8谷歌</h2>]]></content>
       
       
+      <categories>
+          
+          <category> 计算机网络 </category>
+          
+          <category> 应用层 </category>
+          
+      </categories>
+      
       
     </entry>
     
@@ -163,7 +171,7 @@
       <link href="/2022-09-20-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%B0%8F%E7%BB%93/"/>
       <url>/2022-09-20-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%B0%8F%E7%BB%93/</url>
       
-        <content type="html"><![CDATA[<h1 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h1><p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202209211812304.png" alt="渗透测试流程"></p><h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ol><li><p>少用msf17010，动静大，容易把主机打崩，渗透测试尽量要动静小，获取到的主机资产要多，如果直接打崩了就少了个资产。在内网要动静小一点，才能更加的隐蔽</p></li><li><p>内网隧道搭建如果不稳定，就要从msf或者cs的代理转向上传frp或者stowaway进行隧道代理搭建。cs的代理比较少用，老版cs不支持socks5，如果追求稳定还是使用之前学习过的代理工具！！！~~~</p><p>比较推荐的是stowaway</p></li><li><p>上传工具的话。动静还是有的，一些工具需要环境比如python。而且工具容易被杀被检测！有的工具稍微大一点，经过代理上传会导致动静非常大。</p></li><li><p>内网扫描的话fscan不错</p></li><li><p>dirb kali中很好用的一个目录扫描工具</p></li></ol>]]></content>
+        <content type="html"><![CDATA[<h1 id="学习路线"><a href="#学习路线" class="headerlink" title="学习路线"></a>学习路线</h1><p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202209211812304.png" alt="渗透测试流程"></p><h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ol><li><p>少用msf17010，动静大，容易把主机打崩，渗透测试尽量要动静小，获取到的主机资产要多，如果直接打崩了就少了个资产。在内网要动静小一点，才能更加的隐蔽</p></li><li><p>内网隧道搭建如果不稳定，就要从msf或者cs的代理转向上传frp或者stowaway进行隧道代理搭建。cs的代理比较少用，老版cs不支持socks5，如果追求稳定还是使用之前学习过的代理工具！！！~~~</p><p>比较推荐的是stowaway</p></li><li><p>上传工具的话。动静还是有的，一些工具需要环境比如python。而且工具容易被杀被检测！有的工具稍微大一点，经过代理上传会导致动静非常大。</p></li><li><p>内网扫描的话fscan不错</p></li><li><p>dirb kali中很好用的一个目录扫描工具</p></li><li><p>尝试学习写漏洞检测脚本</p></li><li><p>GitHub搜poc，学习知识后，要自己输出知识</p></li><li><p>要了解爆出来的漏洞，了解怎么利用，怎么发现，对他先有一个认知，不一定需要一下子就知道底层原理。先了解怎么利用，再决定要不要了解底层原理。一定要自己动手去复现漏洞。历史漏洞主要还是靠我们自主学习。</p></li></ol>]]></content>
       
       
       <categories>
@@ -849,7 +857,7 @@
       <link href="/2022-08-18-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/0x01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
       <url>/2022-08-18-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/0x01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h1 id="渗透工具环境安装"><a href="#渗透工具环境安装" class="headerlink" title="渗透工具环境安装"></a><strong>渗透工具环境安装</strong></h1><h2 id="scoop-包管理器"><a href="#scoop-包管理器" class="headerlink" title="scoop 包管理器"></a><a href="https://11pmsleep.github.io/2022-08-18-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%B7%A5%E5%85%B7/scoop-%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8/">scoop 包管理器</a></h2><h2 id="Java环境安装"><a href="#Java环境安装" class="headerlink" title="Java环境安装"></a><a href="https://11pmsleep.github.io/2022-08-18-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%B7%A5%E5%85%B7/Java%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/">Java环境安装</a></h2><h2 id="Python环境安装"><a href="#Python环境安装" class="headerlink" title="Python环境安装"></a>Python环境安装</h2><blockquote><p><a href="https://11pmsleep.github.io/2022-08-18-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%B7%A5%E5%85%B7/Python%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/">Python环境安装</a></p></blockquote><h1 id="Linux-Kali配置与使用"><a href="#Linux-Kali配置与使用" class="headerlink" title="Linux-Kali配置与使用"></a><strong><a href="https://11pmsleep.github.io/2022-08-18-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%B7%A5%E5%85%B7/Kali&Linux/Linux-Kali%E9%85%8D%E7%BD%AE%E5%AE%89%E8%A3%85/">Linux-Kali配置与使用</a></strong></h1><h2 id="VMware软件安装"><a href="#VMware软件安装" class="headerlink" title="VMware软件安装"></a><a href="https://11pmsleep.github.io/2022-08-18-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%B7%A5%E5%85%B7/vmware%E4%BD%BF%E7%94%A8/">VMware软件安装</a></h2><h2 id="Linux基础"><a href="#Linux基础" class="headerlink" title="Linux基础"></a><a href="https://11pmsleep.github.io/2022-08-18-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%B7%A5%E5%85%B7/Kali&Linux/Linux%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80/">Linux基础</a></h2>]]></content>
       
       
       <categories>
