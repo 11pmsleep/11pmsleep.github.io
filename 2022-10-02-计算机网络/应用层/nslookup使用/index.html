@@ -1,0 +1,239 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>nslookup使用 | 我的路-</title><meta name="keywords" content="晚上十一点睡觉,网安,渗透,life"><meta name="author" content="晚上十一点睡觉"><meta name="copyright" content="晚上十一点睡觉"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="命令简介nslookup(Name Server Lookup)是一种网络管理命令，用于从 DNS 服务器查询域名、IP或其他 DNS 记录信息。 nslookup 有两种工作模式，交互模式和非交互模式。在交互模式下，用户可以向域名服务器查询各类主机、域名的信息，或者输出域名中的主机列表。在非交互模式下，针对一个主机或域名仅仅获取特定的名称或所需信息。  进入交互模式有两种方式：   （1）直接输">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nslookup使用">
+<meta property="og:url" content="http://example.com/2022-10-02-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%BA%94%E7%94%A8%E5%B1%82/nslookup%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="我的路-">
+<meta property="og:description" content="命令简介nslookup(Name Server Lookup)是一种网络管理命令，用于从 DNS 服务器查询域名、IP或其他 DNS 记录信息。 nslookup 有两种工作模式，交互模式和非交互模式。在交互模式下，用户可以向域名服务器查询各类主机、域名的信息，或者输出域名中的主机列表。在非交互模式下，针对一个主机或域名仅仅获取特定的名称或所需信息。  进入交互模式有两种方式：   （1）直接输">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237545.jpg">
+<meta property="article:published_time" content="2022-10-02T05:55:12.000Z">
+<meta property="article:modified_time" content="2022-10-02T06:17:03.880Z">
+<meta property="article:author" content="晚上十一点睡觉">
+<meta property="article:tag" content="晚上十一点睡觉,网安,渗透,life">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237545.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2022-10-02-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%BA%94%E7%94%A8%E5%B1%82/nslookup%E4%BD%BF%E7%94%A8/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: 晚上十一点睡觉","link":"链接: ","source":"来源: 我的路-","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'nslookup使用',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-02 14:17:03'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208151640204.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">66</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">43</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">29</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237545.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">我的路-</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">nslookup使用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-10-02T05:55:12.000Z" title="发表于 2022-10-02 13:55:12">2022-10-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-02T06:17:03.880Z" title="更新于 2022-10-02 14:17:03">2022-10-02</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="leancloud_visitors" id="/2022-10-02-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%BA%94%E7%94%A8%E5%B1%82/nslookup%E4%BD%BF%E7%94%A8/" data-flag-title="nslookup使用"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span class="leancloud-visitors-count"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2022-10-02-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%BA%94%E7%94%A8%E5%B1%82/nslookup%E4%BD%BF%E7%94%A8/#post-comment" itemprop="discussionUrl"><span class="valine-comment-count" data-xid="/2022-10-02-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%BA%94%E7%94%A8%E5%B1%82/nslookup%E4%BD%BF%E7%94%A8/" itemprop="commentCount"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="命令简介"><a href="#命令简介" class="headerlink" title="命令简介"></a>命令简介</h1><p>nslookup(Name Server Lookup)是一种<strong>网络管理命令</strong>，用于从 DNS 服务器查询<a target="_blank" rel="noopener" href="https://dnspod.cloud.tencent.com/">域名</a>、IP或其他 DNS 记录信息。</p>
+<p>nslookup 有两种工作模式，<strong>交互模式</strong>和<strong>非交互模式</strong>。在交互模式下，用户可以向域名服务器查询各类主机、域名的信息，或者输出域名中的主机列表。在非交互模式下，针对一个主机或域名仅仅获取特定的名称或所需信息。</p>
+<ul>
+<li>进入交互模式有两种方式：</li>
+</ul>
+<blockquote>
+<p>（1）直接输入 nslookup 命令，不加任何参数，此时 nslookup 会连接到默认的域名服务器（&#x2F;etc&#x2F;resolv.conf的第一个DNS地址）； </p>
+<p>（2）第一个参数是连字符（-），第二个参数是域名服务器的主机名或IP，即<code>nslookup - SERVER | IP</code>。</p>
+</blockquote>
+<ul>
+<li>其他方式则进入非交互模式，比如nslookup NAME查询域名对应的IP。</li>
+</ul>
+<h1 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nslookup [-OPTION] [NAME | -] [SERVER]</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">NAME 为域名，SERVER 为域名服务器地址</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="选项说明"><a href="#选项说明" class="headerlink" title="选项说明"></a>选项说明</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-query=TYPE        设置查询的类型。等同交互命令 set type=VALUE。VALUE 取值见下文</span><br><span class="line">-timeout=NUMBER    设置等待响应的超时时间，单位秒。等同交互命令 set timeout=NUMBER</span><br></pre></td></tr></table></figure>
+
+<h1 id="交互命令"><a href="#交互命令" class="headerlink" title="交互命令"></a>交互命令</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">HOST [SERVER]</span><br><span class="line">查询域名对应的地址。如果指定 SERVER 则使用指定的域名服务器解析</span><br><span class="line">server DOMAIN</span><br><span class="line">指定域名服务器</span><br><span class="line">lserver DOMAIN</span><br><span class="line">改变默认域名服务器</span><br><span class="line">exit</span><br><span class="line">退出交互模式</span><br><span class="line">set KEYWORD[=VALUE]</span><br><span class="line">此命令用于更改影响查找的状态信息。有效关键字为：</span><br><span class="line">all</span><br><span class="line">打印所有 KEYWORD 当前配置</span><br><span class="line">class=VALUE</span><br><span class="line">改变 DNS class，VALUE 可取值 IN(Internet)、CH(Chaos)、HS(Hesiod)和 ANY，默认 IN。DNS class 用于指定信息的协议组</span><br><span class="line">[no]debug</span><br><span class="line">在搜索时打开或关闭完整响应数据包和任何中间响应数据包的显示。默认 nodebug，简写 [no]deb</span><br><span class="line">[no]d2</span><br><span class="line">打开或关闭调试模式。这将显示有关 nslookup 正在执行的操作的更多信息。默认 nod2</span><br><span class="line">domain=NAME</span><br><span class="line">设置搜索列表</span><br><span class="line">[no]search</span><br><span class="line">如果查找请求包含至少一个句点但没有以尾随句点结束，则将域搜索列表中的域名追加到请求，直到收到应答。默认 search</span><br><span class="line">port=VALUE</span><br><span class="line">修改默认的TCP/UDP域名服务器端口。默认 53</span><br><span class="line">type=VALUE</span><br><span class="line">更改查询的类型。可取值 A(A记录)、CNAME(CNAME记录)、NS(域名服务器记录)、MX(邮件交换记录)、PTR(反向记录)等。大小写不敏感，默认 A(Address)</span><br><span class="line">[no]recurse</span><br><span class="line">如果域名服务器没有该信息，请告诉它查询其他服务器。默认 recurse，简写 [no]rec</span><br><span class="line">retry=NUMBER</span><br><span class="line">设置重试次数</span><br><span class="line">timeout=NUMBER</span><br><span class="line">设置等待响应的超时时间，单位秒</span><br><span class="line">[no]vc</span><br><span class="line">打开或关闭发送请求到服务器使用虚拟电路。默认 novc</span><br><span class="line">[no]fail</span><br><span class="line">如果域名服务器响应 SERVFAIL 或推荐（nofail）或终止查询（fail），尝试下一个名称服务器。默认不尝试(nofail)</span><br></pre></td></tr></table></figure>
+
+<h1 id="常用示例"><a href="#常用示例" class="headerlink" title="常用示例"></a>常用示例</h1><ol>
+<li>在非交互模式下正向解析，查询域名信息。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nslookup baidu.com</span><br><span class="line">Server:10.123.119.98</span><br><span class="line">Address:10.123.119.98#53</span><br><span class="line"></span><br><span class="line">Non-authoritative answer:</span><br><span class="line">Name:baidu.com</span><br><span class="line">Address: 39.156.69.79</span><br><span class="line">Name:baidu.com</span><br><span class="line">Address: 220.181.38.148</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在交互模式下正向解析，查询域名信息。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nslookup</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">baidu.com</span></span><br><span class="line">Server:10.123.119.98</span><br><span class="line">Address:10.123.119.98#53</span><br><span class="line"></span><br><span class="line">Non-authoritative answer:</span><br><span class="line">Name:baidu.com</span><br><span class="line">Address: 220.181.38.148</span><br><span class="line">Name:baidu.com</span><br><span class="line">Address: 39.156.69.79</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash"><span class="built_in">exit</span></span></span><br></pre></td></tr></table></figure>
+
+<p>最后一个交互命令 exit 表示退</p>
+<ol start="3">
+<li>反向解析，通过 IP 查询对应的域名。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nslookup 209.132.183.105</span><br><span class="line">Server:10.123.119.98</span><br><span class="line">Address:10.123.119.98#53</span><br><span class="line"></span><br><span class="line">Non-authoritative answer:</span><br><span class="line">105.183.132.209.in-addr.arpaname = redirect.redhat.com.</span><br><span class="line"></span><br><span class="line">Authoritative answers can be found from:</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>查询域名别名。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nslookup -query=cname www.baidu.com</span><br><span class="line">Server:10.123.119.98</span><br><span class="line">Address:10.123.119.98#53</span><br><span class="line"></span><br><span class="line">Non-authoritative answer:</span><br><span class="line">www.baidu.comcanonical name = www.a.shifen.com.</span><br><span class="line"></span><br><span class="line">Authoritative answers can be found from:</span><br></pre></td></tr></table></figure>
+
+<p>不知道为什么，查询域名别名时需要在域名前面加上 www，不然会得到如下结果：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nslookup -query=cname baidu.com</span><br><span class="line">Server:10.123.119.98</span><br><span class="line">Address:10.123.119.98#53</span><br><span class="line"></span><br><span class="line">Non-authoritative answer:</span><br><span class="line">*** Can&#x27;t find baidu.com: No answer</span><br><span class="line"></span><br><span class="line">Authoritative answers can be found from:</span><br><span class="line">baidu.com</span><br><span class="line">origin = dns.baidu.com</span><br><span class="line">mail addr = sa.baidu.com</span><br><span class="line">serial = 2012144164</span><br><span class="line">refresh = 300</span><br><span class="line">retry = 300</span><br><span class="line">expire = 2592000</span><br><span class="line">minimum = 7200</span><br></pre></td></tr></table></figure>
+
+<p>（5）查询其他类型的记录。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nslookup -query=TYPE DOMAIN|IP [DNS-SERVER]</span><br><span class="line">TYPE:</span><br><span class="line">AIPv4 地址记录</span><br><span class="line">    AAAAIPv6 地址记录  </span><br><span class="line">AFSDB Andrew文件系统数据库服务器记录 </span><br><span class="line">ATMA ATM地址记录 </span><br><span class="line">CNAME别名记录 </span><br><span class="line">HINFO硬件配置记录，包括CPU、操作系统信息 </span><br><span class="line">ISDN域名对应的ISDN号码 </span><br><span class="line">MB存放指定邮箱的服务器 </span><br><span class="line">MG邮件组记录 </span><br><span class="line">MINFO邮件组和邮箱的信息记录 </span><br><span class="line">MR改名的邮箱记录 </span><br><span class="line">MX邮件服务器记录 </span><br><span class="line">NS名字服务器记录 </span><br><span class="line">PTR反向记录 </span><br><span class="line">RP负责人记录 </span><br><span class="line">RT路由穿透记录 </span><br><span class="line">SRVTCP服务器信息记录 </span><br><span class="line">TXT域名对应的文本信息 </span><br><span class="line">X25域名对应的X.25地址记录</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="refer"><a href="#refer" class="headerlink" title="refer"></a>refer</h1><blockquote>
+<p>[1] <a target="_blank" rel="noopener" href="https://linux.die.net/man/1/nslookup">nslookup(1) manual</a> </p>
+<p>[2] <a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/nslookup-command-in-linux-with-examples/">GeeksforGeeks.nslookup command in Linux with Examples</a> </p>
+<p>[3] <a target="_blank" rel="noopener" href="https://blog.csdn.net/dengjin20104042056/article/details/99977872">【Linux】一步一步学Linux——nslookup命令(161)</a></p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">晚上十一点睡觉</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2022-10-02-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%BA%94%E7%94%A8%E5%B1%82/nslookup%E4%BD%BF%E7%94%A8/">http://example.com/2022-10-02-计算机网络/应用层/nslookup使用/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">我的路-</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237545.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2022-10-01-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/Google-Hacking%E8%AF%AD%E6%B3%95/"><img class="prev-cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237512.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Google Hacking语法</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208151640204.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">晚上十一点睡觉</div><div class="author-info__description">晚上十一点のBlog</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">66</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">43</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">29</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/11pmsleep"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/11pmsleep" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:860637048@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=860637048" target="_blank" title="qq"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">网安新人，欢迎交流技术~~~ Blog仅供个人记录笔记学习所用，若有侵权，联系我删除~若有错误，也望诸君不吝指正</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">命令简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">命令格式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%89%E9%A1%B9%E8%AF%B4%E6%98%8E"><span class="toc-number">3.</span> <span class="toc-text">选项说明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%A4%E4%BA%92%E5%91%BD%E4%BB%A4"><span class="toc-number">4.</span> <span class="toc-text">交互命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-number">5.</span> <span class="toc-text">常用示例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#refer"><span class="toc-number">6.</span> <span class="toc-text">refer</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022-10-02-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%BA%94%E7%94%A8%E5%B1%82/nslookup%E4%BD%BF%E7%94%A8/" title="nslookup使用"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237545.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="nslookup使用"/></a><div class="content"><a class="title" href="/2022-10-02-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%BA%94%E7%94%A8%E5%B1%82/nslookup%E4%BD%BF%E7%94%A8/" title="nslookup使用">nslookup使用</a><time datetime="2022-10-02T06:17:03.880Z" title="更新于 2022-10-02 14:17:03">2022-10-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022-10-01-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/0x05-%E5%A4%96%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" title="0x05 - 外网信息收集"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308743.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="0x05 - 外网信息收集"/></a><div class="content"><a class="title" href="/2022-10-01-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/0x05-%E5%A4%96%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" title="0x05 - 外网信息收集">0x05 - 外网信息收集</a><time datetime="2022-10-02T06:17:00.142Z" title="更新于 2022-10-02 14:17:00">2022-10-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022-09-30-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/0x04%20-%20%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E5%9F%BA%E7%A1%80/" title="0x04 - 网络协议基础"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237535.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="0x04 - 网络协议基础"/></a><div class="content"><a class="title" href="/2022-09-30-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/0x04%20-%20%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E5%9F%BA%E7%A1%80/" title="0x04 - 网络协议基础">0x04 - 网络协议基础</a><time datetime="2022-10-02T05:33:33.641Z" title="更新于 2022-10-02 13:33:33">2022-10-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022-10-01-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/Google-Hacking%E8%AF%AD%E6%B3%95/" title="Google Hacking语法"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237512.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Google Hacking语法"/></a><div class="content"><a class="title" href="/2022-10-01-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/Google-Hacking%E8%AF%AD%E6%B3%95/" title="Google Hacking语法">Google Hacking语法</a><time datetime="2022-10-01T07:33:30.177Z" title="更新于 2022-10-01 15:33:30">2022-10-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022-09-30-Python%E5%85%A8%E6%A0%88/Python%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/4.%20%E5%87%BD%E6%95%B0/" title="4. 函数"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237482.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="4. 函数"/></a><div class="content"><a class="title" href="/2022-09-30-Python%E5%85%A8%E6%A0%88/Python%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/4.%20%E5%87%BD%E6%95%B0/" title="4. 函数">4. 函数</a><time datetime="2022-09-30T14:11:14.659Z" title="更新于 2022-09-30 22:11:14">2022-09-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 晚上十一点睡觉</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Welcome to 11pmsleep's blog ~~~ 该网站用来记录学习笔记及生活，欢迎交流技术~</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'ctM8NyGphVxEX1qXd84qXWNa-gzGzoHsz',
+      appKey: 'Ryr4bqLMBmcscGhSAclo91Jv',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
