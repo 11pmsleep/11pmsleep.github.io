@@ -1,0 +1,563 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>nmap学习 | 晚上十一点睡觉</title><meta name="keywords" content="信息收集,nmap"><meta name="author" content="晚上十一点睡觉"><meta name="copyright" content="晚上十一点睡觉"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Nmap介绍Network Mapper，是一款开放源代码的网络探测和安全审核的工具 Nmap既能应用于简单的网络信息扫描，也能用在高级、复杂、特定的环境中：例如扫描互联网上大量的主机；绕开防火墙&#x2F;IDS&#x2F;IPS；扫描Web站点；扫描路由器 nmap端口状态Open                #端口开启，数据有到达主机，有程序在端口上监控Closed">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nmap学习">
+<meta property="og:url" content="http://example.com/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%B7%A5%E5%85%B7+%E7%8E%AF%E5%A2%83/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E5%B7%A5%E5%85%B7/nmap%E5%AD%A6%E4%B9%A0.html">
+<meta property="og:site_name" content="晚上十一点睡觉">
+<meta property="og:description" content="Nmap介绍Network Mapper，是一款开放源代码的网络探测和安全审核的工具 Nmap既能应用于简单的网络信息扫描，也能用在高级、复杂、特定的环境中：例如扫描互联网上大量的主机；绕开防火墙&#x2F;IDS&#x2F;IPS；扫描Web站点；扫描路由器 nmap端口状态Open                #端口开启，数据有到达主机，有程序在端口上监控Closed">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237499.jpg">
+<meta property="article:published_time" content="2022-09-25T08:06:53.000Z">
+<meta property="article:modified_time" content="2022-10-17T21:07:20.506Z">
+<meta property="article:author" content="晚上十一点睡觉">
+<meta property="article:tag" content="信息收集">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237499.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%B7%A5%E5%85%B7+%E7%8E%AF%E5%A2%83/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E5%B7%A5%E5%85%B7/nmap%E5%AD%A6%E4%B9%A0"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: 晚上十一点睡觉","link":"链接: ","source":"来源: 晚上十一点睡觉","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'nmap学习',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-18 05:07:20'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208151640204.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">82</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">44</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">38</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237499.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">晚上十一点睡觉</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">nmap学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-25T08:06:53.000Z" title="发表于 2022-09-25 16:06:53">2022-09-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-17T21:07:20.506Z" title="更新于 2022-10-18 05:07:20">2022-10-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/">工具+环境</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%B7%A5%E5%85%B7-%E7%8E%AF%E5%A2%83/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E5%B7%A5%E5%85%B7/">信息收集工具</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">8.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>33分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="nmap学习"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%B7%A5%E5%85%B7+%E7%8E%AF%E5%A2%83/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E5%B7%A5%E5%85%B7/nmap%E5%AD%A6%E4%B9%A0.html#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Nmap介绍"><a href="#Nmap介绍" class="headerlink" title="Nmap介绍"></a>Nmap介绍</h1><p>Network Mapper，是一款开放源代码的网络探测和安全审核的工具</p>
+<p>Nmap既能应用于简单的网络信息扫描，也能用在高级、复杂、特定的环境中：例如扫描互联网上大量的主机；绕开防火墙&#x2F;IDS&#x2F;IPS；扫描Web站点；扫描路由器</p>
+<h2 id="nmap端口状态"><a href="#nmap端口状态" class="headerlink" title="nmap端口状态"></a>nmap端口状态</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Open                #端口开启，数据有到达主机，有程序在端口上监控</span><br><span class="line">Closed              #端口关闭，数据有到达主机，没有程序在端口上监控</span><br><span class="line">Filtered            #数据没有到达主机，返回的结果为空，数据被防火墙或IDS过滤</span><br><span class="line">UnFiltered          #数据有到达主机，但是不能识别端口的当前状态</span><br><span class="line">Open|Filtered       #端口没有返回值，主要发生在UDP、IP、FIN、NULL和Xmas扫描中</span><br><span class="line">Closed|Filtered     #只发生在IP ID idle扫描</span><br></pre></td></tr></table></figure>
+
+<h2 id="nmap功能"><a href="#nmap功能" class="headerlink" title="nmap功能"></a>nmap功能</h2><blockquote>
+<ol>
+<li>检测网络存活主机（主机发现）</li>
+<li>检测主机开放端口（端口发现或枚举）</li>
+<li>检测相应端口软件（服务发现）版本</li>
+<li>检测操作系统，硬件地址，以及软件版本</li>
+<li>检测脆弱性的漏洞（nmap的脚本）</li>
+</ol>
+</blockquote>
+<h1 id="nmap安装"><a href="#nmap安装" class="headerlink" title="nmap安装"></a>nmap安装</h1><h2 id="Linux安装nmap"><a href="#Linux安装nmap" class="headerlink" title="Linux安装nmap"></a>Linux安装nmap</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">Centos：yum -y install nmap</span><br><span class="line">Ubuntu：apt -y install nmap</span><br></pre></td></tr></table></figure>
+
+<h2 id="Windows下安装namp"><a href="#Windows下安装namp" class="headerlink" title="Windows下安装namp"></a>Windows下安装namp</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#nmap-7.80安装程序：</span><br><span class="line">https://nmap.org/dist/nmap-7.80-setup.exe</span><br><span class="line">#npcap-0.9987：</span><br><span class="line">https://nmap.org/npcap/dist/npcap-0.9987.exe</span><br><span class="line">#nmap-7.80的zip包：</span><br><span class="line">https://nmap.org/dist/nmap-7.80-win32.zip</span><br></pre></td></tr></table></figure>
+
+<h1 id="nmap参数查询"><a href="#nmap参数查询" class="headerlink" title="nmap参数查询"></a>nmap参数查询</h1><h2 id="Nmap网段表示方式"><a href="#Nmap网段表示方式" class="headerlink" title="Nmap网段表示方式"></a>Nmap网段表示方式</h2><blockquote>
+<p>Nmap支持主机名，IP，网段的表示方式<br>例如： <code>blah.highon.coffee</code> 、 <code>namp.org/24</code>  、 <code>192.168.0.1</code> 、 <code>10.0.0-25.1-254</code></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-iL filename                从文件中读取待检测的目标,文件中的表示方法支持机名,ip,网段</span><br><span class="line">-iR hostnum                 随机选取,进行扫描.如果-iR指定为0,则是无休止的扫描</span><br><span class="line">--exclude host1[, host2]    从扫描任务中需要排除的主机</span><br><span class="line">--exculdefile exclude_file  排除文件中的IP,格式和-iL指定扫描文件的格式相同</span><br></pre></td></tr></table></figure>
+
+<h2 id="主机发现"><a href="#主机发现" class="headerlink" title="主机发现"></a>主机发现</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-sL                         仅仅是显示,扫描的IP数目,不会进行任何扫描</span><br><span class="line">-sn                         ping扫描,即主机发现</span><br><span class="line">-Pn                         不检测主机存活</span><br><span class="line">-PS/PA/PU/PY[portlist]  TCP SYN Ping/TCP ACK Ping/UDP   Ping发现</span><br><span class="line">-PE/PP/PM                   使用ICMP echo, timestamp and netmask 请求包发现主机</span><br><span class="line">-PO[prococol list]          使用IP协议包探测对方主机是否开启</span><br><span class="line">-n/-R                       不对IP进行域名反向解析/为所有的IP都进行域名的反响解析</span><br></pre></td></tr></table></figure>
+
+<h2 id="扫描技巧"><a href="#扫描技巧" class="headerlink" title="扫描技巧"></a>扫描技巧</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-sS/sT/sA/sW/sM                TCP SYN/TCP connect()/ACK/TCP窗口扫描/TCP Maimon扫描</span><br><span class="line">-sU                            UDP扫描</span><br><span class="line">-sN/sF/sX                      TCP Null，FIN，and Xmas扫描</span><br><span class="line">--scanflags                    自定义TCP包中的flags</span><br><span class="line">-sI zombie host[:probeport]    Idlescan</span><br><span class="line">-sY/sZ                         CTP INIT/COOKIE-ECHO 扫描</span><br><span class="line">-sO                            使用IP protocol 扫描确定目标机支持的协议类型</span><br><span class="line">-b &quot;FTP relay host&quot;            使用FTP bounce scan</span><br></pre></td></tr></table></figure>
+
+<h2 id="指定端口和扫描顺序"><a href="#指定端口和扫描顺序" class="headerlink" title="指定端口和扫描顺序"></a>指定端口和扫描顺序</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-p                            特定的端口 -p80,443 或者 -p1-65535</span><br><span class="line">-p U:PORT                     扫描udp的某个端口, -p U:53</span><br><span class="line">-F                            快速扫描模式,比默认的扫描端口还少</span><br><span class="line">-r                            不随机扫描端口,默认是随机扫描的</span><br><span class="line">--top-ports &quot;number&quot;          扫描开放概率最高的number个端口,出现的概率需要参考nmap-services文件,ubuntu中该文件位于/usr/share/nmap.nmap默认扫前1000个</span><br><span class="line"></span><br><span class="line">--port-ratio &quot;ratio&quot;          扫描指定频率以上的端口</span><br></pre></td></tr></table></figure>
+
+<h2 id="服务版本识别"><a href="#服务版本识别" class="headerlink" title="服务版本识别"></a>服务版本识别</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-sV                           开放版本探测,可以直接使用-A同时打开操作系统探测和版本探测</span><br><span class="line">--version-intensity &quot;level&quot;   设置版本扫描强度,强度水平说明了应该使用哪些探测报文。数值越高，服务越有可能被正确识别。默认是7</span><br><span class="line">--version-light               打开轻量级模式,为--version-intensity 2的别名</span><br><span class="line">--version-all                 尝试所有探测,为--version-intensity 9的别名</span><br><span class="line">--version-trace               显示出详细的版本侦测过程信息</span><br></pre></td></tr></table></figure>
+
+<h2 id="脚本扫描"><a href="#脚本扫描" class="headerlink" title="脚本扫描"></a>脚本扫描</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-sC                         根据端口识别的服务,调用默认脚本</span><br><span class="line">--script=”Lua scripts”      调用的脚本名</span><br><span class="line">--script-args=n1=v1,[n2=v2]  调用的脚本传递的参数</span><br><span class="line">--script-args-file=filename   使用文本传递参数</span><br><span class="line">--script-trace                显示所有发送和接收到的数据</span><br><span class="line">--script-updatedb           更新脚本的数据库</span><br><span class="line">--script-help=”Lua script”  显示指定脚本的帮助</span><br></pre></td></tr></table></figure>
+
+<h2 id="OS识别"><a href="#OS识别" class="headerlink" title="OS识别"></a>OS识别</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-O                          启用操作系统检测,-A来同时启用操作系统检测和版本检测</span><br><span class="line">--osscan-limit            针对指定的目标进行操作系统检测(至少需确知该主机分别有一个open和closed的端口)</span><br><span class="line">--osscan-guess            推测操作系统检测结果,当Nmap无法确定所检测的操作系统时，会尽可能地提供最相近的匹配，Nmap默认进行这种匹配</span><br></pre></td></tr></table></figure>
+
+<h2 id="防火墙-x2F-IDS躲避和哄骗"><a href="#防火墙-x2F-IDS躲避和哄骗" class="headerlink" title="防火墙&#x2F;IDS躲避和哄骗"></a>防火墙&#x2F;IDS躲避和哄骗</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-f; --mtu value             指定使用分片、指定数据包的MTU.</span><br><span class="line">-D decoy1,decoy2,ME         使用诱饵隐蔽扫描</span><br><span class="line">-S IP-ADDRESS               源地址欺骗</span><br><span class="line">-e interface                使用指定的接口</span><br><span class="line">-g/ --source-port PROTNUM   使用指定源端口</span><br><span class="line">--proxies url1,[url2],...   使用HTTP或者SOCKS4的代理</span><br><span class="line">--data-length NUM           填充随机数据让数据包长度达到NUM</span><br><span class="line">--ip-options OPTIONS        使用指定的IP选项来发送数据包</span><br><span class="line">--ttl VALUE                 设置IP time-to-live域</span><br><span class="line">--spoof-mac ADDR/PREFIX/VEBDOR    MAC地址伪装</span><br><span class="line">--badsum                    使用错误的checksum来发送数据包</span><br></pre></td></tr></table></figure>
+
+<h2 id="Nmap-输出"><a href="#Nmap-输出" class="headerlink" title="Nmap 输出"></a>Nmap 输出</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-oN                     将标准输出直接写入指定的文件</span><br><span class="line">-oX                     输出xml文件</span><br><span class="line">-oS                     将所有的输出都改为大写</span><br><span class="line">-oG                     输出便于通过bash或者perl处理的格式,非xml</span><br><span class="line">-oA BASENAME            可将扫描结果以标准格式、XML格式和Grep格式一次性输出</span><br><span class="line">-v                      提高输出信息的详细度</span><br><span class="line">-d level                设置debug级别,最高是9</span><br><span class="line">--reason                显示端口处于带确认状态的原因</span><br><span class="line">--open                  只输出端口状态为open的端口</span><br><span class="line">--packet-trace          显示所有发送或者接收到的数据包</span><br><span class="line">--iflist                显示路由信息和接口,便于调试</span><br><span class="line">--log-errors            把日志等级为errors/warings的日志输出</span><br><span class="line">--append-output         追加到指定的文件</span><br><span class="line">--resume FILENAME       恢复已停止的扫描</span><br><span class="line">--stylesheet PATH/URL   设置XSL样式表，转换XML输出</span><br><span class="line">--webxml                从namp.org得到XML的样式</span><br><span class="line">--no-sytlesheet         忽略XML声明的XSL样式表</span><br></pre></td></tr></table></figure>
+
+<h2 id="时间性能优化"><a href="#时间性能优化" class="headerlink" title="时间性能优化"></a>时间性能优化</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-T                      时间优化(0-5)(paranoid|sneaky|polite|normal|aggressive|insane).速度越快准确性越低</span><br><span class="line">-F                      快速扫描。</span><br><span class="line">--host-timeout time     设置扫描主机的最大时间</span><br><span class="line">--defeat-rst-ratelimit  设置rst的限制</span><br><span class="line">--max-retries           调整重传次数。</span><br><span class="line">--max-retries tries     指定探针重传转发数</span><br><span class="line">--min-hostgroup/--max-hostgroup size      设置组的大小</span><br><span class="line">--min-parallelism/--max-parellelism time  指定时间内的探针数</span><br><span class="line">--scan-delay/-max-scan-delay time         指定探针之间的时延</span><br><span class="line">--min-rtt-timrout/--max-rtt-timrout/initial-rtt-timrouttime   指定探针超时</span><br></pre></td></tr></table></figure>
+
+<h2 id="其他nmap选项"><a href="#其他nmap选项" class="headerlink" title="其他nmap选项"></a>其他nmap选项</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-6                        开启IPv6</span><br><span class="line">-A                        OS识别,版本探测,脚本扫描和traceroute</span><br><span class="line">-V                        打印版本信息</span><br><span class="line">-h                        输出帮助</span><br><span class="line">--datedir DIRNAME         明用户Nmap数据文件位置</span><br><span class="line">--send-eth / --send-ip    用原以太网帧发送/在原IP层发送</span><br><span class="line">--privileged              假定用户具有全部权限</span><br><span class="line">--unprovoleged            假定用户不具有全部权限,创建原始套接字需要root权限</span><br></pre></td></tr></table></figure>
+
+<h1 id="nmap用法"><a href="#nmap用法" class="headerlink" title="nmap用法"></a>nmap用法</h1><h2 id="基础用法"><a href="#基础用法" class="headerlink" title="基础用法"></a>基础用法</h2><blockquote>
+<p>Nmap默认发送一个arp的ping数据包，来探测目标主机在1-10000范围内所开放的端口.</p>
+<p>Nmap默认扫描只扫描1000个最可能开放的端口</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">单一主机扫描：</span></span><br><span class="line">namp 192.168.1.2</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">子网扫描：</span></span><br><span class="line">namp 192.168.1.1/24</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">多主机扫描：</span></span><br><span class="line">nmap 192.168.1.1 192.168.1.10</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">主机范围扫描：</span></span><br><span class="line">namp 192.168.1.1-100</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">IP地址列表扫描：</span></span><br><span class="line">nmap –iL target.txt</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">显示扫描的主机列表：</span></span><br><span class="line">nmap -sL 192.168.1.1/24</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">扫描除指定IP外的所有子网主机：</span></span><br><span class="line">nmap 192.168.1.1/24 --exclude 192.168.1.1</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">扫描除文件中IP外的子网主机：</span></span><br><span class="line">nmap 192.168.1.1/24 --excludefile xxx.txt</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">扫描特定主机上的80,21,23端口：</span></span><br><span class="line">nmap –p 80,21,23 192.168.1.1</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">nmap默认扫描目标1-10000范围内的端口号。我们则可以通过参数-p来设置我们将要扫描的端口号，端口大小不能超过65535</span></span><br><span class="line">nmap -p1-65535 192.168.1.1</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">扫描全端口</span></span><br><span class="line">nmap -p- 192.168.1.1</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">nmap路由跟踪</span></span><br><span class="line">nmap --traceroute 8.8.8.8</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="组合用法"><a href="#组合用法" class="headerlink" title="组合用法"></a>组合用法</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#主机发现：</span></span><br><span class="line">nmap -T4 -sn ip</span><br><span class="line"><span class="comment">#端口扫描：</span></span><br><span class="line">nmap -T4 ip</span><br><span class="line"><span class="comment">#服务扫描：</span></span><br><span class="line">nmap -T4 -sV ip</span><br><span class="line"><span class="comment">#操作系统扫描：</span></span><br><span class="line">nmap -T4 -O ip</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#全面扫描：1-1024端口</span></span><br><span class="line">nmap -A -T4 192.168.1.200</span><br><span class="line"><span class="comment">#-A：全面扫描\综合扫描</span></span><br><span class="line"><span class="comment">#-T4：扫描速度，共有6级，T0-T5</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#扫描全部端口</span></span><br><span class="line">nmap -sS -v -T4 -Pn -p 0-65535 -oN FullTCP -iL liveHosts.txt</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#以扫描老师为例： </span></span><br><span class="line">nmap -v -Pn -sV -sS -T4 -p 0-65535 -oN FullTCP 47.104.255.11</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#-sS：SYN扫描,又称为半开放扫描，它不打开一个完全的TCP连接，执行得很快，效率高（一个完整的tcp连接需要3次握手，而-sS选项不需要3次握手）</span></span><br><span class="line"><span class="comment">#优点：Nmap发送SYN包到远程主机，但是它不会产生任何会话，目标主机几乎不会把连接记入系统日志。（防止对方判断为扫描攻击），扫描速度快，效率高，在工作中使用频率最高</span></span><br><span class="line"><span class="comment">#缺点：它需要root/administrator权限执行</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#-Pn：即(no ping)扫描之前不需要用ping命令，有些防火墙禁止ping命令。可以使用此选项进行扫描</span></span><br><span class="line"><span class="comment">#-iL：导入需要扫描的列表</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="扫描常用端口及服务信息"><a href="#扫描常用端口及服务信息" class="headerlink" title="扫描常用端口及服务信息"></a>扫描常用端口及服务信息</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">普通的半开扫描</span></span><br><span class="line">nmap -sS -T4 -Pn -oG TopTCP -iL LiveHosts.txt</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">系统扫描</span></span><br><span class="line">nmap -O -T4 -Pn -oG OSDetect -iL LiveHosts.txt</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">版本检测</span></span><br><span class="line">nmap -sV -T4 -Pn -oG ServiceDetect -iL LiveHosts.txt</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">-oG将扫描结果保存为TXT</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">-oN将结果按标准方式保存</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">-sS</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">-O：扫描操作系统</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">-sV：扫描 (版本探测)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="常用语法"><a href="#常用语法" class="headerlink" title="常用语法"></a>常用语法</h2><blockquote>
+<p>适用所有大小网络最好的 nmap 扫描策略</p>
+</blockquote>
+<h3 id="主机发现，生成存活主机列表"><a href="#主机发现，生成存活主机列表" class="headerlink" title="主机发现，生成存活主机列表"></a>主机发现，生成存活主机列表</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">nmap -sn -T4 -oG Discovery.gnmap 192.168.56.0/24</span><br><span class="line">grep <span class="string">&quot;Status: Up&quot;</span> Discovery.gnmap | <span class="built_in">cut</span> -f 2 -d <span class="string">&#x27; &#x27;</span> &gt; LiveHosts.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="端口发现，扫描大部分常用端口"><a href="#端口发现，扫描大部分常用端口" class="headerlink" title="端口发现，扫描大部分常用端口"></a>端口发现，扫描大部分常用端口</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="http://nmap.org/presentations/BHDC08/bhdc08-slides-fyodor.pdf">http://nmap.org/presentations/BHDC08/bhdc08-slides-fyodor.pdf</a></p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">nmap -sS -T4 -Pn -oG TopTCP -iL LiveHosts.txt</span><br><span class="line">nmap -sU -T4 -Pn -oN TopUDP -iL LiveHosts.txt</span><br><span class="line"><span class="comment">#扫描开放概率最高的3674个端口</span></span><br><span class="line">nmap -sS -T4 -Pn --top-ports 3674 -oG 3674 -iL LiveHosts.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="端口发现，扫描全部端口"><a href="#端口发现，扫描全部端口" class="headerlink" title="端口发现，扫描全部端口"></a>端口发现，扫描全部端口</h3><blockquote>
+<p>但 UDP 端口的扫描会非常慢</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">nmap -sS -T4 -Pn -p 0-65535 -oN FullTCP -iL LiveHosts.txt</span><br><span class="line">nmap -sU -T4 -Pn -p 0-65535 -oN FullUDP -iL LiveHosts.txt</span><br><span class="line">nmap -p- -T4 -sV 124.223.217.243		</span><br></pre></td></tr></table></figure>
+
+<h3 id="显示-TCP-UDP-端口"><a href="#显示-TCP-UDP-端口" class="headerlink" title="显示 TCP\UDP 端口"></a>显示 TCP\UDP 端口</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">grep <span class="string">&quot;open&quot;</span> FullTCP|<span class="built_in">cut</span> -f 1 -d <span class="string">&#x27; &#x27;</span> | <span class="built_in">sort</span> -nu | <span class="built_in">cut</span> -f 1 -d <span class="string">&#x27;/&#x27;</span> |xargs | sed <span class="string">&#x27;s/ /,/g&#x27;</span>|awk <span class="string">&#x27;&#123;print &quot;T:&quot;$0&#125;&#x27;</span></span><br><span class="line">grep <span class="string">&quot;open&quot;</span> FullUDP|<span class="built_in">cut</span> -f 1 -d <span class="string">&#x27; &#x27;</span> | <span class="built_in">sort</span> -nu | <span class="built_in">cut</span> -f 1 -d <span class="string">&#x27;/&#x27;</span> |xargs | sed <span class="string">&#x27;s/ /,/g&#x27;</span>|awk <span class="string">&#x27;&#123;print &quot;U:&quot;$0&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="侦测服务版本"><a href="#侦测服务版本" class="headerlink" title="侦测服务版本"></a>侦测服务版本</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">nmap -sV -T4 -Pn -oG ServiceDetect -iL LiveHosts.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="扫做系统扫描"><a href="#扫做系统扫描" class="headerlink" title="扫做系统扫描"></a>扫做系统扫描</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">nmap -O -T4 -Pn -oG OSDetect -iL LiveHosts.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="系统和服务检测"><a href="#系统和服务检测" class="headerlink" title="系统和服务检测"></a>系统和服务检测</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">nmap -O -sV -T4 -Pn -p U:53,111,137,T:21-25,80,139,8080 -oG OS_Service_Detect -iL LiveHosts.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="nmap躲避防火墙"><a href="#nmap躲避防火墙" class="headerlink" title="nmap躲避防火墙"></a>nmap躲避防火墙</h3><blockquote>
+<p>分段</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -f</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改默认-MTU-大小，但必须为-8-的倍数-8-16-24-32-等等"><a href="#修改默认-MTU-大小，但必须为-8-的倍数-8-16-24-32-等等" class="headerlink" title="修改默认 MTU 大小，但必须为 8 的倍数(8,16,24,32 等等)"></a>修改默认 MTU 大小，但必须为 8 的倍数(8,16,24,32 等等)</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap --mtu 24</span><br></pre></td></tr></table></figure>
+
+<h3 id="生成随机数量的欺骗"><a href="#生成随机数量的欺骗" class="headerlink" title="生成随机数量的欺骗"></a>生成随机数量的欺骗</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -D RND:10 [target]</span><br></pre></td></tr></table></figure>
+
+<h3 id="手动指定欺骗使用的-IP"><a href="#手动指定欺骗使用的-IP" class="headerlink" title="手动指定欺骗使用的 IP"></a>手动指定欺骗使用的 IP</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -D decoy1,decoy2,decoy3 etc.</span><br></pre></td></tr></table></figure>
+
+<h3 id="僵尸网络扫描-首先需要找到僵尸网络的IP"><a href="#僵尸网络扫描-首先需要找到僵尸网络的IP" class="headerlink" title="僵尸网络扫描, 首先需要找到僵尸网络的IP"></a>僵尸网络扫描, 首先需要找到僵尸网络的IP</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -sI [Zombie IP] [Target IP]</span><br></pre></td></tr></table></figure>
+
+<h3 id="指定源端口号"><a href="#指定源端口号" class="headerlink" title="指定源端口号"></a>指定源端口号</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap --source-port 80 IP</span><br></pre></td></tr></table></figure>
+
+<h3 id="在每个扫描数据包后追加随机数量的数据"><a href="#在每个扫描数据包后追加随机数量的数据" class="headerlink" title="在每个扫描数据包后追加随机数量的数据"></a>在每个扫描数据包后追加随机数量的数据</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap --&gt;25 IP</span><br></pre></td></tr></table></figure>
+
+<h3 id="MAC-地址欺骗，可以生成不同主机的-MAC-地址"><a href="#MAC-地址欺骗，可以生成不同主机的-MAC-地址" class="headerlink" title="MAC 地址欺骗，可以生成不同主机的 MAC 地址"></a>MAC 地址欺骗，可以生成不同主机的 MAC 地址</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap --spoof-mac Dell/Apple/3Com IP</span><br></pre></td></tr></table></figure>
+
+<h3 id="Nmap-进行-Web-漏洞扫描"><a href="#Nmap-进行-Web-漏洞扫描" class="headerlink" title="Nmap 进行 Web 漏洞扫描"></a>Nmap 进行 Web 漏洞扫描</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/share/nmap/scripts/</span><br><span class="line">wget http://www.computec.ch/projekte/vulscan/download/nmap_nse_vulscan-2.0.tar.gz &amp;&amp; tar xzf nmap_nse_vulscan-2.0.tar.gz</span><br><span class="line">nmap -sS -sV --script=vulscan/vulscan.nse target</span><br><span class="line">nmap -sS -sV --script=vulscan/vulscan.nse –script-args vulscandb=scipvuldb.csv target</span><br><span class="line">nmap -sS -sV --script=vulscan/vulscan.nse –script-args vulscandb=scipvuldb.csv -p80 target</span><br><span class="line">nmap -PN -sS -sV --script=vulscan –script-args vulscancorrelation=1 -p80 target</span><br><span class="line">nmap -sV --script=vuln target</span><br><span class="line">nmap -PN -sS -sV --script=all –script-args vulscancorrelation=1 target</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#漏洞扫描</span></span><br><span class="line">nmap --script=vuln 192.168.137.*</span><br><span class="line">nmap.exe -p445 -v --script smb-ghost 192.168.1.0/24</span><br></pre></td></tr></table></figure>
+
+<h2 id="nmap扫描防火墙"><a href="#nmap扫描防火墙" class="headerlink" title="nmap扫描防火墙"></a>nmap扫描防火墙</h2><p>防火墙在今天网络安全中扮演着重要的角色，如果能对防火墙系统进行详细的探测，那么绕开防火墙或渗透防火墙就更加容易。所以，此处讲解利用Nmap获取防火墙基本信息典型的用法。<br>为了获取防火墙全面的信息，需尽可能多地结合不同扫描方式来探测其状态。在设计命令行参数时，可以综合网络环境来微调时序参数，以便加快扫描速度</p>
+<h3 id="SYN扫描"><a href="#SYN扫描" class="headerlink" title="SYN扫描"></a>SYN扫描</h3><p>首先可以利用基本的SYN扫描方式探测其端口开放状态。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">nmap -sS -T4 www.fujieace.com</span><br><span class="line"><span class="comment">#扫描输出结果为：</span></span><br><span class="line">All 997 ports are filtered PORT STATE SERVICE </span><br><span class="line">80/tcp open http </span><br><span class="line">113/tcp closed auth </span><br><span class="line">507/tcp open crs</span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到SYN方式探测到3个端口开放，而有997个端口被过滤。Nmap默认扫描只扫描1000个最可能开放的端口，如果想扫描全部的端口，命令如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -sS -T4-p- www.fujieace.com</span><br></pre></td></tr></table></figure>
+
+<h3 id="FIN扫描"><a href="#FIN扫描" class="headerlink" title="FIN扫描"></a>FIN扫描</h3><p>然后可以利用FIN扫描方式探测防火墙状态。FIN扫描方式用于识别端口是否关闭，收到RST回复说明该端口关闭，否则说明是open或filtered状态。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">nmap -sF -T4 www.fujieace.com</span><br><span class="line"><span class="comment">#扫描输出结果为：</span></span><br><span class="line">PORT STATE SERVICE </span><br><span class="line">7/tcp open|filtered <span class="built_in">echo</span> </span><br><span class="line">9/tcp open|filtered discard </span><br><span class="line">11/tcp open|filtered systat </span><br><span class="line">13/tcp open|filtered daytime </span><br><span class="line">23/tcp open|filtered telnet </span><br><span class="line">25/tcp open|filtered smtp </span><br><span class="line">37/tcp open|filtered time </span><br><span class="line">79/tcp open|filtered finger </span><br><span class="line">80/tcp open|filtered http</span><br><span class="line">.......</span><br></pre></td></tr></table></figure>
+
+<h3 id="ACK扫描"><a href="#ACK扫描" class="headerlink" title="ACK扫描"></a>ACK扫描</h3><p>然后利用ACK扫描判断端口是否被过滤。针对ACK探测包，未被过滤的端口（无论打开、关闭）会回复RST包。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">nmap -sA -T4 www.fujieace.com</span><br><span class="line"><span class="comment">#扫描输出结果为：</span></span><br><span class="line">Not shown: 997 unfiltered ports PORT STATE SERVICE </span><br><span class="line">135/tcp filtered msrpc </span><br><span class="line">1434/tcp filtered ms-sql-m </span><br><span class="line">32777/tcp filtered sometimes-rpc17</span><br></pre></td></tr></table></figure>
+
+<p>从结果可以知道997个端口是未被过滤的（unfiltered），而3个（135&#x2F;1434&#x2F;32777）被过滤了。<br>所以，将ACK与FIN扫描 的结果结合分析，我们可以找到很多开放的端口。<br>例如7号端口，FIN中得出的状态是:open或filtered，从ACK中得出的状态是 unfiltered，那么该端口只能是open的。</p>
+<h3 id="Window扫描"><a href="#Window扫描" class="headerlink" title="Window扫描"></a>Window扫描</h3><p>当然也可以利用Window扫描方式，得出一些端口信息，可以与之前扫描分析的结果相互补充。<br>Window扫描方式只对某些TCPIP协议栈才有效。<br>window扫描原理与ACK类似，发送ACK包探测目标端口，对回复的RST包中的Window size进行解析。<br>在某些TCPIP协议栈实现中，关闭的端口在RST中会将Window size设置为0；而开放的端口将Window size设置成非0的值。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">nmap -sW -p- -T4 www.fujieace.com</span><br><span class="line"><span class="comment">#输出结果：</span></span><br><span class="line">PORT STATE SERVICE </span><br><span class="line">7/tcp open <span class="built_in">echo</span> </span><br><span class="line">9/tcp open discard </span><br><span class="line">11/tcp open systat </span><br><span class="line">13/tcp open daytime</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+
+<p>在采用多种方式获取出防火墙状态后，可以进一步进行应用程序与版本侦测及OS侦测。 此处不再赘述</p>
+<h2 id="nmap扫描路由器"><a href="#nmap扫描路由器" class="headerlink" title="nmap扫描路由器"></a>nmap扫描路由器</h2><blockquote>
+<p>nmap内部维护了一份系统与设备的数据库（nmap-os-db），能够识别数千种不同系统与设备。所以，可以用来扫描主流的路由器设备。</p>
+</blockquote>
+<h3 id="扫描思科路由器"><a href="#扫描思科路由器" class="headerlink" title="扫描思科路由器"></a>扫描思科路由器</h3><p>思科路由器会在上述端口中运行了常见的服务。列举出上述端口开放的主机，可以定位到路由器设备可能的IP地址及端口状态。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">nmap -p 1-25,80,512-515,2001,4001,6001,9001 10.20.0.1/16</span><br></pre></td></tr></table></figure>
+
+<h3 id="扫描路由器TFTP"><a href="#扫描路由器TFTP" class="headerlink" title="扫描路由器TFTP"></a>扫描路由器TFTP</h3><p>大多数的路由器都支持TFTP协议（简单文件传输协议），该协议常用于备份和恢复路由器的配置文件，运行在UDP 69端口上。使用上述命令可以探测出路由器是否开放TFTP。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap –sU –p69 –nvv target</span><br></pre></td></tr></table></figure>
+
+<h3 id="扫描路由器操作系统"><a href="#扫描路由器操作系统" class="headerlink" title="扫描路由器操作系统"></a>扫描路由器操作系统</h3><p>与通用PC扫描方式类似，使用-O选项扫描路由器的操作系统。-F用于快速扫描最可能开放的100个端口，并根据端口扫描结果进一步做OS的指纹分析</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -O -F -n 192.168.1.1</span><br></pre></td></tr></table></figure>
+
+<h2 id="nmap扫描互联网"><a href="#nmap扫描互联网" class="headerlink" title="nmap扫描互联网"></a>nmap扫描互联网</h2><blockquote>
+<p>Nmap内部的设计非常强大灵活，既能扫描单个主机、小型的局域网，也可以扫描成千上万台主机从中发掘用户关注的信息。<br>扫描大量主机，需要对扫描时序等参数进行仔细的优化。</p>
+</blockquote>
+<h3 id="发现互联网上web服务器"><a href="#发现互联网上web服务器" class="headerlink" title="发现互联网上web服务器"></a>发现互联网上web服务器</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -iR 100000 -sS -PS80 -p 80 -oG nmap.txt </span><br></pre></td></tr></table></figure>
+
+<p>随机地产生10万个IP地址，对其80端口进行扫描。<br>将扫描结果以greppable（可用grep命令提取）格式输出到nmap.txt文件。可以使用grep命令从输出文件提取关心的细节信息。</p>
+<h3 id="统计互联网主机基本数据"><a href="#统计互联网主机基本数据" class="headerlink" title="统计互联网主机基本数据"></a>统计互联网主机基本数据</h3><p>Nmap的创始人Fyodor在2008年的Black Hat大会发表一篇演讲，讲的是如何使用Nmap来扫描互联网（Nmap: Scanning the Internet）， 资料地址：<a target="_blank" rel="noopener" href="http://nmap.org/presentations/BHDC08/">http://nmap.org/presentations/BHDC08/</a><br>Fyodor进行互联网扫描的初衷是统计出网络经验数据并用之优化Nmap的性能。例如，根据统计出每个端口开放的概率，优先扫描常见端口，以节省用户的时间。</p>
+<h4 id="产生随机IP地址"><a href="#产生随机IP地址" class="headerlink" title="产生随机IP地址"></a>产生随机IP地址</h4><p>产生100万个随机的IP地址，并将之保存到文件中，方便后续扫描时作为参数输入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -iR 1200000 -sL -n | grep &quot;not scanned&quot; | awk &#x27;&#123;print $2&#125;&#x27; | sort -n | uniq &gt;! tp; head -25000000 tp &gt;! tcp-allports-1M-IPs; rm tp</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上述命令含义：随机生成1200000个IP地址（-iR 120000），并进行列表扫描（-sL，列举出IP地址，不进行真正的扫描），不进行dns解析操作（-n），这样将产生Nmap列表扫描的结果。在此结果中搜出未扫描的行（grep “not scanned”），打印出每一行的第二列内容（awk ‘{print $2}’，也就是IP地址），然后对获取到的IP地址进行排序（sort -n），然后剔除重复IP地址，将结果保存到临时文件tp，再取出前1000000个IP地址保存到tcp-allports-1M-IPs文件中，删除临时文件。<br>总之，此处产生了1000000个随机IP地址存放在tcp-allports-1M-IPs文件中。</p>
+</blockquote>
+<h4 id="优化主机发现"><a href="#优化主机发现" class="headerlink" title="优化主机发现"></a>优化主机发现</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -sP -PE -PP -PS21,22,23,25,80,113,31339-PA80,113,443,10042 –source-port 53 -T4 -iL tcp-allports-1M-IPs</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上述命令进行主机发现：使用产生的IP地址（-iL tcp-allports-1M-IPs），指定发送包的源端口为53（–source-port 53，该端口是DNS查询端口，一般的防火墙都允许来自此端口的数据包），时序级别为4（-T4，探测速度比较快），以TCP SYN包方式探测目标机的21,22,23,25,80,113,31339端口，以TCP ACK包方式探测对方80,113,443,10042端口，另外也发送ICMP ECHO&#x2F;ICMP TIMESTAMP包探测对方主机。只要上述的探测包中得到一个回复，就可以证明目标主机在线。</p>
+</blockquote>
+<h4 id="完整的扫描命令"><a href="#完整的扫描命令" class="headerlink" title="完整的扫描命令"></a>完整的扫描命令</h4><p>在准备了必要的IP地址文件，并对主机发现参数优化后，我们就得到最终的扫描命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -S [srcip] -d –max-scan-delay 10 -oAlogs/tcp-allports-%T-%D -iL tcp-allports-1M-IPs –max-retries 1–randomize-hosts -p- -PS21,22,23,25,53,80,443 -T4 –min-hostgroup 256 –min-rate175 –max-rate 300</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上述命令用于扫描互联网上100万台主机全部的TCP端口的开放情况。使用包含100万个IP地址的文件（-iL tcp-allports-1M-IPs），源端IP地址设置为srcip(指定一个IP地址，保证该IP地址位于统一局域网中，否则无法收到目标机的回 复包)，主机发现过程使用TCP SYN包探测目标机的21,22,23,25,53,80,443，扫描过程将随机打乱主机顺序（–randomize-hosts，因为文件中的IP 已经排序，这里将之打乱，避免被防火墙检查出），端口扫描过程检查全部的TCP端口（-p-，端口1到65535），使用时序级别为4（-T4，速度比较 快），将结果以XML&#x2F;grepable&#x2F;普通格式输出到文件中（-oA logs&#x2F;tcp-allports-%T-%D，其中%T表示扫描时间，%D表示扫描日期）。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-d表示打印调试出信息。</span><br><span class="line">–max-scan-delay 10表示发包最多延时10秒，防止特殊情景下等待过长的时间。</span><br><span class="line">–max-retries 1，表示端口扫描探测包最多被重传一次，防止Nmap在没有收到回复的情况下多次重传探测包，当然这样也会降低探测的准确性。</span><br><span class="line">–min-host-group 256表示进行端口扫描与版本侦测时，同时进行探测的主机的数量，这里至少256个主机一组来进行扫描，可以加快扫描速度。</span><br><span class="line">–min-rate 175和–max-rate 300，表示发包速率介于175和300之间，保证扫描速度不会太慢，也不会因为速率过高引起目标机的警觉。</span><br></pre></td></tr></table></figure>
+
+<h4 id="扫描结果"><a href="#扫描结果" class="headerlink" title="扫描结果:"></a>扫描结果:</h4><p>Fyodor组织的此次扫描得出很多重要结论，统计出了互联网最有可能开放的10个TCP端口。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">80 (http)</span><br><span class="line">23 (telnet)</span><br><span class="line">22 (ssh)</span><br><span class="line">443 (https)</span><br><span class="line">3389 (ms-term-serv)</span><br><span class="line">445 (microsoft-ds)</span><br><span class="line">139 (netbios-ssn)</span><br><span class="line">21 (ftp)</span><br><span class="line">135 (msrpc)</span><br><span class="line">25 (smtp)</span><br></pre></td></tr></table></figure>
+
+<p>最有可能开放的10个UDP端口。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">137 (netbios-ns)</span><br><span class="line">161 (snmp)</span><br><span class="line">1434 (ms-sql-m)</span><br><span class="line">123 (ntp)</span><br><span class="line">138 (netbios-dgm)</span><br><span class="line">445 (microsoft-ds)</span><br><span class="line">135 (msrpc)</span><br><span class="line">67 (dhcps)</span><br><span class="line">139 (netbios-ssn)</span><br><span class="line">53 (domain)</span><br></pre></td></tr></table></figure>
+
+<h2 id="nmap扫描Web站点"><a href="#nmap扫描Web站点" class="headerlink" title="nmap扫描Web站点"></a>nmap扫描Web站点</h2><p>Web是互联网上最广泛的应用，而且越来越多的服务倾向于以Web形式提供出来，所以对Web安全监管也越来越重要。<br>目前安全领域有很多专门的 Web扫描软件（如AppScan、WebInspect、W3AF），能够提供端口扫描、漏洞扫描、漏洞利用、分析报表等诸多功能。<br>而Nmap作为一款 开源的端口扫描器，对Web扫描方面支持也越来越强大，可以完成Web基本的信息探测：<strong>服务器版本、支持的Method、是否包含典型漏洞</strong>。<br>功能已经远远 超过同领域的其他开源软件，如HTTPrint、Httsquash。<br>目前Nmap中对Web的支持主要通过Lua脚本来实现，NSE脚本库中共有50多个HTTP相关的脚本。<br>扫描实例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -sV -p 80 -T4 --script http*,default scanme.nmap.org</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上面以扫描scanme.nmap.org的Web应用展示Nmap提供Web扫描能力，从图中可以看到扫描结果中提供了比较丰富的信息。 首先是应用程序及版本：Apachehttpd 2.2.14 (Ubuntu)，然后搜出了该站点的affiliate-id:该ID可用于识别同一拥有者的不同页面。然后输出HTTP-headers信息，从中查看到基本配置信息。，从http-title中，可以看到网页标题。某些网页标题可能会泄漏重要信息，所以这里也应对其检查。</p>
+</blockquote>
+<h2 id="高级参数"><a href="#高级参数" class="headerlink" title="高级参数"></a>高级参数</h2><h3 id="查看本地路由与接口"><a href="#查看本地路由与接口" class="headerlink" title="查看本地路由与接口"></a>查看本地路由与接口</h3><p>Nmap中提供了<code>–iflist</code>选项来查看本地主机的接口信息与路由信息。<br>当遇到无法达到目标主机或想选择从多块网卡中某一特定网卡访问目标主机时，可以查看<code>nmap –iflist</code>中提供的网络接口信息。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap –iflist </span><br></pre></td></tr></table></figure>
+
+<h3 id="指定网口与IP地址"><a href="#指定网口与IP地址" class="headerlink" title="指定网口与IP地址"></a>指定网口与IP地址</h3><p>在Nmap可指定用哪个网口发送数据， -e <interface> 选项。接口的详细信息可以参考–iflist选项输出结果。<br>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -e eth0 targetip</span><br></pre></td></tr></table></figure>
+
+<p>Nmap也可以<strong>显式地指定发送的源端IP地址</strong>。使用 -S <spoofip> 选项，nmap将用指定的spoofip作为源端IP来发送探测包。<br>另外可以<strong>使用Decoy（诱骗）方式来掩盖真实的扫描地址</strong>，例如<code>-D ip1,ip2,ip3,ip4,ME</code>，这样就会产生多个虚假的ip同时对目标机进行探测，其中ME代表本机的真实地址，这样对方的防火墙不容易识别出是扫描者的身份。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">nmap -T4 -F -n -Pn -D 192.168.1.100,192.168.1.101,192.168.1.102,ME 192.168.1.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="定制探测包"><a href="#定制探测包" class="headerlink" title="定制探测包"></a>定制探测包</h3><p>Nmap提供<code>–scanflags</code>选项，用户可以对需要发送的TCP探测包的标志位进行完全的控制。<br>可以使用数字或符号指定TCP标志位：<code>URG, ACK, PSH,RST, SYN,and FIN</code>。<br>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -sX -T4 –scanflags URGACKPSHRSTSYNFINtargetip</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此命令设置全部的TCP标志位为1，可以用于某些特殊场景的探测。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">–ip-options可以定制IP包的options字段。</span><br><span class="line">-S指定虚假的IP地址</span><br><span class="line">-D指定一组诱骗IP地址（ME代表真实地址）</span><br><span class="line">-e指定发送探测包的网络接口</span><br><span class="line">-g（–source- port）指定源端口</span><br><span class="line">-f指定使用IP分片方式发送探测包</span><br><span class="line">–spoof-mac指定使用欺骗的MAC地址</span><br><span class="line">-ttl指定生存时间</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h1 id="nmap扫描技术"><a href="#nmap扫描技术" class="headerlink" title="nmap扫描技术"></a>nmap扫描技术</h1><h3 id="Tcp-SYN-Scan-sS-："><a href="#Tcp-SYN-Scan-sS-：" class="headerlink" title="Tcp SYN Scan (sS)："></a>Tcp SYN Scan (sS)：</h3><blockquote>
+<p><strong>半开放扫描</strong>，这种技术使得Nmap不需要通过完整的握手，就能获得远程主机的信息。 nmap发送SYN包到远程主机，但是它不会产生任何会话.因此<strong>不会在目标主机上产生任何日志记录,因为没有形成会话</strong>。这个就是SYN扫描的优势。<br>如果nmap命令中没有指出扫描类型,默认的就是tcp SYN。但是它需要root&#x2F;administrator权限.</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -sS IP</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li><strong>有一个疑问：到底查看什么日志可以看到自己被扫了呢？？</strong></li>
+</ul>
+<p>在Ubuntu上，查看到此日志， auth.log记录了所有和用户认证相关的日志。无论是我们通过 ssh 登录，还是通过 sudo 执行命令都会在 auth.log 中产生记录。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">tail</span> -f -n 50 auth.log</span><br></pre></td></tr></table></figure>
+
+<p>但是呢？我在扫描的时候，所看到的痕迹很少，而且显示的内容是一个不开放的端口？为什么？</p>
+<p>Ubuntu上面在哪看？？？？其他在var&#x2F;log目录下的日志也看过，没有痕迹</p>
+<img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202209251450536.png" alt="image-20220925145049127" style="zoom:50%;" />
+</blockquote>
+<h3 id="Tcp-connect-scan-sT-："><a href="#Tcp-connect-scan-sT-：" class="headerlink" title="Tcp connect() scan(sT)："></a>Tcp connect() scan(sT)：</h3><blockquote>
+<p>如果不选择SYN扫描,TCP connect()扫描就是默认的扫描模式。不同于Tcp SYN扫描,Tcp connect()扫描需要完成三次握手,并且要求调用系统的connect()。</p>
+<p><strong>Tcp connect()扫描技术只适用于找出TCP和UDP端口.</strong></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -sT IP</span><br></pre></td></tr></table></figure>
+
+<h3 id="Udp-scan-sU-："><a href="#Udp-scan-sU-：" class="headerlink" title="Udp scan(sU)："></a>Udp scan(sU)：</h3><blockquote>
+<p>这种扫描技术用来寻找目标主机打开的UDP端口.它不需要发送任何的SYN包，因为这种技术是针对UDP端口的。<br>UDP扫描发送UDP数据包到目标主机，并等待响应,如果返回ICMP不可达的错误消息，说明端口是关闭的，如果得到正确的适当的回应，说明端口是开放的。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap –sU IP</span><br></pre></td></tr></table></figure>
+
+<h3 id="FIN-scan-sF-："><a href="#FIN-scan-sF-：" class="headerlink" title="FIN scan (sF)："></a>FIN scan (sF)：</h3><blockquote>
+<p>有时候TcpSYN扫描不是最佳的扫描模式,因为有<strong>防火墙</strong>的存在.目标主机有时候可能有<strong>IDS和IPS系统</strong>的存在,<strong>防火墙会阻止掉SYN数据包</strong>。<br><strong>发送一个设置了FIN标志的数据包并不需要完成TCP的握手.FIN扫描也不会在目标主机上创建日志(FIN扫描的优势之一).</strong></p>
+</blockquote>
+<blockquote>
+<p>（不是很理解这里？）</p>
+<p>几个类型的扫描都是具有差异性的,FIN扫描发送的包只包含FIN标识,NULL扫描不发送数据包上的任何字节,XMAS扫描发送FIN、PSH和URG标识的数据包.</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap –sF IP</span><br></pre></td></tr></table></figure>
+
+<h3 id="PING-Scan-sP-："><a href="#PING-Scan-sP-：" class="headerlink" title="PING Scan (sP)："></a>PING Scan (sP)：</h3><blockquote>
+<p>PING扫描不同于其它的扫描方式，因为它只用于找出主机是否是存在在网络中的。</p>
+<p><strong>它不是用来发现是否开放端口的.PING扫描需要ROOT权限，</strong></p>
+<p>如果用户没有ROOT权限,PING扫描将会使用connect()调用.</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -sP IP</span><br></pre></td></tr></table></figure>
+
+<h3 id="版本检测-sV-："><a href="#版本检测-sV-：" class="headerlink" title="版本检测(sV)："></a>版本检测(sV)：</h3><blockquote>
+<p>版本检测是用来扫描目标主机和端口上运行的软件的版本。</p>
+<p><strong>它不是用来扫描目标主机上开放的端口，不过它需要从开放的端口获取信息来判断软件的版本.。</strong></p>
+<p><strong>使用版本检测扫描之前需要先用TCP SYN扫描开放了哪些端口。</strong></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -sV IP</span><br></pre></td></tr></table></figure>
+
+<h3 id="Idle-scan-sL-："><a href="#Idle-scan-sL-：" class="headerlink" title="Idle scan (sL)："></a>Idle scan (sL)：</h3><p>Idle scan是一种先进的扫描技术，它<strong>不是用你真实的主机ip发送数据包</strong>，而是使用另外一个目标网络的主机发送数据包.<br>Idle scan是一种<strong>理想的匿名扫描技术</strong>,通过目标网络中的192.168.1.6向主机192.168.1.1发送数据，来获取192.168.1.1开放的端口<br>有需要其它的扫描技术，如 FTP bounce（FTP反弹）, fragmentation scan（碎片扫描）, IP protocol scan（IP协议扫描）,以上讨论的是几种最主要的扫描方式.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -sL IP</span><br></pre></td></tr></table></figure>
+
+<h3 id="OS检测-O-："><a href="#OS检测-O-：" class="headerlink" title="OS检测(O)："></a>OS检测(O)：</h3><p>Nmap最重要的特点之一是能够远程检测操作系统和软件，Nmap的OS检测技术用来了解远程主机的操作系统和软件.<br>Nmap有一个名为nmap-OS-DB的数据库，该数据库包含超过2600操作系统的信息。<br>Nmap把TCP和UDP数据包发送到目标机器上，然后检查结果和数据库对照。<br>Nmap的首先发现开放的端口，然后发送数据包发现远程操作系统。操作系统检测参数是O（大写O）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -O IP</span><br></pre></td></tr></table></figure>
+
+<h4 id="nmap操作系统指纹识别技术"><a href="#nmap操作系统指纹识别技术" class="headerlink" title="nmap操作系统指纹识别技术"></a>nmap操作系统指纹识别技术</h4><blockquote>
+<ul>
+<li>设备类型（路由器，工作组等）</li>
+<li>运行（运行的操作系统）</li>
+<li>操作系统的详细信息（操作系统的名称和版本）</li>
+<li>网络距离（目标和攻击者之间的距离跳）</li>
+</ul>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -O-PN</span><br></pre></td></tr></table></figure>
+
+<p>如果远程主机有防火墙，IDS和IPS系统，你可以使用-PN命令来确保不ping远程主机，因为有时候防火墙会阻止掉ping请求.-PN命令告诉Nmap不用ping远程主机。<br>以上命令告诉发信主机远程主机是存活在网络上的，所以没有必要发送ping请求,使用-PN参数可以绕过PING命令,但是不影响主机的系统的发现.。<br>Nmap的操作系统检测的基础是有开放和关闭的端口，如果OSscan无法检测到至少一个开放或者关闭的端口，会返回以下错误，代码如下:</p>
+<p><code>arning:OSScan results may be unreliable because we could not find at least 1 openand 1 closed port</code></p>
+<p>OSScan的结果是不可靠的，因为没有发现至少一个开放或者关闭的端口，这种情况是非常不理想的，应该是远程主机做了针对操作系统检测的防范。<br>如果Nmap不能检测到远程操作系统类型，那么就没有必要使用-osscan_limit检测。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -O --osscan-guess</span><br></pre></td></tr></table></figure>
+
+<p>想好通过Nmap准确的检测到远程操作系统是比较困难的，需要使用到Nmap的猜测功能选项,–osscan-guess猜测认为最接近目标的匹配操作系统类型。</p>
+<h1 id="nmap脚本使用"><a href="#nmap脚本使用" class="headerlink" title="nmap脚本使用"></a>nmap脚本使用</h1><blockquote>
+<p>Windows安装nmap的安装目录下面有一个script目录，里面有各种脚本</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">D:\Program Files\Nmap\scripts</span><br></pre></td></tr></table></figure>
+
+<p>Linux亦是，</p>
+</blockquote>
+<h2 id="nmap按脚本分类扫描"><a href="#nmap按脚本分类扫描" class="headerlink" title="nmap按脚本分类扫描"></a>nmap按脚本分类扫描</h2><blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">--script=type</span><br></pre></td></tr></table></figure>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">auth: 负责处理鉴权证书（绕开鉴权）的脚本  </span><br><span class="line">broadcast: 在局域网内探查更多服务开启状况，如dhcp/dns/sqlserver等服务  </span><br><span class="line">brute: 提供暴力破解方式，针对常见的应用如http/snmp等  </span><br><span class="line">default: 使用-sC或-A选项扫描时候默认的脚本，提供基本脚本扫描能力  </span><br><span class="line">discovery: 对网络进行更多的信息，如SMB枚举、SNMP查询等  </span><br><span class="line">dos: 用于进行拒绝服务攻击  </span><br><span class="line">exploit: 利用已知的漏洞入侵系统  </span><br><span class="line">external: 利用第三方的数据库或资源，例如进行whois解析  </span><br><span class="line">fuzzer: 模糊测试的脚本，发送异常的包到目标机，探测出潜在漏洞</span><br><span class="line">intrusive: 入侵性的脚本，此类脚本可能引发对方的IDS/IPS的记录或屏蔽  </span><br><span class="line">malware: 探测目标机是否感染了病毒、开启了后门等信息  </span><br><span class="line">safe: 此类与intrusive相反，属于安全性脚本  </span><br><span class="line">version: 负责增强服务与版本扫描（Version Detection）功能的脚本  </span><br><span class="line">vuln: 负责检查目标机是否有常见的漏洞（Vulnerability），如是否有MS08_067</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>负责处理鉴权证书（绕开鉴权）的脚本,也可以作为检测部分应用弱口令</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap --script=auth 192.168.137.*</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>提供暴力破解的方式  可对数据库，smb，snmp等进行简单密码的暴力猜解</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap --script=brute 192.168.137.*</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>默认的脚本扫描，主要是搜集各种应用服务的信息，收集到后，可再针对具体服务进行攻击</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap --script=default 192.168.137.* 或者 nmap -sC 192.168.137.*</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>检查是否存在常见漏洞</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap --script=vuln 192.168.137.*</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>在局域网内探查更多服务开启状况</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap -n -p445 --script=broadcast 192.168.137.4</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>利用第三方的数据库或资源，例如进行whois解析</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap --script external 202.103.243.110</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>识别waf</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nmap –p80,443 --script http-waf-detect ip</span><br><span class="line">nmap –p80,443 --script http-waf-fingerprint ip</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可以看到有这些脚本都可以使用~~~~</p>
+</blockquote>
+<img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210051900270.png" alt="image-20221005190021808" style="zoom:50%;" />
+
+<h2 id="nmap按应用服务扫描"><a href="#nmap按应用服务扫描" class="headerlink" title="nmap按应用服务扫描"></a>nmap按应用服务扫描</h2><h3 id="vnc扫描"><a href="#vnc扫描" class="headerlink" title="vnc扫描"></a>vnc扫描</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#检查vnc bypass：</span></span><br><span class="line">nmap  --script=realvnc-auth-bypass 192.168.137.4</span><br><span class="line"><span class="comment">#检查vnc认证方式：</span></span><br><span class="line">nmap  --script=vnc-auth  192.168.137.4</span><br><span class="line"><span class="comment">#获取vnc信息：</span></span><br><span class="line">nmap  --script=vnc-info  192.168.137.4</span><br></pre></td></tr></table></figure>
+
+<h3 id="smb扫描"><a href="#smb扫描" class="headerlink" title="smb扫描"></a>smb扫描</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#smb破解</span></span><br><span class="line">nmap  --script=smb-brute.nse 192.168.137.4</span><br><span class="line"><span class="comment">#smb字典破解</span></span><br><span class="line">nmap --script=smb-brute.nse --script-args=userdb=/var/passwd,passdb=/var/passwd 192.168.137.4</span><br><span class="line"><span class="comment">#smb已知几个严重漏</span></span><br><span class="line">nmap  --script=smb-check-vulns.nse --script-args=unsafe=1 192.168.137.4</span><br><span class="line"><span class="comment">#查看共享目录</span></span><br><span class="line">nmap -p 445  --script smb-ls --script-args ‘share=e$,path=\,smbuser=<span class="built_in">test</span>,smbpass=<span class="built_in">test</span>’ 192.168.137.4</span><br><span class="line"><span class="comment">#查询主机一些敏感信息（注：需要下载nmap_service）</span></span><br><span class="line">nmap -p 445 -n –script=smb-psexec --script-args= smbuser=<span class="built_in">test</span>,smbpass=<span class="built_in">test</span> 192.168.137.4</span><br><span class="line"><span class="comment">#查看会话</span></span><br><span class="line">nmap -n -p445 --script=smb-enum-sessions.nse --script-args=smbuser=<span class="built_in">test</span>,smbpass=<span class="built_in">test</span> 192.168.137.4</span><br><span class="line"><span class="comment">#系统信息</span></span><br><span class="line">nmap -n -p445 --script=smb-os-discovery.nse --script-args=smbuser=<span class="built_in">test</span>,smbpass=<span class="built_in">test</span> 192.168.137.4</span><br></pre></td></tr></table></figure>
+
+<h3 id="Mssql扫描："><a href="#Mssql扫描：" class="headerlink" title="Mssql扫描："></a>Mssql扫描：</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#猜解mssql用户名和密码</span></span><br><span class="line">nmap -p1433 --script=ms-sql-brute --script-args=userdb=/var/passwd,passdb=/var/passwd 192.168.137.4</span><br><span class="line"><span class="comment">#xp_cmdshell 执行命令</span></span><br><span class="line">nmap -p 1433 --script ms-sql-xp-cmdshell --script-args mssql.username=sa,mssql.password=sa,ms-sql-xp-cmdshell.cmd=<span class="string">&quot;net user&quot;</span> 192.168.137.4</span><br><span class="line"><span class="comment">#dumphash值</span></span><br><span class="line">nmap -p 1433 --script ms-sql-dump-hashes.nse --script-args mssql.username=sa,mssql.password=sa  192.168.137.4</span><br></pre></td></tr></table></figure>
+
+<h3 id="Mysql扫描"><a href="#Mysql扫描" class="headerlink" title="Mysql扫描"></a>Mysql扫描</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#扫描root空口令</span></span><br><span class="line">nmap -p3306 --script=mysql-empty-password.nse 192.168.137.4</span><br><span class="line"><span class="comment">#列出所有mysql用户</span></span><br><span class="line">nmap -p3306 --script=mysql-users.nse --script-args=mysqluser=root 192.168.137.4</span><br><span class="line"><span class="comment">#支持同一应用的所有脚本扫描</span></span><br><span class="line">nmap --script=mysql-* 192.168.137.4</span><br></pre></td></tr></table></figure>
+
+<h3 id="Oracle扫描"><a href="#Oracle扫描" class="headerlink" title="Oracle扫描"></a>Oracle扫描</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#oracle sid扫描</span></span><br><span class="line">nmap --script=oracle-sid-brute -p 1521-1560 192.168.137.5</span><br><span class="line"><span class="comment">#oracle弱口令破解</span></span><br><span class="line">nmap --script oracle-brute -p 1521 --script-args oracle-brute.sid=ORCL,userdb=/var/passwd,passdb=/var/passwd 192.168.137.5</span><br></pre></td></tr></table></figure>
+
+<h2 id="其他一些比较好用的脚本"><a href="#其他一些比较好用的脚本" class="headerlink" title="其他一些比较好用的脚本"></a>其他一些比较好用的脚本</h2><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">nmap --script=broadcast-netbios-master-browser 192.168.137.4   <span class="comment">#发现网关  </span></span><br><span class="line">nmap -p 873 --script rsync-brute --script-args <span class="string">&#x27;rsync-brute.module=www&#x27;</span> 192.168.137.4  <span class="comment">#破解rsync  </span></span><br><span class="line">nmap --script informix-brute -p 9088 192.168.137.4    <span class="comment">#informix数据库破解  </span></span><br><span class="line">nmap -p 5432 --script pgsql-brute 192.168.137.4       <span class="comment">#pgsql破解  </span></span><br><span class="line">nmap -sU --script snmp-brute 192.168.137.4            <span class="comment">#snmp破解  </span></span><br><span class="line">nmap -sV --script=telnet-brute 192.168.137.4          <span class="comment">#telnet破解</span></span><br><span class="line">nmap --script=http-vuln-cve2010-0738 --script-args <span class="string">&#x27;http-vuln-cve2010-0738.paths=&#123;/path1/,/path2/&#125;&#x27;</span> &lt;target&gt;  jboss autopwn</span><br><span class="line">nmap --script=http-methods.nse 192.168.137.4        <span class="comment">#检查http方法</span></span><br><span class="line">nmap --script http-slowloris --max-parallelism 400 192.168.137.4  <span class="comment">#dos攻击，对于处理能力较小的站点还挺好用的 &#x27;half-HTTP&#x27; connections</span></span><br><span class="line">nmap --script=samba-vuln-cve-2012-1182  -p 139 192.168.137.4</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>不靠谱的脚本：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vnc-brute    次数多了会禁止连接</span><br><span class="line">pcanywhere-brute   同上</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><blockquote>
+<ol>
+<li><p>若不加端口说明扫描默认端口，<code>1-1024</code> + nmap-service</p>
+</li>
+<li><p>Nmap默认扫描只扫描1000个最可能开放的端口</p>
+</li>
+<li><p>有些时候，nmap会扫不出结果，可能是有防火墙或者其他安全设备，nmap提供绕过防火墙的功能，可以尝试绕过</p>
+</li>
+</ol>
+</blockquote>
+<h1 id="refer"><a href="#refer" class="headerlink" title="refer"></a>refer</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://nmap.org/man/zh/">nmap参考指南（中文版）</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41880069/article/details/82792896">Nmap的使用方法总结</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/m1585761297/article/details/80015726?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-5.baidujs&dist_request_id=1331989.13183.16188260180781699&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-5.baidujs">Nmap简介和使用方法</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/benben0729/article/details/87916189?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-2.baidujs&dist_request_id=1331989.13476.16188267563089697&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-2.baidujs">nmap 扫描主机端口（谨慎使用）</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/LyShark/p/10637507.html">Nmap命令-基础用法</a></li>
+</ul>
+</blockquote>
+<h1 id="附：Nmap渗透测试思维导图"><a href="#附：Nmap渗透测试思维导图" class="headerlink" title="附：Nmap渗透测试思维导图"></a>附：Nmap渗透测试思维导图</h1><p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202209251325226.png" alt="Nmap渗透测试思维导图"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">晚上十一点睡觉</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%B7%A5%E5%85%B7+%E7%8E%AF%E5%A2%83/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E5%B7%A5%E5%85%B7/nmap%E5%AD%A6%E4%B9%A0.html">http://example.com/渗透测试/工具+环境/信息收集工具/nmap学习.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">晚上十一点睡觉</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">信息收集</a></div><div class="post_share"><div class="social-share" data-image="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237499.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/%E8%93%9D%E9%98%9F/%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1/%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1.html"><img class="prev-cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308736.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Linux-日志审计</div></div></a></div><div class="next-post pull-right"><a href="/WEB%E5%AE%89%E5%85%A8/%E5%8E%86%E5%8F%B2%E6%BC%8F%E6%B4%9E/0x12-Swagger-ui%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E.html"><img class="next-cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237515.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">0x12 - Swagger-ui未授权访问漏洞</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/0x05-%E5%A4%96%E7%BD%91%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86.html" title="0x05 - 外网信息收集"><img class="cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237573.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-01</div><div class="title">0x05 - 外网信息收集</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208151640204.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">晚上十一点睡觉</div><div class="author-info__description">晚上十一点のBlog</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">82</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">44</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">38</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/11pmsleep"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/11pmsleep" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:860637048@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=860637048" target="_blank" title="qq"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">笔记迁移整理中~~~以前习惯有道云记笔记，整理知识也算沉淀自己的一部分吧·· 加油··stay passionate and never say die!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nmap%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">Nmap介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap%E7%AB%AF%E5%8F%A3%E7%8A%B6%E6%80%81"><span class="toc-number">1.1.</span> <span class="toc-text">nmap端口状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap%E5%8A%9F%E8%83%BD"><span class="toc-number">1.2.</span> <span class="toc-text">nmap功能</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#nmap%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">nmap安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E5%AE%89%E8%A3%85nmap"><span class="toc-number">2.1.</span> <span class="toc-text">Linux安装nmap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows%E4%B8%8B%E5%AE%89%E8%A3%85namp"><span class="toc-number">2.2.</span> <span class="toc-text">Windows下安装namp</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#nmap%E5%8F%82%E6%95%B0%E6%9F%A5%E8%AF%A2"><span class="toc-number">3.</span> <span class="toc-text">nmap参数查询</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Nmap%E7%BD%91%E6%AE%B5%E8%A1%A8%E7%A4%BA%E6%96%B9%E5%BC%8F"><span class="toc-number">3.1.</span> <span class="toc-text">Nmap网段表示方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E6%9C%BA%E5%8F%91%E7%8E%B0"><span class="toc-number">3.2.</span> <span class="toc-text">主机发现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E6%8A%80%E5%B7%A7"><span class="toc-number">3.3.</span> <span class="toc-text">扫描技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E7%AB%AF%E5%8F%A3%E5%92%8C%E6%89%AB%E6%8F%8F%E9%A1%BA%E5%BA%8F"><span class="toc-number">3.4.</span> <span class="toc-text">指定端口和扫描顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%89%88%E6%9C%AC%E8%AF%86%E5%88%AB"><span class="toc-number">3.5.</span> <span class="toc-text">服务版本识别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC%E6%89%AB%E6%8F%8F"><span class="toc-number">3.6.</span> <span class="toc-text">脚本扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OS%E8%AF%86%E5%88%AB"><span class="toc-number">3.7.</span> <span class="toc-text">OS识别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99-x2F-IDS%E8%BA%B2%E9%81%BF%E5%92%8C%E5%93%84%E9%AA%97"><span class="toc-number">3.8.</span> <span class="toc-text">防火墙&#x2F;IDS躲避和哄骗</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nmap-%E8%BE%93%E5%87%BA"><span class="toc-number">3.9.</span> <span class="toc-text">Nmap 输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-number">3.10.</span> <span class="toc-text">时间性能优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96nmap%E9%80%89%E9%A1%B9"><span class="toc-number">3.11.</span> <span class="toc-text">其他nmap选项</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#nmap%E7%94%A8%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">nmap用法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95"><span class="toc-number">4.1.</span> <span class="toc-text">基础用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E7%94%A8%E6%B3%95"><span class="toc-number">4.2.</span> <span class="toc-text">组合用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E5%B8%B8%E7%94%A8%E7%AB%AF%E5%8F%A3%E5%8F%8A%E6%9C%8D%E5%8A%A1%E4%BF%A1%E6%81%AF"><span class="toc-number">4.3.</span> <span class="toc-text">扫描常用端口及服务信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95"><span class="toc-number">4.4.</span> <span class="toc-text">常用语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E6%9C%BA%E5%8F%91%E7%8E%B0%EF%BC%8C%E7%94%9F%E6%88%90%E5%AD%98%E6%B4%BB%E4%B8%BB%E6%9C%BA%E5%88%97%E8%A1%A8"><span class="toc-number">4.4.1.</span> <span class="toc-text">主机发现，生成存活主机列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E5%8F%91%E7%8E%B0%EF%BC%8C%E6%89%AB%E6%8F%8F%E5%A4%A7%E9%83%A8%E5%88%86%E5%B8%B8%E7%94%A8%E7%AB%AF%E5%8F%A3"><span class="toc-number">4.4.2.</span> <span class="toc-text">端口发现，扫描大部分常用端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E5%8F%91%E7%8E%B0%EF%BC%8C%E6%89%AB%E6%8F%8F%E5%85%A8%E9%83%A8%E7%AB%AF%E5%8F%A3"><span class="toc-number">4.4.3.</span> <span class="toc-text">端口发现，扫描全部端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA-TCP-UDP-%E7%AB%AF%E5%8F%A3"><span class="toc-number">4.4.4.</span> <span class="toc-text">显示 TCP\UDP 端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%A6%E6%B5%8B%E6%9C%8D%E5%8A%A1%E7%89%88%E6%9C%AC"><span class="toc-number">4.4.5.</span> <span class="toc-text">侦测服务版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%AB%E5%81%9A%E7%B3%BB%E7%BB%9F%E6%89%AB%E6%8F%8F"><span class="toc-number">4.4.6.</span> <span class="toc-text">扫做系统扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E5%92%8C%E6%9C%8D%E5%8A%A1%E6%A3%80%E6%B5%8B"><span class="toc-number">4.4.7.</span> <span class="toc-text">系统和服务检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nmap%E8%BA%B2%E9%81%BF%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-number">4.4.8.</span> <span class="toc-text">nmap躲避防火墙</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A4-MTU-%E5%A4%A7%E5%B0%8F%EF%BC%8C%E4%BD%86%E5%BF%85%E9%A1%BB%E4%B8%BA-8-%E7%9A%84%E5%80%8D%E6%95%B0-8-16-24-32-%E7%AD%89%E7%AD%89"><span class="toc-number">4.4.9.</span> <span class="toc-text">修改默认 MTU 大小，但必须为 8 的倍数(8,16,24,32 等等)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0%E9%87%8F%E7%9A%84%E6%AC%BA%E9%AA%97"><span class="toc-number">4.4.10.</span> <span class="toc-text">生成随机数量的欺骗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E6%8C%87%E5%AE%9A%E6%AC%BA%E9%AA%97%E4%BD%BF%E7%94%A8%E7%9A%84-IP"><span class="toc-number">4.4.11.</span> <span class="toc-text">手动指定欺骗使用的 IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%83%B5%E5%B0%B8%E7%BD%91%E7%BB%9C%E6%89%AB%E6%8F%8F-%E9%A6%96%E5%85%88%E9%9C%80%E8%A6%81%E6%89%BE%E5%88%B0%E5%83%B5%E5%B0%B8%E7%BD%91%E7%BB%9C%E7%9A%84IP"><span class="toc-number">4.4.12.</span> <span class="toc-text">僵尸网络扫描, 首先需要找到僵尸网络的IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E6%BA%90%E7%AB%AF%E5%8F%A3%E5%8F%B7"><span class="toc-number">4.4.13.</span> <span class="toc-text">指定源端口号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E6%AF%8F%E4%B8%AA%E6%89%AB%E6%8F%8F%E6%95%B0%E6%8D%AE%E5%8C%85%E5%90%8E%E8%BF%BD%E5%8A%A0%E9%9A%8F%E6%9C%BA%E6%95%B0%E9%87%8F%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="toc-number">4.4.14.</span> <span class="toc-text">在每个扫描数据包后追加随机数量的数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MAC-%E5%9C%B0%E5%9D%80%E6%AC%BA%E9%AA%97%EF%BC%8C%E5%8F%AF%E4%BB%A5%E7%94%9F%E6%88%90%E4%B8%8D%E5%90%8C%E4%B8%BB%E6%9C%BA%E7%9A%84-MAC-%E5%9C%B0%E5%9D%80"><span class="toc-number">4.4.15.</span> <span class="toc-text">MAC 地址欺骗，可以生成不同主机的 MAC 地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nmap-%E8%BF%9B%E8%A1%8C-Web-%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F"><span class="toc-number">4.4.16.</span> <span class="toc-text">Nmap 进行 Web 漏洞扫描</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap%E6%89%AB%E6%8F%8F%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-number">4.5.</span> <span class="toc-text">nmap扫描防火墙</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SYN%E6%89%AB%E6%8F%8F"><span class="toc-number">4.5.1.</span> <span class="toc-text">SYN扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FIN%E6%89%AB%E6%8F%8F"><span class="toc-number">4.5.2.</span> <span class="toc-text">FIN扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ACK%E6%89%AB%E6%8F%8F"><span class="toc-number">4.5.3.</span> <span class="toc-text">ACK扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Window%E6%89%AB%E6%8F%8F"><span class="toc-number">4.5.4.</span> <span class="toc-text">Window扫描</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap%E6%89%AB%E6%8F%8F%E8%B7%AF%E7%94%B1%E5%99%A8"><span class="toc-number">4.6.</span> <span class="toc-text">nmap扫描路由器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E6%80%9D%E7%A7%91%E8%B7%AF%E7%94%B1%E5%99%A8"><span class="toc-number">4.6.1.</span> <span class="toc-text">扫描思科路由器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E8%B7%AF%E7%94%B1%E5%99%A8TFTP"><span class="toc-number">4.6.2.</span> <span class="toc-text">扫描路由器TFTP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E8%B7%AF%E7%94%B1%E5%99%A8%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-number">4.6.3.</span> <span class="toc-text">扫描路由器操作系统</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap%E6%89%AB%E6%8F%8F%E4%BA%92%E8%81%94%E7%BD%91"><span class="toc-number">4.7.</span> <span class="toc-text">nmap扫描互联网</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E7%8E%B0%E4%BA%92%E8%81%94%E7%BD%91%E4%B8%8Aweb%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">4.7.1.</span> <span class="toc-text">发现互联网上web服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%9F%E8%AE%A1%E4%BA%92%E8%81%94%E7%BD%91%E4%B8%BB%E6%9C%BA%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE"><span class="toc-number">4.7.2.</span> <span class="toc-text">统计互联网主机基本数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%A7%E7%94%9F%E9%9A%8F%E6%9C%BAIP%E5%9C%B0%E5%9D%80"><span class="toc-number">4.7.2.1.</span> <span class="toc-text">产生随机IP地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E4%B8%BB%E6%9C%BA%E5%8F%91%E7%8E%B0"><span class="toc-number">4.7.2.2.</span> <span class="toc-text">优化主机发现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E6%89%AB%E6%8F%8F%E5%91%BD%E4%BB%A4"><span class="toc-number">4.7.2.3.</span> <span class="toc-text">完整的扫描命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%AB%E6%8F%8F%E7%BB%93%E6%9E%9C"><span class="toc-number">4.7.2.4.</span> <span class="toc-text">扫描结果:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap%E6%89%AB%E6%8F%8FWeb%E7%AB%99%E7%82%B9"><span class="toc-number">4.8.</span> <span class="toc-text">nmap扫描Web站点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E5%8F%82%E6%95%B0"><span class="toc-number">4.9.</span> <span class="toc-text">高级参数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%9C%AC%E5%9C%B0%E8%B7%AF%E7%94%B1%E4%B8%8E%E6%8E%A5%E5%8F%A3"><span class="toc-number">4.9.1.</span> <span class="toc-text">查看本地路由与接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E7%BD%91%E5%8F%A3%E4%B8%8EIP%E5%9C%B0%E5%9D%80"><span class="toc-number">4.9.2.</span> <span class="toc-text">指定网口与IP地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E5%88%B6%E6%8E%A2%E6%B5%8B%E5%8C%85"><span class="toc-number">4.9.3.</span> <span class="toc-text">定制探测包</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#nmap%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF"><span class="toc-number">5.</span> <span class="toc-text">nmap扫描技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Tcp-SYN-Scan-sS-%EF%BC%9A"><span class="toc-number">5.0.1.</span> <span class="toc-text">Tcp SYN Scan (sS)：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tcp-connect-scan-sT-%EF%BC%9A"><span class="toc-number">5.0.2.</span> <span class="toc-text">Tcp connect() scan(sT)：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Udp-scan-sU-%EF%BC%9A"><span class="toc-number">5.0.3.</span> <span class="toc-text">Udp scan(sU)：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FIN-scan-sF-%EF%BC%9A"><span class="toc-number">5.0.4.</span> <span class="toc-text">FIN scan (sF)：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PING-Scan-sP-%EF%BC%9A"><span class="toc-number">5.0.5.</span> <span class="toc-text">PING Scan (sP)：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E6%A3%80%E6%B5%8B-sV-%EF%BC%9A"><span class="toc-number">5.0.6.</span> <span class="toc-text">版本检测(sV)：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Idle-scan-sL-%EF%BC%9A"><span class="toc-number">5.0.7.</span> <span class="toc-text">Idle scan (sL)：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OS%E6%A3%80%E6%B5%8B-O-%EF%BC%9A"><span class="toc-number">5.0.8.</span> <span class="toc-text">OS检测(O)：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#nmap%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB%E6%8A%80%E6%9C%AF"><span class="toc-number">5.0.8.1.</span> <span class="toc-text">nmap操作系统指纹识别技术</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#nmap%E8%84%9A%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">6.</span> <span class="toc-text">nmap脚本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap%E6%8C%89%E8%84%9A%E6%9C%AC%E5%88%86%E7%B1%BB%E6%89%AB%E6%8F%8F"><span class="toc-number">6.1.</span> <span class="toc-text">nmap按脚本分类扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nmap%E6%8C%89%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E6%89%AB%E6%8F%8F"><span class="toc-number">6.2.</span> <span class="toc-text">nmap按应用服务扫描</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vnc%E6%89%AB%E6%8F%8F"><span class="toc-number">6.2.1.</span> <span class="toc-text">vnc扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#smb%E6%89%AB%E6%8F%8F"><span class="toc-number">6.2.2.</span> <span class="toc-text">smb扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mssql%E6%89%AB%E6%8F%8F%EF%BC%9A"><span class="toc-number">6.2.3.</span> <span class="toc-text">Mssql扫描：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mysql%E6%89%AB%E6%8F%8F"><span class="toc-number">6.2.4.</span> <span class="toc-text">Mysql扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Oracle%E6%89%AB%E6%8F%8F"><span class="toc-number">6.2.5.</span> <span class="toc-text">Oracle扫描</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E4%B8%80%E4%BA%9B%E6%AF%94%E8%BE%83%E5%A5%BD%E7%94%A8%E7%9A%84%E8%84%9A%E6%9C%AC"><span class="toc-number">6.3.</span> <span class="toc-text">其他一些比较好用的脚本</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">7.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#refer"><span class="toc-number">8.</span> <span class="toc-text">refer</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%EF%BC%9ANmap%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE"><span class="toc-number">9.</span> <span class="toc-text">附：Nmap渗透测试思维导图</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/%E8%93%9D%E9%98%9F/%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1/%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1.html" title="Linux-日志审计"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308736.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux-日志审计"/></a><div class="content"><a class="title" href="/%E8%93%9D%E9%98%9F/%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1/%E6%97%A5%E5%BF%97%E5%AE%A1%E8%AE%A1.html" title="Linux-日志审计">Linux-日志审计</a><time datetime="2022-10-20T22:51:50.054Z" title="更新于 2022-10-21 06:51:50">2022-10-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/%E8%93%9D%E9%98%9F/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94.html" title="应急响应"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237527.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="应急响应"/></a><div class="content"><a class="title" href="/%E8%93%9D%E9%98%9F/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94.html" title="应急响应">应急响应</a><time datetime="2022-10-20T22:51:31.176Z" title="更新于 2022-10-21 06:51:31">2022-10-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/Attack/CobaltStrike/0x17-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6Cobalt-Strike.html" title="0x17 - 渗透测试框架Cobalt Strike"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237573.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="0x17 - 渗透测试框架Cobalt Strike"/></a><div class="content"><a class="title" href="/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/Attack/CobaltStrike/0x17-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6Cobalt-Strike.html" title="0x17 - 渗透测试框架Cobalt Strike">0x17 - 渗透测试框架Cobalt Strike</a><time datetime="2022-10-20T21:41:09.224Z" title="更新于 2022-10-21 05:41:09">2022-10-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/WEB%E5%AE%89%E5%85%A8/%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html" title="安全基础知识"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237506.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="安全基础知识"/></a><div class="content"><a class="title" href="/WEB%E5%AE%89%E5%85%A8/%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html" title="安全基础知识">安全基础知识</a><time datetime="2022-10-18T14:02:16.139Z" title="更新于 2022-10-18 22:02:16">2022-10-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/WEB%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/0x07-Web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80-SQL%E6%B3%A8%E5%85%A5.html" title="0x07 - Web安全基础-SQL注入"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237564.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="0x07 - Web安全基础-SQL注入"/></a><div class="content"><a class="title" href="/WEB%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/0x07-Web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80-SQL%E6%B3%A8%E5%85%A5.html" title="0x07 - Web安全基础-SQL注入">0x07 - Web安全基础-SQL注入</a><time datetime="2022-10-18T13:47:08.190Z" title="更新于 2022-10-18 21:47:08">2022-10-18</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 晚上十一点睡觉</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Welcome to 11pmsleep's blog ~~~ 该网站用来记录学习笔记及生活，欢迎交流技术~~~Blog仅供个人记录笔记学习所用，若有侵权，联系我删除~若有错误，也望诸君不吝指正</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.gungnir.top/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.gungnir.top/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
