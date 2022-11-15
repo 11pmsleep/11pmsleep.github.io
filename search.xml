@@ -30,6 +30,8 @@
             
             <tag> 反弹shell </tag>
             
+            <tag> Web安全 </tag>
+            
         </tags>
       
     </entry>
@@ -62,6 +64,8 @@
             <tag> 命令执行 </tag>
             
             <tag> 反弹shell </tag>
+            
+            <tag> Web安全 </tag>
             
         </tags>
       
@@ -115,6 +119,8 @@
             
             <tag> 反弹shell </tag>
             
+            <tag> Web安全 </tag>
+            
         </tags>
       
     </entry>
@@ -152,6 +158,8 @@
             
             <tag> IIS </tag>
             
+            <tag> Web安全 </tag>
+            
         </tags>
       
     </entry>
@@ -177,6 +185,18 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> 命令执行 </tag>
+            
+            <tag> Web安全 </tag>
+            
+            <tag> 文件上传 </tag>
+            
+            <tag> Webshell </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -200,6 +220,14 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> Web安全 </tag>
+            
+            <tag> 文件上传 </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -222,6 +250,14 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Web安全 </tag>
+            
+            <tag> Sqlmap </tag>
+            
+        </tags>
       
     </entry>
     
@@ -335,6 +371,8 @@
             
             <tag> Thinkphp </tag>
             
+            <tag> Web安全 </tag>
+            
         </tags>
       
     </entry>
@@ -433,6 +471,12 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> Web安全 </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -478,6 +522,12 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Sql </tag>
+            
+        </tags>
       
     </entry>
     
@@ -650,6 +700,8 @@
             
             <tag> Poc </tag>
             
+            <tag> Web安全 </tag>
+            
         </tags>
       
     </entry>
@@ -674,6 +726,12 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Web安全 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -1152,6 +1210,8 @@
             
             <tag> Swagger </tag>
             
+            <tag> Web安全 </tag>
+            
         </tags>
       
     </entry>
@@ -1234,6 +1294,8 @@
             <tag> 未授权访问漏洞 </tag>
             
             <tag> Docker </tag>
+            
+            <tag> Web安全 </tag>
             
         </tags>
       
@@ -1355,6 +1417,8 @@
             
             <tag> Redis </tag>
             
+            <tag> Web安全 </tag>
+            
         </tags>
       
     </entry>
@@ -1471,6 +1535,8 @@
             <tag> Log4j2 </tag>
             
             <tag> Apache </tag>
+            
+            <tag> Web安全 </tag>
             
         </tags>
       
@@ -2504,6 +2570,8 @@
         <tags>
             
             <tag> SQL注入 </tag>
+            
+            <tag> Web安全 </tag>
             
         </tags>
       
