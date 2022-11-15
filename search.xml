@@ -22,6 +22,16 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> Windows </tag>
+            
+            <tag> 命令执行 </tag>
+            
+            <tag> 反弹shell </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -44,6 +54,16 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> 命令执行 </tag>
+            
+            <tag> 反弹shell </tag>
+            
+        </tags>
       
     </entry>
     
@@ -88,6 +108,14 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> 命令执行 </tag>
+            
+            <tag> 反弹shell </tag>
+            
+        </tags>
       
     </entry>
     
