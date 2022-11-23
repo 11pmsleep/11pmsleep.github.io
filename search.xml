@@ -2623,6 +2623,33 @@
     
     
     <entry>
+      <title>网站SEO优化</title>
+      <link href="/hexo%E6%95%99%E7%A8%8B/%E7%BD%91%E7%AB%99SEO%E4%BC%98%E5%8C%96.html"/>
+      <url>/hexo%E6%95%99%E7%A8%8B/%E7%BD%91%E7%AB%99SEO%E4%BC%98%E5%8C%96.html</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>hexo博客SEO优化</p><h1 id="SEO"><a href="#SEO" class="headerlink" title="SEO"></a>SEO</h1><p>SEO全称<code>Search Engine Optimization</code>，关乎网站在搜索引擎的排名。排名越高，流量越多。</p><h2 id="搜索引擎爬虫"><a href="#搜索引擎爬虫" class="headerlink" title="搜索引擎爬虫"></a>搜索引擎爬虫</h2><h3 id="常见爬虫"><a href="#常见爬虫" class="headerlink" title="常见爬虫"></a>常见爬虫</h3><ul><li>BaiduSpider（百度蜘蛛）</li><li>Googlebot</li><li>360Spider</li><li>Sogou web spider</li><li>Bingbot</li><li>Sosospider</li></ul><p>……</p><h2 id="网站关键词排名过程"><a href="#网站关键词排名过程" class="headerlink" title="网站关键词排名过程"></a>网站关键词排名过程</h2><ol><li>放出蜘蛛（代码）</li><li>蜘蛛来访抓取</li><li>页面的收录</li><li>算法计算得分</li><li>排名</li></ol><blockquote><p>注意前面步骤如果卡死了，那么后面的步骤基本上不会进行</p></blockquote><h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ul><li><p>搜索引擎爬虫是模拟真实用户的访问。模拟用户体验越好，评分越高。影响因素有很多，比如说网站的访问速度，网站域名是否是英文域名，网站文字多不多</p></li><li><p>vip以及一些需要登录的页面爬虫是无法爬取的</p></li><li><p>来访爬虫越多越容易被收录</p><blockquote><p>可以在访问日志中筛选查看百度爬虫访问数量</p></blockquote></li><li><p>不仅仅评价网站整体的评分，单页面得分也可以得分很高</p></li></ul><h1 id="一些注意点"><a href="#一些注意点" class="headerlink" title="一些注意点"></a>一些注意点</h1><ul><li>Github pages不能被百度蜘蛛收录。托管在 GitHub 之上的博客无法被百度检索到。GitHub 不能被百度收录，但 Bing, Google 等搜索引擎，均可正常收录。解决方式：使用 <a href="https://coding.net/pages">Coding Pages</a> 托管</li><li>最好先学seo再建站，不然后期优化比较麻烦</li></ul><h1 id="refer："><a href="#refer：" class="headerlink" title="refer："></a>refer：</h1><blockquote><p>- </p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> hexo教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+            <tag> SEO </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>0x07 - Web安全基础-SQL注入</title>
       <link href="/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/WEB%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/0x07-Web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80-SQL%E6%B3%A8%E5%85%A5.html"/>
       <url>/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/WEB%E5%AE%89%E5%85%A8/SQL%E6%B3%A8%E5%85%A5/0x07-Web%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80-SQL%E6%B3%A8%E5%85%A5.html</url>
