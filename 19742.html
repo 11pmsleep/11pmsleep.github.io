@@ -1,0 +1,239 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>本机域名解析文件 hosts | 晚上十一点睡觉</title><meta name="keywords" content="晚上十一点睡觉,网安,渗透,life"><meta name="author" content="晚上十一点睡觉"><meta name="copyright" content="晚上十一点睡觉"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Hosts在本地将一些常用的网址域名与其对应的IP地址建立一个关联“数据库”，当我们访问域名时，系统会首先自动从Hosts文件中寻找对应的IP地址，一旦找到，系统会立即打开对应网页，如果没有找到，则系统会再将网址提交DNS域名解析服务器进行IP地址的解析。 hosts文件在哪Win10系统在Windows系统中，包括XP、Win7、Win8以及最新的Win10系统中，hosts文件都是位于系统盘的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="本机域名解析文件 hosts">
+<meta property="og:url" content="http://gungnir.top/19742.html">
+<meta property="og:site_name" content="晚上十一点睡觉">
+<meta property="og:description" content="Hosts在本地将一些常用的网址域名与其对应的IP地址建立一个关联“数据库”，当我们访问域名时，系统会首先自动从Hosts文件中寻找对应的IP地址，一旦找到，系统会立即打开对应网页，如果没有找到，则系统会再将网址提交DNS域名解析服务器进行IP地址的解析。 hosts文件在哪Win10系统在Windows系统中，包括XP、Win7、Win8以及最新的Win10系统中，hosts文件都是位于系统盘的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308750.jpg">
+<meta property="article:published_time" content="2022-10-15T13:43:35.000Z">
+<meta property="article:modified_time" content="2022-11-27T19:04:54.335Z">
+<meta property="article:author" content="晚上十一点睡觉">
+<meta property="article:tag" content="晚上十一点睡觉,网安,渗透,life">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308750.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://gungnir.top/19742"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: 晚上十一点睡觉","link":"链接: ","source":"来源: 晚上十一点睡觉","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '本机域名解析文件 hosts',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-11-28 03:04:54'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208151640204.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">104</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">63</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">41</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa fa-heartbeat"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308750.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">晚上十一点睡觉</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa fa-heartbeat"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">本机域名解析文件 hosts</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-10-15T13:43:35.000Z" title="发表于 2022-10-15 21:43:35">2022-10-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-11-27T19:04:54.335Z" title="更新于 2022-11-28 03:04:54">2022-11-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%BA%94%E7%94%A8%E5%B1%82/">应用层</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%BA%94%E7%94%A8%E5%B1%82/DNS/">DNS</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="本机域名解析文件 hosts"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/19742.html#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>Hosts在本地将一些常用的网址域名与其对应的IP地址建立一个关联“数据库”，当我们访问域名时，系统会首先自动从Hosts文件中寻找对应的IP地址，一旦找到，系统会立即打开对应网页，如果没有找到，则系统会再将网址提交DNS域名解析服务器进行IP地址的解析。</p>
+<h2 id="hosts文件在哪"><a href="#hosts文件在哪" class="headerlink" title="hosts文件在哪"></a>hosts文件在哪</h2><h3 id="Win10系统"><a href="#Win10系统" class="headerlink" title="Win10系统"></a>Win10系统</h3><p>在Windows系统中，包括XP、Win7、Win8以及最新的Win10系统中，hosts文件都是位于系统盘的Windows文件夹夹下，文件位置路径如下。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">C:\WINDOWS\system32\drivers\etc\hosts</span><br></pre></td></tr></table></figure>
+
+<h3 id="linux操作系统中"><a href="#linux操作系统中" class="headerlink" title="linux操作系统中"></a>linux操作系统中</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/hosts</span><br></pre></td></tr></table></figure>
+
+<h2 id="hosts文件修改后为什么有时候不会立即生效呢？"><a href="#hosts文件修改后为什么有时候不会立即生效呢？" class="headerlink" title="hosts文件修改后为什么有时候不会立即生效呢？"></a>hosts文件修改后为什么有时候不会立即生效呢？</h2><p>经常做Web开发的工程师，都会遇到需要将某个域名绑定到特定IP上，进行测试的情况。大家一般都会用修改hosts文件的方式来解决，但是经常也会遇到修改hosts不生效的情况，而且有时生效，有时不生效的情况也有发生，这到底是为什么呢？</p>
+<h3 id="DNS缓存机制"><a href="#DNS缓存机制" class="headerlink" title="DNS缓存机制"></a>DNS缓存机制</h3><blockquote>
+<p>关于DNS缓存的机制，有一篇非常详细的文章<a target="_blank" rel="noopener external nofollow noreferrer" href="http://igoro.com/archive/what-really-happens-when-you-navigate-to-a-url/">What really happens when you navigate to a URL</a>。</p>
+</blockquote>
+<p>简单来说，一条域名的DNS记录会在本地有两种缓存：浏览器缓存和操作系统(OS)缓存。在浏览器中访问的时候，会优先访问浏览器缓存，如果未命中则访问OS缓存，最后再访问DNS服务器(一般是ISP提供)，然后DNS服务器会递归式的查找域名记录，然后返回。<br>DNS记录会有一个ttl值(time to live)，单位是秒，意思是这个记录最大有效期是多少。经过实验，OS缓存会参考ttl值，但是不完全等于ttl值，而<strong>浏览器DNS缓存的时间跟ttl值无关，每种浏览器都使用一个固定值。</strong><br>后来我也做过测试，Mac下Chrome(23.0.1271.101)的DNS缓存时间是1分钟。Safari下DNS缓存时间大约为10秒。</p>
+<h3 id="hosts文件修改的原理"><a href="#hosts文件修改的原理" class="headerlink" title="hosts文件修改的原理"></a>hosts文件修改的原理</h3><p>那么在修改hosts文件之后，发生了什么事情呢？这里不妨先提提Chrome下的一个工具：<code>chrome://net-internals/#dns</code>。这里列出了目前系统中的DNS缓存和Chrome中使用的情况。通过这个工具，可以看到：<br><strong>在修改hosts文件后，所有OS中DNS缓存会被清空，而浏览器缓存则不发生变化。</strong></p>
+<p>网上盛传<code>chrome://net-internals/#dns</code>下的”Clear Host Cache”可以清空DNS缓存，这里博主做了一个测试，这里清空的仅仅是OS的缓存，而并非浏览器DNS缓存。当某条DNS记录显示”Expired”的时候，才表示浏览器DNS缓存已经被清除。所以使用Clear Host Cache其实是没有用的。</p>
+<p>那么回到最初的问题上来，为什么修改hosts文件之后，有时会立刻生效，有时却一直不生效呢？其实原因很简单，这是因为浏览器缓存的过期时间，是从某个域名上次查询DNS记录开始计算的。</p>
+<p>例如：我00秒的时候使用chrome访问过<code>www.google.com.hk</code>，此时浏览器DNS缓存产生，然后我修改了hosts文件，将 <code>www.google.com.hk</code>指向本地127.0.0.1，然后在05秒的时候尝试再次访问这个地址，因为浏览器DNS缓存未过期，所以hosts 修改无法体现出来。<br>另一种情况下，我很久都没有访问<code>www.baidu.com</code>了，然后我修改了hosts文件，将其指向127.0.0.1，这时因为浏览器没有DNS缓存，所以会查询操作系统中的DNS缓存，结果此时hosts文件生效！<br>前面也提到，Safari的浏览器DNS缓存时间大约为10秒，所以一般调试程序的时候，很多人都习惯修改hosts后，用Safari来调试，因为大部分情况下，修改hosts之后，浏览器DNS缓存已经失效了。<br>那么怎么主动清除浏览器DNS缓存呢？博主目前也没有找到办法，测试过Chrome下的“清除缓存”选项，发现没有起到期望的效果。<br>那么，就请在修改hosts之后，耐下心来，稍等几十秒吧。</p>
+<hr>
+<h1 id="refer"><a href="#refer" class="headerlink" title="refer"></a>refer</h1><blockquote>
+<p>- </p>
+</blockquote>
+<blockquote>
+<p><strong>声明：</strong></p>
+<ol>
+<li><p>若文章存在错误，望诸君不吝指正^</p>
+</li>
+<li><p>部分笔记由于年代久远，做的笔记找不到最初是引用谁的，若是不允许引用转载，请联系我</p>
+</li>
+</ol>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://gungnir.top/">晚上十一点睡觉</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://gungnir.top/19742.html">http://gungnir.top/19742.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://gungnir.top" target="_blank">晚上十一点睡觉</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308750.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/60273.html"><img class="prev-cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237522.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">SQL常用语句及知识</div></div></a></div><div class="next-post pull-right"><a href="/65078.html"><img class="next-cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237529.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Web安全基础知识</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208151640204.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">晚上十一点睡觉</div><div class="author-info__description">晚上十一点のBlog</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">104</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">63</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">41</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/11pmsleep"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/11pmsleep" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:860637048@qq.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=860637048" rel="external nofollow noreferrer" target="_blank" title="qq"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">笔记迁移整理中~~~以前习惯有道云记笔记，整理知识也算沉淀自己的一部分吧·· 加油··stay passionate and never say die!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#hosts%E6%96%87%E4%BB%B6%E5%9C%A8%E5%93%AA"><span class="toc-number">1.</span> <span class="toc-text">hosts文件在哪</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Win10%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.1.</span> <span class="toc-text">Win10系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%AD"><span class="toc-number">1.2.</span> <span class="toc-text">linux操作系统中</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hosts%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E6%97%B6%E5%80%99%E4%B8%8D%E4%BC%9A%E7%AB%8B%E5%8D%B3%E7%94%9F%E6%95%88%E5%91%A2%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">hosts文件修改后为什么有时候不会立即生效呢？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6"><span class="toc-number">2.1.</span> <span class="toc-text">DNS缓存机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hosts%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">2.2.</span> <span class="toc-text">hosts文件修改的原理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#refer"><span class="toc-number"></span> <span class="toc-text">refer</span></a></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/1.html" title="无题"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237492.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/1.html" title="无题">无题</a><time datetime="2022-11-27T19:05:35.005Z" title="更新于 2022-11-28 03:05:35">2022-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/1539.html" title="浏览器DNS缓存"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237511.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="浏览器DNS缓存"/></a><div class="content"><a class="title" href="/1539.html" title="浏览器DNS缓存">浏览器DNS缓存</a><time datetime="2022-11-27T19:04:54.340Z" title="更新于 2022-11-28 03:04:54">2022-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/19742.html" title="本机域名解析文件 hosts"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308750.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="本机域名解析文件 hosts"/></a><div class="content"><a class="title" href="/19742.html" title="本机域名解析文件 hosts">本机域名解析文件 hosts</a><time datetime="2022-11-27T19:04:54.335Z" title="更新于 2022-11-28 03:04:54">2022-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/64913.html" title="操作系统DNS缓存"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237506.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="操作系统DNS缓存"/></a><div class="content"><a class="title" href="/64913.html" title="操作系统DNS缓存">操作系统DNS缓存</a><time datetime="2022-11-27T19:04:54.331Z" title="更新于 2022-11-28 03:04:54">2022-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/16526.html" title="nmap学习"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237502.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="nmap学习"/></a><div class="content"><a class="title" href="/16526.html" title="nmap学习">nmap学习</a><time datetime="2022-11-27T19:04:54.328Z" title="更新于 2022-11-28 03:04:54">2022-11-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 晚上十一点睡觉</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Welcome to 11pmsleep's blog ~~~ 该网站用来记录学习笔记及生活，欢迎交流技术~~~Blog仅供个人记录笔记学习所用，若有侵权，联系我删除~若有错误，也望诸君不吝指正</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.gungnir.top/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.gungnir.top/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

