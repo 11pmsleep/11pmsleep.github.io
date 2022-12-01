@@ -1,0 +1,408 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>0x17 - 渗透测试框架Cobalt Strike | 晚上十一点睡觉のBlog</title><meta name="author" content="晚上十一点睡觉"><meta name="copyright" content="晚上十一点睡觉"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Cobaltstrike框架介绍Cobaltstrike简介cobalt strike（简称CS）是一款团队作战渗透测试神器，分为客户端及服务端，一个服务端可以对应多个客户端，一个客户端可以连接多个服务端，可被团队进行分布式协团操作. 和MSF关系metasploit是一款开源框架，armitage"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://gungnir.top/posts/2880"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?60a7a67c81784f02b889a11753e4e8cc";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: 晚上十一点睡觉","link":"链接: ","source":"来源: 晚上十一点睡觉のBlog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '0x17 - 渗透测试框架Cobalt Strike',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-11-28 03:04:54'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208151640204.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">109</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">59</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">41</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa fa-heartbeat"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308742.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">晚上十一点睡觉のBlog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa fa-heartbeat"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">0x17 - 渗透测试框架Cobalt Strike</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-10-07T06:23:54.000Z" title="发表于 2022-10-07 14:23:54">2022-10-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-11-27T19:04:54.154Z" title="更新于 2022-11-28 03:04:54">2022-11-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/Attack/">Attack</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/Attack/CobaltStrike/">CobaltStrike</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>13分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="0x17 - 渗透测试框架Cobalt Strike"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/posts/2880#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Cobaltstrike框架介绍"><a href="#Cobaltstrike框架介绍" class="headerlink" title="Cobaltstrike框架介绍"></a>Cobaltstrike框架介绍</h2><h3 id="Cobaltstrike简介"><a href="#Cobaltstrike简介" class="headerlink" title="Cobaltstrike简介"></a>Cobaltstrike简介</h3><p>cobalt strike（简称CS）是一款团队作战渗透测试神器，分为客户端及服务端，一个服务端可以对应多个客户端，一个客户端可以连接多个服务端，可被团队进行分布式协团操作.</p>
+<p>和MSF关系<br>metasploit是一款开源框架，armitage是metasploit框架的图形化界面方式，cobalt strike是armitage的增强版，同时也是收费软件。cobalt strike在2.0版本还是依托metasploit，在3.0之后的版本使用单独的平台。</p>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><p>&#x3D;&#x3D;agscript&#x3D;&#x3D;      拓展应用的脚本<br>c2lint  用于检查profile的错误异常<br>&#x3D;&#x3D;teamserver&#x3D;&#x3D;   服务端程序<br>&#x3D;&#x3D;cobaltstrike，cobaltstrike.jar&#x3D;&#x3D;   客户端程序( java跨平台)<br>logs   目录记录与目标主机的相关信息<br>update，update.jar  用于更新CS，一般不用，因为更新了就不是破解版了<br>third-party   第三方工具</p>
+<h3 id="部署teamserver"><a href="#部署teamserver" class="headerlink" title="部署teamserver"></a>部署teamserver</h3><p>需要java环境 默认服务端安装在linux平台</p>
+<pre><code> #!/bin/bash
+tar -zxvf jdk-8u321-linux-x64.tar.gz -C /usr/lib/
+echo &quot;export JAVA_HOME=/usr/lib/jdk1.8.0_321/&quot; &gt;&gt; /etc/profile
+echo &quot;export JRE_HOME=/usr/lib/jdk1.8.0_321/jre&quot; &gt;&gt; /etc/profile
+echo &quot;export PATH=\$JAVA_HOME/bin:\$JAVA_HOME/jre/bin:\$PATH&quot; &gt;&gt; /etc/profile  
+echo &quot;export CLASSPATH=\$CLASSPATH:.:\$JAVA_HOME/lib:\$JAVA_HOME/jre/lib&quot; &gt;&gt;/etc/profile
+source /etc/profile
+rm jdk-8u321-linux-x64.tar.gz
+保存为install.sh，运行chmod +x install.sh，./install.sh执行，执行完成后再执行一次source
+/etc/profile，然后输入java -version，返回java版本即安装成功。
+yum search java|grep jdk	yum install java-1.8.0-openjdk*
+</code></pre>
+<p>上传CS到VPS<br>赋予teamserver可执行权限:chmod +x teamserver<br>修改默认端口</p>
+<pre><code>./teamserver &lt;host&gt; &lt;password&gt; [/path/to/c2.profile] [YYYY-MM-DD]
+./teamserver 124.223.217.243 121212
+
+必填参数host 本服务器外网IP/域名
+必填参数password Client GUI连接时需要输入的密码
+可选参数Malleable C2 communication profile 指定C2通信配置文件 该功能体现了CS的强大扩展性
+可选参数kill date 指定所有payload的终止日期
+</code></pre>
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430189.png"></p>
+<h3 id="客户端连接"><a href="#客户端连接" class="headerlink" title="客户端连接"></a>客户端连接</h3><p>需要java环境</p>
+<pre><code>Start.bat
+ 这句有问题：
+ java.exe -Dfile.encoding=UTF-8 -XX:ParallelGCThreads=4 -XX:+AggressiveHeap -XX:+UseParallelGC -Xms512m -Xmx4048m  -jar cobaltstrike.jar 
+ 以该命令启动的话，中文会乱码：
+ java -XX:ParallelGCThreads=4 -XX:+AggressiveHeap -XX:+UseParallelGC -Xms512M -Xmx1024M -javaagent:hook.jar -jar cobaltstrike.jar
+ 中文不乱码，以UTF-8启动，并加载中文汉化的jar包（对比两条语句的区别即可知道：
+ java -XX:ParallelGCThreads=4 -XX:+AggressiveHeap -XX:+UseParallelGC -Xms512M -Xmx1024M -Dfile.encoding=UTF-8 -javaagent:CobaltstrikeCN.jar -javaagent:hook.jar -jar cobaltstrike.jar
+</code></pre>
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430205.png"><br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430141.png"></p>
+<h2 id="Cobaltstrike基本使用"><a href="#Cobaltstrike基本使用" class="headerlink" title="Cobaltstrike基本使用"></a>Cobaltstrike基本使用</h2><h3 id="常用功能"><a href="#常用功能" class="headerlink" title="常用功能"></a>常用功能</h3><p>顶部菜单 主要使用cobaltstrike，View和Attack</p>
+<pre><code>Cobaltstrike菜单
+New Connection #进行另外一个连接，支持连接多个服务器端 
+Preferences #设置Cobal Strike界面、控制台、以及输出报告样式TeamServer连接记录。 
+Visualization #主要展示输出结果的形式 
+VPN Interfaces #设置VPN接口 
+Listenrs #创建一个Listener 
+Script Manager #脚本管理 
+Close #退出连接
+</code></pre>
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430125.png"></p>
+<h4 id="View菜单"><a href="#View菜单" class="headerlink" title="View菜单"></a>View菜单</h4><pre><code>Applications   # 显示受害主机的应用信息
+Credentials   # 显示所有以获取的受害主机的凭证，如hashdump、Mimikatz
+Downloads   # 查看已下载文件
+Event Log   # 主机上线记录以及团队协作聊天记录
+Keystrokes   # 查看键盘记录结果
+Proxy Pivots   # 查看代理模块
+Screenshots   # 查看所有屏幕截图
+Script Console   # 加载第三方脚本以增强功能 
+Targets   # 显示所有受害主机
+Web Log    # 所有Web服务的日志
+</code></pre>
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430189.png"></p>
+<h4 id="Attack菜单"><a href="#Attack菜单" class="headerlink" title="Attack菜单"></a>Attack菜单</h4><pre><code>packages
+HTML Application   # 生成(executable/VBA/powershell)这三种原理实现的恶意HTA木马文件
+MS Office Macro   # 生成office宏病毒文件
+Payload Generator   # 生成各种语言版本的payload
+USB/CD AutoPlay   # 生成利用自动播放运行的木马文件
+Windows Dropper   # 捆绑器能够对任意的正常文件进行捆绑(免杀效果差)
+Windows Executable   # 生成可执行exe木马，就是需要什么传什么
+Windows Executable(Stageless)   # 生成无状态的可执行exe木马,就是所有依赖都打包在一个文件中上传，比较大
+
+我们在进行免杀的时候还是尽量使用小一些的分阶段木马也就是Windows Executable
+</code></pre>
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430213.png"></p>
+<pre><code>Web Drive-by  #钓鱼攻击
+Manage   #对开启的web服务进行管理
+Clone Site   #克隆网站，可以记录受害者提交的数据
+Host File   #提供一个文件下载，可以修改Mime信息
+Scripted Web Delivery   #为payload提供web服务以便下载和执行 类似于Metasploit的web_delivery 
+Signed Applet Attack   #使用java自签名的程序进行钓鱼攻击(该方式已过时)
+Smart Applet Attack   #自动检测java版本并进行攻击，针对Java 1.6.0_45以下以及Java 1.7.0_21以下版本
+System Profiler   #用来获取一些系统信息，比如系统版本，Flash版本，浏览器版本等
+Spear Phish   #用来邮件钓鱼的模块,鱼叉钓鱼攻击
+</code></pre>
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430883.png"></p>
+<h4 id="工具栏，即菜单栏中的部分功能"><a href="#工具栏，即菜单栏中的部分功能" class="headerlink" title="工具栏，即菜单栏中的部分功能"></a>工具栏，即菜单栏中的部分功能</h4><p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430077.png"></p>
+<pre><code>① Connect to team server：连接服务端
+② Disonnect from team server：断开当前服务端连接
+③ Configure Listeners：配置监听器
+④ Show sessions in graph view：展示会话列表
+⑤ Show sessions in table view：展示视图列表
+⑥ Show targets in table view：展示目标列表
+⑦ Credentials：查看从靶机获取的账户密码
+⑧ Downloaded Files：查看从靶机下载的文件
+⑨ Keystrokes：查看键盘记录
+⑩ Screenshots：查看屏幕截图
+⑪ Generate Windows Executable (Stageless)：生成无状态的EXE木马
+⑫ Setup java Signed Applet Attack：开启Web服务为自签名Java Applet提供运行环境
+⑬ MS Office Macro Attack：生成OFFICE宏病毒文件
+⑭ Setup Scripted Web-Delivery (Stageless)：开启Web服务，供下载和执行Payload
+⑮ Host a file：开启Web服务，供下载文件
+⑯ Manage Web Server：管理Web服务
+⑰ Help：帮助文档
+⑱ About：关于Cobalt Strike
+</code></pre>
+<h4 id="团队协作"><a href="#团队协作" class="headerlink" title="团队协作"></a>团队协作</h4><p>1、多个客户端连接同一个服务端<br>注意：</p>
+<ul>
+<li><strong>linux启动客户端</strong>：在cs4.3文件夹中有有一个.sh的文件，赋予执行权限后，使用脚本即可在Linux快速的启动cs</li>
+<li><strong>windows启动客户端</strong>：.bat文件启动<br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430891.png"><br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430077.png"><br>2、一个客户端连接多个服务端<br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430085.png"><br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430988.png"><br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430523.png"></li>
+</ul>
+<h2 id="Cobaltstrike监听器详解"><a href="#Cobaltstrike监听器详解" class="headerlink" title="Cobaltstrike监听器详解"></a>Cobaltstrike监听器详解</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="http://blog.leanote.com/post/snowming/50448511de58">http://blog.leanote.com/post/snowming/50448511de58</a></p>
+</blockquote>
+<h4 id="beacon"><a href="#beacon" class="headerlink" title="beacon"></a>beacon</h4><p>beacon指的是受害者与我们的teamserver所建立的这个连接，也可以理解成我们所获的的对方主机的控制权</p>
+<h4 id="listeners"><a href="#listeners" class="headerlink" title="listeners"></a>listeners</h4><p>Listener是用来接收Beacon请求信息的Cobalt Strike模块<br>其中包含DNS、HTTP、SMB、tcp为内置listener。各种上线方式<br>SMB和tcp是横向移动相关的<br>C2是流量隐藏相关的<br>&#x3D;&#x3D;Foreign为外部结合的Listener&#x3D;&#x3D;，常用于MSF的结合，例如获取meterpreter到MSF上，与msf联动<br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430740.png"></p>
+<h4 id="创建listener"><a href="#创建listener" class="headerlink" title="创建listener"></a>创建listener</h4><p>Beacon HTTP&amp;HTTPS(以HTTP或HTTPS协议流量建立Beacon连接)</p>
+<pre><code>NAME:监听器名
+Payload:创建监听器所选用的payload和传输协议
+HTTP Hosts:回连主机
+Host Rotation Strategy:cs4.3新增在beacon通信时，可以选择更多的轮询方案以逃避检测、阻断，beacon回连主机策略，通俗来讲就是流量检测绕过的方式，但是，cs是开源的所以其流量特征都会被标记
+HTTP Host(stager):配置Stager主机，仅当Payload明确需要Stager配合时有效
+Profile：Malleable C2配置文件，用于自定义通信流量特征
+HTTPS Port (C2)：Beacon回连的监听端口
+HTTPS Port (Bind)：绑定监听端口，实现端口重定向
+HTTPS Host Header：设置内层真实域名，在使**用域前置技术**时使用，设置DNS时搞
+HTTPS Proxy：为Payload指定代理
+</code></pre>
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430829.png"></p>
+<p>Beacon DNS（以DNS协议流量建立Beacon连接）</p>
+<p>DNS Hosts：Beacon回连的主机，可以添加多个<br>Host Rotation Strategy：Beacon回连主机策略，<br>HTTP Host (Stager)：配置Stager主机，仅当Payload明确需要Stager配合时有效<br>Profile：Malleable C2配置文件，用于自定义通信流量特征<br>DNS Port (Bind)：绑定监听端口，实现端口重定向<br>DNS Resolver：指定NS服务器<br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430711.png"></p>
+<p>Beacon SMB（以SMB协议流量建立Beacon连接）适用于内网横向<br>windows&#x2F;beacon_smb&#x2F;bind_pipe</p>
+<p>官网介绍:SMB Beacon使用&#x3D;&#x3D;命名管道&#x3D;&#x3D;通过父级Beacon进行通讯，当两个Beacons链接后，子Beacon从父Beacon获取到任务并发送。因为链接的Beacons使用Windows命名管道进行通信，此流量封装在SMB协议中，所以SMB Beacon相对隐蔽，绕防火墙时可能发挥奇效。</p>
+<p>前提条件<br>&#x3D;&#x3D;具有 SMB Beacon 的主机必须接受 445 端口上的连&#x3D;&#x3D;接。<br>只能链接由同一个 Cobalt Strike 实例管理的 Beacon。<br>利用这种beacon横移必须有目标主机的管理员权限或者说是拥有具有管理员权限的凭据。<br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430829.png"><br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430873.png"></p>
+<p>Beacon tcp(仅与父 Beacon 通信)适用于内网横向移动<br>windows&#x2F;beacon_tcp&#x2F;bind_tcp<br>命令格式同smb相似，不过此处连接目标IP的命令不是link，而是connect。取消连接目标机器的话对应的命令与smb同为unlink<br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430225.png"></p>
+<h2 id="Cobaltstrike上线Beacon"><a href="#Cobaltstrike上线Beacon" class="headerlink" title="Cobaltstrike上线Beacon"></a>Cobaltstrike上线Beacon</h2><h3 id="Beacon使用"><a href="#Beacon使用" class="headerlink" title="Beacon使用"></a>Beacon使用</h3><p>在目标上线CS后，&#x3D;&#x3D;右键目标interact使用Beacon&#x3D;&#x3D;</p>
+<p>Tips:在Cobalt Strike中它的&#x3D;&#x3D;心跳&#x3D;&#x3D;默认是60s(即sleep时间为60s，每一分钟目标主机与teamserver通信一次)<br>如果sleep时间过长，在下载文件面前更为明显，所以在测试时会把时间降低一点 。所以拿到beacon一般先执行sleep<br>大家可以根据实战环境来调节，建议不要太快，不然流量会很明显。</p>
+<p>Tips：&#x3D;&#x3D;beacon中不能直接输入cmd命令，比如要让目标机执行ipconfig这条cmd命令，对应的beacon命令是shell ipconfig&#x3D;&#x3D;</p>
+<p>&#x3D;&#x3D;其他的beacon命令，可以在beacon中输入help&#x3D;&#x3D;<br>上线完才能搞这些<br>一般来说，cs时用来钓鱼或者是进行域渗透或者是横向移动</p>
+<h3 id="Office钓鱼"><a href="#Office钓鱼" class="headerlink" title="Office钓鱼"></a>Office钓鱼</h3><p>当无法从web找到突破口时，可以尝试钓鱼打入内网<br>Visual Basic for Applications（VBA）是Visual Basic的一种宏语言，是微软开发出来在其桌面应用程序中执行通用的自动化(OLE)任务的编程语言。主要能用来扩展Windows的应用程序功能，特别是Microsoft Office软件，也可说是一种应用程式视觉化的Basic 脚本<br>&#x3D;&#x3D;注意：这个宏钓鱼太厉害，微软很多时候都禁用了这个，需要开启宏，才能进行操作，需要暗示或者是引导受害者开启宏&#x3D;&#x3D;</p>
+<h4 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h4><p>1.CS开启listener<br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430277.png"><br>2.点击攻击——&gt;生成后门——&gt;MS Office Macro ——&gt;选择一个监听器，点击Generate</p>
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430318.png"><br>3.复制生成的vb恶意代码<br>4.打开word编辑器，在工具栏中找到视图，查看宏<br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430558.png"><br>5.创建宏名进入<br>6.找到ThisDocument，并将CS生成的代码复制进去保存<br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430439.png"><br>7.然后保存为doc或者启用宏的word文档<br>8.打开后启用宏即可上线<br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430447.png"></p>
+<h3 id="Cobaltstrike实战演示"><a href="#Cobaltstrike实战演示" class="headerlink" title="Cobaltstrike实战演示"></a>Cobaltstrike实战演示</h3><h4 id="cobaltstrike"><a href="#cobaltstrike" class="headerlink" title="cobaltstrike"></a>cobaltstrike</h4><p>当我们拥有webshell或者有命令执行权限时，我们可以通过&#x3D;&#x3D;远程加载或者生成木马&#x3D;&#x3D;上线<br><strong>远程加载</strong>是没有文件落地的一个上传方式</p>
+<h4 id="远程加载上线CS"><a href="#远程加载上线CS" class="headerlink" title="远程加载上线CS"></a>远程加载上线CS</h4><p>AttackWeb Drive-by Scripted Web Delivery<br>&#x3D;&#x3D;一般的从web漏洞入侵后，拿到一个shell，<br>接下来就使用下面的方法，生成命令，运行之，在远程机器上上线cs，控制机器&#x3D;&#x3D;</p>
+<h5 id="远程加载上线一"><a href="#远程加载上线一" class="headerlink" title="远程加载上线一"></a>远程加载上线一</h5><p>1.生成远程木马<br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430840.png"><br>2.配置参数<br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430848.png"><br>3.在目标机器上执行上线<br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430988.png"></p>
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430052.png"></p>
+<h5 id="远程加载上线二"><a href="#远程加载上线二" class="headerlink" title="远程加载上线二"></a>远程加载上线二</h5><p>需要借助hta！什么是hta？<br>HTA是HTML Application的缩写（HTML应用程序），是软件开发的新概念，直接将HTML保存成HTA的格式，就是一个独立的应用软件，与VB、C++等程序语言所设计的软件界面没什么差别<br>例子：<br>把上面的代码复制到任意文本编辑器中，然后保存为*.hta，直接双击就可以看到效果。</p>
+<pre><code>&lt;!--example1.hta--&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;第一个HTA的例子&lt;/title&gt;
+&lt;style&gt;
+p&#123;
+font-size:24;
+cursor:hand&#125;
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;center&gt;
+&lt;p&gt;
+HTA
+HTMLApplication
+HTML应用程序
+&lt;/p&gt;
+&lt;/center&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430098.png"><br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430138.png"><br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430346.png"><br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430440.png"><br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430488.png"><br>&#x3D;&#x3D;当然了，也可以直接运行hta文件上线，这个地方是利用mshta命令执行hta上线&#x3D;&#x3D;<br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430657.png"></p>
+<h5 id="通过生成后门上线"><a href="#通过生成后门上线" class="headerlink" title="通过生成后门上线"></a>通过生成后门上线</h5><p>&#x3D;&#x3D;当拥有webshell可以通过webshell上传木马文件上线CS(若有杀软需做免杀处理)&#x3D;&#x3D;</p>
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430733.png"><br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430713.png"><br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430841.png"></p>
+<h5 id="Powershell本地加载上线CS"><a href="#Powershell本地加载上线CS" class="headerlink" title="Powershell本地加载上线CS"></a>Powershell本地加载上线CS</h5><p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430063.png"><br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430039.png"><br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430189.png"><br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430335.png"></p>
+<h4 id="通过DNS-beacon上线"><a href="#通过DNS-beacon上线" class="headerlink" title="通过DNS beacon上线"></a>通过DNS beacon上线</h4><p>&#x3D;&#x3D;这个是可以绕过一些流量监听器&#x3D;&#x3D;<br>第一步 配置dns beacon监听器<br>1.配置name为随意名。<br>2.payload为beacon DNS<br>3.DNS Hosts为ns记录但如没有域名则可以填写其他网站域名<br>4.DNS Host为A记录填写自己的域名。如若没有则填其他网站域名，注意需要和DNS Host一致，如若拥有域名则可填写A记录<br>5.DNS port 需要填写为53端口填写其他的则不会成功。 &#x2F;&#x2F;这里需要注意再vps上可能默认是被systemd-resolved 服务占用那我们就要进行修改此服务占用端口了<br>6.DNS Resolver 此处需要填写cs服务器的真实地址不然目标机器无法找到我们的cs服务器</p>
+<p>端口被占用怎么办？</p>
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430323.png"></p>
+<h5 id="端口占用解决方法"><a href="#端口占用解决方法" class="headerlink" title="端口占用解决方法"></a>端口占用解决方法</h5><p>1.通过netstat -anoutp | grep 53命令查看53端口是否被占用如被占用则会显示下方图片中的情况，后面会有服务名称</p>
+<p>2.停用systemd-resolved服务，使用命令<br>systemctl stop systemd-resolved<br>这个服务是必须要有的一个服务，但是端口被占用了怎么办呢？<br>！！修改配置文件，改这个服务的端口<br>3.通过vi命令编辑vi &#x2F;etc&#x2F;systemd&#x2F;resolved.conf此文件为下图内容即可</p>
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430590.png"><br>4.通过此命令ln -sf &#x2F;run&#x2F;systemd&#x2F;resolve&#x2F;resolv.conf &#x2F;etc&#x2F;resolv.conf生成一个软连接，<br>5.再重启此服务即可<br>重启命令为 systemctl start systemd-resolved<br>再通过 netstat -anoutp | grep 53 查看可发现没有返回了<br>至此修改成功，我们的监听器也就可以进行配置了。</p>
+<p>第三步，运行beacon.exe文件即可上线，成功后会上线一个小黑框，此时则需要通过鼠标右击选定第一个进入，输入checkin命令强制对方主机会连到我们的cs服务器即可获取会话。</p>
+<p>这种方式上线之后会是一个黑方框<br><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430622.png" alt="image-20221007142837169"><br>这个时候我们要，使用命令：checkin强制回连我们<br>等待后就可以上线和其他的一样了</p>
+<p>注意：dns上传时，流量会很小，因此上传文件会很慢<br>使用mode dns-txt加快点速度<br>可以截图<br>可以浏览文件</p>
+<img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202210071430858.png" alt="image-20221007142816086" style="zoom:50%;" />
+VNC是连接后的远程桌面
+取消勾选小黑客图表就可以对远程桌面进行控制
+
+<h1 id="上线Linux"><a href="#上线Linux" class="headerlink" title="上线Linux"></a>上线Linux</h1><p>cs如果相对linux攻击需要添加脚本文件<br>cs一般是攻击windows的渗透框架</p>
+<blockquote>
+<p>在cs扩展那篇文章有讲怎么上线Linux</p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/gloxec/CrossC2">https://github.com/gloxec/CrossC2</a> </p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/darkr4y/geacon">https://github.com/darkr4y/geacon</a> 这个也可可以上线Linux</p>
+<p>参考过程：<a target="_blank" rel="noopener external nofollow noreferrer" href="http://www.adminxe.com/1287.html">http://www.adminxe.com/1287.html</a></p>
+</blockquote>
+<hr>
+<h1 id="refer"><a href="#refer" class="headerlink" title="refer"></a>refer</h1><blockquote>
+<p>- </p>
+</blockquote>
+<blockquote>
+<p><strong>声明：</strong></p>
+<ol>
+<li><p>若文章存在错误，望诸君不吝指正^</p>
+</li>
+<li><p>部分笔记由于年代久远，做的笔记找不到最初是引用谁的，若是不允许引用转载，请联系我</p>
+</li>
+</ol>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://gungnir.top/">晚上十一点睡觉</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://gungnir.top/posts/2880">http://gungnir.top/posts/2880</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://gungnir.top" target="_blank">晚上十一点睡觉のBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308742.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/11355"><img class="prev-cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308745.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Struts2框架漏洞POC集合</div></div></a></div><div class="next-post pull-right"><a href="/posts/34865"><img class="next-cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237550.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">0x18 - 渗透测试框架进阶-ip、流量隐藏 重要！面试会问</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208151640204.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">晚上十一点睡觉</div><div class="author-info__description">晚上十一点睡觉的个人博客，个人笔记及日志，最近在学习网络安全和Python</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">109</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">59</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">41</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/11pmsleep"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/11pmsleep" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:860637048@qq.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=860637048" rel="external nofollow noreferrer" target="_blank" title="qq"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">笔记迁移整理中~~~以前习惯有道云记笔记，整理知识也算沉淀自己的一部分吧·· 加油··stay passionate and never say die!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cobaltstrike%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">Cobaltstrike框架介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cobaltstrike%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">Cobaltstrike简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.</span> <span class="toc-text">目录结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2teamserver"><span class="toc-number">1.3.</span> <span class="toc-text">部署teamserver</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.4.</span> <span class="toc-text">客户端连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cobaltstrike%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">Cobaltstrike基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD"><span class="toc-number">2.1.</span> <span class="toc-text">常用功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#View%E8%8F%9C%E5%8D%95"><span class="toc-number">2.1.1.</span> <span class="toc-text">View菜单</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Attack%E8%8F%9C%E5%8D%95"><span class="toc-number">2.1.2.</span> <span class="toc-text">Attack菜单</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7%E6%A0%8F%EF%BC%8C%E5%8D%B3%E8%8F%9C%E5%8D%95%E6%A0%8F%E4%B8%AD%E7%9A%84%E9%83%A8%E5%88%86%E5%8A%9F%E8%83%BD"><span class="toc-number">2.1.3.</span> <span class="toc-text">工具栏，即菜单栏中的部分功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C"><span class="toc-number">2.1.4.</span> <span class="toc-text">团队协作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cobaltstrike%E7%9B%91%E5%90%AC%E5%99%A8%E8%AF%A6%E8%A7%A3"><span class="toc-number">3.</span> <span class="toc-text">Cobaltstrike监听器详解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#beacon"><span class="toc-number">3.0.1.</span> <span class="toc-text">beacon</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#listeners"><span class="toc-number">3.0.2.</span> <span class="toc-text">listeners</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAlistener"><span class="toc-number">3.0.3.</span> <span class="toc-text">创建listener</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cobaltstrike%E4%B8%8A%E7%BA%BFBeacon"><span class="toc-number">4.</span> <span class="toc-text">Cobaltstrike上线Beacon</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Beacon%E4%BD%BF%E7%94%A8"><span class="toc-number">4.1.</span> <span class="toc-text">Beacon使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Office%E9%92%93%E9%B1%BC"><span class="toc-number">4.2.</span> <span class="toc-text">Office钓鱼</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.2.1.</span> <span class="toc-text">具体实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cobaltstrike%E5%AE%9E%E6%88%98%E6%BC%94%E7%A4%BA"><span class="toc-number">4.3.</span> <span class="toc-text">Cobaltstrike实战演示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#cobaltstrike"><span class="toc-number">4.3.1.</span> <span class="toc-text">cobaltstrike</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E5%8A%A0%E8%BD%BD%E4%B8%8A%E7%BA%BFCS"><span class="toc-number">4.3.2.</span> <span class="toc-text">远程加载上线CS</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E5%8A%A0%E8%BD%BD%E4%B8%8A%E7%BA%BF%E4%B8%80"><span class="toc-number">4.3.2.1.</span> <span class="toc-text">远程加载上线一</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E5%8A%A0%E8%BD%BD%E4%B8%8A%E7%BA%BF%E4%BA%8C"><span class="toc-number">4.3.2.2.</span> <span class="toc-text">远程加载上线二</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E7%94%9F%E6%88%90%E5%90%8E%E9%97%A8%E4%B8%8A%E7%BA%BF"><span class="toc-number">4.3.2.3.</span> <span class="toc-text">通过生成后门上线</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Powershell%E6%9C%AC%E5%9C%B0%E5%8A%A0%E8%BD%BD%E4%B8%8A%E7%BA%BFCS"><span class="toc-number">4.3.2.4.</span> <span class="toc-text">Powershell本地加载上线CS</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9A%E8%BF%87DNS-beacon%E4%B8%8A%E7%BA%BF"><span class="toc-number">4.3.3.</span> <span class="toc-text">通过DNS beacon上线</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-number">4.3.3.1.</span> <span class="toc-text">端口占用解决方法</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8A%E7%BA%BFLinux"><span class="toc-number"></span> <span class="toc-text">上线Linux</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#refer"><span class="toc-number"></span> <span class="toc-text">refer</span></a></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/40881" title="hexo教程-搜索引擎收录"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308767.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hexo教程-搜索引擎收录"/></a><div class="content"><a class="title" href="/posts/40881" title="hexo教程-搜索引擎收录">hexo教程-搜索引擎收录</a><time datetime="2022-12-01T19:15:20.697Z" title="更新于 2022-12-02 03:15:20">2022-12-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/27148" title="hexo教程-搭建个人博客踩坑"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237572.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hexo教程-搭建个人博客踩坑"/></a><div class="content"><a class="title" href="/posts/27148" title="hexo教程-搭建个人博客踩坑">hexo教程-搭建个人博客踩坑</a><time datetime="2022-12-01T19:13:05.101Z" title="更新于 2022-12-02 03:13:05">2022-12-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/4710" title="12. 网络编程"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237544.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="12. 网络编程"/></a><div class="content"><a class="title" href="/posts/4710" title="12. 网络编程">12. 网络编程</a><time datetime="2022-12-01T18:46:52.094Z" title="更新于 2022-12-02 02:46:52">2022-12-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/5964" title="11. 异常与文件操作"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237533.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="11. 异常与文件操作"/></a><div class="content"><a class="title" href="/posts/5964" title="11. 异常与文件操作">11. 异常与文件操作</a><time datetime="2022-12-01T07:21:16.578Z" title="更新于 2022-12-01 15:21:16">2022-12-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/22609" title="网站SEO优化"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237555.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="网站SEO优化"/></a><div class="content"><a class="title" href="/posts/22609" title="网站SEO优化">网站SEO优化</a><time datetime="2022-11-30T11:09:16.189Z" title="更新于 2022-11-30 19:09:16">2022-11-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 By 晚上十一点睡觉</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Welcome to 11pmsleep's blog ~~~ 该网站用来记录学习笔记及生活，欢迎交流技术~~~Blog仅供个人记录笔记学习所用，若有侵权，联系我删除~若有错误，也望诸君不吝指正</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.gungnir.top/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.gungnir.top/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

