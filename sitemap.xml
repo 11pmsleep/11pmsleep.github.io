@@ -1738,4 +1738,11 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>http://gungnir.top/categories/Python%E5%85%A8%E6%A0%88/Python%E7%88%AC%E8%99%AB/</loc>
+    <lastmod>2022-12-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 </urlset>
